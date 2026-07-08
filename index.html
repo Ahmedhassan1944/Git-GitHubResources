@@ -151,6 +151,60 @@
           <div class="lc-badge" style="--clr:#00f5ff">Remote</div>
         </div>
       </div>
+
+      <!-- STASH SIDE-POCKET DIAGRAM -->
+      <div class="lc-stash-zone reveal">
+        <div class="lc-stash-connectors-down">
+          <div class="lc-stash-connector lc-stash-conn-1">
+            <span class="lc-stash-cmd">git stash</span>
+            <div class="lc-stash-line"></div>
+            <div class="lc-stash-arrow">▼</div>
+          </div>
+          <div class="lc-stash-connector lc-stash-conn-2">
+            <span class="lc-stash-cmd">git stash</span>
+            <div class="lc-stash-line"></div>
+            <div class="lc-stash-arrow">▼</div>
+          </div>
+        </div>
+
+        <div class="lc-stash-card">
+          <div class="lc-icon-wrap" style="--clr:#f59e0b">📦</div>
+          <div class="lc-content">
+            <h3>Stash Stack</h3>
+            <p>Temporary shelf for unfinished work. Not part of commit history.</p>
+            <div class="lc-stash-pills">
+              <span class="lc-stash-pill" id="stash-pill-demo">stash@{0}</span>
+              <span class="lc-stash-pill">stash@{1}</span>
+              <span class="lc-stash-pill">stash@{2}</span>
+            </div>
+            <p class="lc-stash-warning">⚠️ Not a substitute for commits or branches</p>
+          </div>
+          <div class="lc-badge" style="--clr:#f59e0b">Temporary</div>
+        </div>
+
+        <div class="lc-stash-connectors-up">
+          <div class="lc-stash-connector-up lc-stash-ret-1">
+            <div class="lc-stash-arrow">▲</div>
+            <div class="lc-stash-line"></div>
+            <span class="lc-stash-cmd">git stash pop</span>
+          </div>
+          <div class="lc-stash-connector-up lc-stash-ret-2">
+            <div class="lc-stash-arrow">▲</div>
+            <div class="lc-stash-line"></div>
+            <span class="lc-stash-cmd">git stash apply</span>
+          </div>
+        </div>
+
+        <div class="lc-stash-legend">
+          <div class="legend-item"><span class="legend-solid"></span> Normal flow</div>
+          <div class="legend-item"><span class="legend-dashed"></span> Stash escape (temporary)</div>
+        </div>
+      </div>
+
+      <div class="lc-stash-btn-wrap reveal">
+        <button class="lc-stash-btn" id="lc-stash-sim-btn" aria-label="Simulate urgent interrupt scenario">🚨 Simulate: Urgent Interrupt!</button>
+      </div>
+
     </div>
   </section>
 
