@@ -208,6 +208,138 @@
     </div>
   </section>
 
+  <!-- ===== GIT STASH CINEMA ===== -->
+  <section id="stash-cinema" class="section reveal">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Interactive Scene Player</span>
+        <h2 class="section-title">Git Stash <span class="gradient-text">Cinema</span></h2>
+        <p class="section-desc">Select a command. Watch the scene play out inside Git.</p>
+      </div>
+
+      <div class="sc-cinema-layout reveal">
+        <!-- COMMAND PANEL (Left) -->
+        <div class="sc-panel">
+          <div class="sc-panel-header">
+            🎬 STASH COMMANDS
+          </div>
+          <hr class="sc-panel-divider">
+          
+          <div class="sc-panel-scroll">
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--green);">📦 CREATE</div>
+              <button class="sc-cmd-btn" data-scene="stash">git stash <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-named">git stash push -m "msg" <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-untracked">git stash -u <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--blue);">🔍 INSPECT</div>
+              <button class="sc-cmd-btn" data-scene="stash-list">git stash list <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-show">git stash show <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-show-diff">git stash show -p <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--purple);">♻️ RESTORE</div>
+              <button class="sc-cmd-btn" data-scene="stash-apply">git stash apply <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-apply-index">git stash apply stash@{1} <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-pop">git stash pop <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-pop-index">git stash pop --index <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--red);">🗑️ CLEAN</div>
+              <button class="sc-cmd-btn" data-scene="stash-drop">git stash drop stash@{1} <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-clear">git stash clear <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIFECYCLE SCREEN (Right) -->
+        <div class="sc-screen">
+          <div class="sc-screen-titlebar">
+            <div class="sc-dots">
+              <span class="sc-dot" style="background:#ff5f56;"></span>
+              <span class="sc-dot" style="background:#ffbd2e;"></span>
+              <span class="sc-dot" style="background:#27c93f;"></span>
+            </div>
+            <div class="sc-screen-title">git-visualizer — scene: idle</div>
+            <button class="sc-reset-btn">[RESET]</button>
+          </div>
+
+          <div class="sc-screen-body" id="sc-screen-body">
+            <div class="sc-zones-grid">
+              <!-- Zone 1: Working Dir -->
+              <div class="sc-zone sc-zone-wd" id="sc-zone-wd">
+                <div class="sc-zone-title">📁 Working Dir</div>
+                <div class="sc-file-container" id="sc-files-wd">
+                  <span class="sc-file" id="sc-file-app">app.js ✏️</span>
+                  <span class="sc-file" id="sc-file-style">style.css ✏️</span>
+                  <span class="sc-file sc-hidden" id="sc-file-new">new-file.js 🆕</span>
+                </div>
+                <div class="sc-zone-label sc-hidden" id="sc-label-wd"></div>
+              </div>
+
+              <!-- Zone 2: Staging Area -->
+              <div class="sc-zone sc-zone-stage" id="sc-zone-stage">
+                <div class="sc-zone-title">📋 Staging Area</div>
+                <div class="sc-file-container" id="sc-files-stage">
+                  <span class="sc-file" id="sc-file-utils">utils.js ✅</span>
+                </div>
+                <div class="sc-zone-label sc-hidden" id="sc-label-stage"></div>
+              </div>
+
+              <!-- Zone 3: Local Repo -->
+              <div class="sc-zone sc-zone-repo">
+                <div class="sc-zone-title">💾 Local Repo</div>
+                <div class="sc-file-container"></div>
+              </div>
+
+              <!-- Zone 4: Remote -->
+              <div class="sc-zone sc-zone-remote">
+                <div class="sc-zone-title">☁️ Remote</div>
+                <div class="sc-file-container"></div>
+              </div>
+
+              <!-- Zone 5: Stash Stack -->
+              <div class="sc-zone sc-zone-stash" id="sc-zone-stash">
+                <div class="sc-zone-title">📦 STASH STACK</div>
+                <div class="sc-stash-container" id="sc-stash-stack">
+                  <span class="sc-stash-pill" id="sc-pill-1">stash@{0}</span>
+                  <span class="sc-stash-pill" id="sc-pill-2">stash@{1}</span>
+                </div>
+                <!-- Dynamic overlays inside stash -->
+                <div class="sc-overlay sc-hidden" id="sc-list-overlay">
+                  <div>stash@{0}  WIP on main: abc1234 — working on feature</div>
+                  <div>stash@{1}  WIP on main: def5678 — hotfix prep</div>
+                </div>
+                <div class="sc-overlay sc-hidden" id="sc-show-overlay">
+                  <div>📄 app.js     | 3 changes</div>
+                  <div>📄 style.css  | 1 change</div>
+                  <div>2 files changed, 4 lines</div>
+                  <div class="sc-diff-block sc-hidden" id="sc-diff-block">
+                    <div class="diff-minus">- const old = 'value';</div>
+                    <div class="diff-plus">+ const new = 'updated';</div>
+                  </div>
+                </div>
+                <div class="sc-zone-label sc-hidden" id="sc-label-stash"></div>
+              </div>
+            </div>
+
+            <div class="sc-desc-bar">
+              <div class="sc-desc-cmd"><span id="sc-cmd-text"></span><span class="sc-cursor">_</span></div>
+              <div class="sc-desc-text" id="sc-desc-text"></div>
+            </div>
+            
+            <div id="sc-particles-container"></div>
+            <div id="sc-flash" class="sc-hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== COMMANDS SECTION ===== -->
   <section id="commands" class="section section-alt">
     <div class="container">

@@ -2976,3 +2976,439 @@ button {
   opacity: 0;
   transform: scale(0.8);
 }
+
+/* ===== GIT STASH CINEMA ===== */
+#stash-cinema {
+  /* Scope wrapper */
+}
+
+/* Main layout */
+#stash-cinema .sc-cinema-layout { 
+  display: grid; 
+  grid-template-columns: 35% 65%; 
+  min-height: 640px; 
+}
+
+@media (max-width: 900px) {
+  #stash-cinema .sc-cinema-layout {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+/* Command Panel */
+#stash-cinema .sc-panel { 
+  background: #050709; 
+  border: 1px solid var(--border);
+  border-right: none;
+  border-left: 3px solid var(--cyan);
+  border-radius: 16px 0 0 16px; 
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  #stash-cinema .sc-panel {
+    border-radius: 0 0 16px 16px;
+    border-right: 1px solid var(--border);
+    border-top: none;
+  }
+}
+
+#stash-cinema .sc-panel-header {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+#stash-cinema .sc-panel-divider {
+  border: 0;
+  height: 1px;
+  background: var(--cyan);
+  opacity: 0.3;
+  margin: 16px 0;
+}
+
+#stash-cinema .sc-panel-scroll {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 560px;
+  padding-right: 12px;
+}
+
+#stash-cinema .sc-panel-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+#stash-cinema .sc-panel-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 245, 255, 0.3);
+  border-radius: 4px;
+}
+
+#stash-cinema .sc-group {
+  margin-bottom: 24px;
+}
+
+#stash-cinema .sc-group-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--grp-clr);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+/* Command Button */
+#stash-cinema .sc-cmd-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#stash-cinema .sc-cmd-btn:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-main);
+  border-left-color: var(--cyan);
+}
+
+#stash-cinema .sc-cmd-btn.sc-active {
+  background: rgba(0, 245, 255, 0.08);
+  border-left-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: inset 0 0 20px rgba(0,245,255,0.05);
+}
+
+#stash-cinema .sc-play-ind {
+  font-size: 0.65rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#stash-cinema .sc-cmd-btn.sc-active .sc-play-ind {
+  opacity: 1;
+  animation: sc-blink 1s step-end infinite;
+}
+
+/* Screen */
+#stash-cinema .sc-screen { 
+  background: #000; 
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0 16px 16px 0; 
+  position: relative; 
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  #stash-cinema .sc-screen {
+    border-radius: 16px 16px 0 0;
+    min-height: 520px;
+  }
+}
+
+#stash-cinema .sc-screen-titlebar {
+  background: #1a1e24;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+#stash-cinema .sc-dots {
+  display: flex;
+  gap: 6px;
+}
+
+#stash-cinema .sc-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#stash-cinema .sc-screen-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+#stash-cinema .sc-reset-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#stash-cinema .sc-reset-btn:hover {
+  color: var(--text-main);
+  background: rgba(255,255,255,0.1);
+}
+
+#stash-cinema .sc-screen-body {
+  flex: 1;
+  position: relative;
+  min-height: 520px;
+}
+
+/* Zones layout inside screen body */
+#stash-cinema .sc-zones-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 12px;
+  padding: 20px;
+  height: calc(100% - 80px); /* leave room for description bar */
+}
+
+@media (max-width: 1200px) {
+  #stash-cinema .sc-zones-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Zone generic */
+#stash-cinema .sc-zone {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+  min-height: 120px;
+}
+
+#stash-cinema .sc-zone-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-main);
+  text-align: center;
+}
+
+/* Specific zones */
+#stash-cinema .sc-zone-stash {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  border: 2px dashed rgba(245,158,11,0.4);
+  background: rgba(245,158,11,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 160px;
+}
+
+@media (max-width: 1200px) {
+  #stash-cinema .sc-zone-stash {
+    grid-column: 1 / 3;
+    grid-row: 3;
+  }
+}
+
+/* Zone highlight states */
+#stash-cinema .sc-zone-active {
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 20px rgba(0,245,255,0.15) !important;
+}
+
+#stash-cinema .sc-zone-danger {
+  border-color: var(--red) !important;
+  box-shadow: 0 0 20px rgba(239,68,68,0.15) !important;
+}
+
+#stash-cinema .sc-zone-success {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 20px rgba(16,185,129,0.15) !important;
+}
+
+/* Files & Pills */
+#stash-cinema .sc-file-container,
+#stash-cinema .sc-stash-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+#stash-cinema .sc-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+#stash-cinema .sc-stash-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.4);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #f59e0b;
+  transition: all 0.3s ease;
+}
+
+/* Description bar */
+#stash-cinema .sc-desc-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+#stash-cinema .sc-desc-cmd {
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  min-height: 1.2rem;
+}
+
+#stash-cinema .sc-desc-text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+}
+
+/* Dynamic overlays inside stash */
+#stash-cinema .sc-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #0d1117;
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-main);
+  white-space: pre;
+  text-align: left;
+  z-index: 5;
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+}
+
+#stash-cinema .sc-diff-block {
+  margin-top: 8px;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+#stash-cinema .diff-minus { color: var(--red); }
+#stash-cinema .diff-plus { color: var(--green); }
+
+/* Helpers */
+#stash-cinema .sc-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  transform: scale(0.5);
+}
+
+#stash-cinema .sc-label-float {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  z-index: 6;
+  white-space: nowrap;
+}
+
+/* Particle animation */
+@keyframes sc-particle-fly {
+  0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--sc-dx), var(--sc-dy)) scale(0.3); }
+}
+
+#stash-cinema .sc-particle {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  animation: sc-particle-fly 0.6s ease-in forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Animations */
+@keyframes sc-pop-in {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.sc-anim-pop-in { animation: sc-pop-in 0.4s ease forwards; }
+
+@keyframes sc-pop-out {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+.sc-anim-pop-out { animation: sc-pop-out 0.3s ease forwards; }
+
+@keyframes sc-shake {
+  0%,100% { transform: translateX(0); }
+  20%  { transform: translateX(-5px); }
+  40%  { transform: translateX(5px); }
+  60%  { transform: translateX(-3px); }
+  80%  { transform: translateX(3px); }
+}
+.sc-anim-shake { animation: sc-shake 0.4s ease; }
+
+@keyframes sc-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+#stash-cinema .sc-cursor { animation: sc-blink 0.8s step-end infinite; }
+
+#stash-cinema #sc-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.8);
+  z-index: 50;
+  transition: opacity 0.2s;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] #stash-cinema .sc-panel { background: #f8f9fa; }
+[data-theme="light"] #stash-cinema .sc-screen { background: #ffffff; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #stash-cinema .sc-screen-titlebar { background: #e5e7eb; border-bottom-color: rgba(0,0,0,0.1); color: #4b5563; }
+[data-theme="light"] #stash-cinema .sc-zone { background: #ffffff; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #stash-cinema .sc-desc-bar { background: rgba(255,255,255,0.9); border-top-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #stash-cinema .sc-cmd-btn:hover { background: rgba(0,0,0,0.05); color: var(--text-main); }
+[data-theme="light"] #stash-cinema .sc-file { background: rgba(0,0,0,0.05); }
