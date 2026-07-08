@@ -2276,3 +2276,398 @@ button {
     justify-content: flex-start;
   }
 }
+
+/* ===== GIT STASH SECTION ===== */
+#git-stash .mt-12 {
+  margin-top: 48px;
+}
+#git-stash .stash-section-title {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+#git-stash .stash-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: var(--transition);
+}
+#git-stash .stash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* B. Overview */
+#git-stash .stash-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  #git-stash .stash-overview-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+#git-stash .stash-card-title {
+  margin-bottom: 24px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+#git-stash .stash-zones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#git-stash .stash-zone {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--zone-clr);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  width: 100%;
+  max-width: 300px;
+}
+#git-stash .stash-zone-icon {
+  font-size: 2rem;
+}
+#git-stash .stash-zone-text h4 {
+  margin-bottom: 4px;
+}
+#git-stash .stash-zone-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+#git-stash .stash-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-muted);
+}
+#git-stash .stash-cmd {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: #000;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+#git-stash .stash-line {
+  font-size: 1.5rem;
+  animation: stashPulse 2s infinite;
+}
+@keyframes stashPulse {
+  0%, 100% { opacity: 0.5; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(4px); }
+}
+#git-stash .stash-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#git-stash .stash-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--step-clr);
+  border-radius: 8px;
+}
+#git-stash .stash-step-icon {
+  font-size: 1.5rem;
+}
+#git-stash .stash-step-text {
+  font-size: 0.95rem;
+}
+#git-stash .stash-step-text code {
+  font-family: var(--font-mono);
+  background: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+}
+
+/* C. What Gets Saved */
+#git-stash .stash-saves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+#git-stash .stash-saves-title {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+#git-stash .stash-saves-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#git-stash .stash-saves-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#git-stash .stash-warning-banner {
+  margin-top: 24px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid var(--yellow);
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--yellow);
+}
+#git-stash .stash-warning-banner code {
+  background: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+/* D. Commands Grid */
+#git-stash .stash-filter-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+#git-stash .stash-filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+#git-stash .stash-filter-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-main);
+}
+#git-stash .stash-filter-btn.active {
+  background: rgba(0, 245, 255, 0.1);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+#git-stash .stash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+#git-stash .stash-cmd-card {
+  display: flex;
+  flex-direction: column;
+}
+#git-stash .stash-cmd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+#git-stash .stash-badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--badge-clr);
+  color: var(--badge-clr);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+#git-stash .stash-cmd-title {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+#git-stash .stash-cmd-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+#git-stash .stash-code {
+  background: #000;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+#git-stash .stash-danger-card {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* E. Compare Table */
+#git-stash .stash-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+@media (min-width: 768px) {
+  #git-stash .stash-compare-grid {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+}
+#git-stash .stash-vs {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 16px;
+}
+#git-stash .stash-compare-title {
+  font-family: var(--font-mono);
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--cyan);
+}
+#git-stash .stash-compare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#git-stash .stash-compare-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+#git-stash .stash-glow-card {
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.1);
+  border-color: var(--cyan);
+}
+
+/* F. Stash Numbering Demo */
+#git-stash .stash-demo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+}
+#git-stash .stash-demo-text {
+  margin-bottom: 24px;
+}
+#git-stash .stash-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+#git-stash .stash-stack-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  transition: all 0.5s ease;
+}
+#git-stash .stash-stack-item.fading-out {
+  opacity: 0;
+  transform: translateX(20px);
+}
+#git-stash .stash-stack-item.highlight-renumber {
+  background: rgba(0, 245, 255, 0.1);
+  border-color: var(--cyan);
+  box-shadow: var(--shadow-glow);
+}
+#git-stash .stash-item-id {
+  color: var(--cyan);
+}
+#git-stash .stash-item-msg {
+  color: var(--green);
+}
+
+/* G. Mistakes */
+#git-stash .stash-mistakes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+#git-stash .stash-warning {
+  border-left: 4px solid var(--yellow);
+}
+#git-stash .stash-warning h4 {
+  color: var(--yellow);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#git-stash .stash-warning h4::before {
+  content: '⚠️';
+}
+#git-stash .stash-warning p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+#git-stash .stash-warning code {
+  background: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+/* H. Decision Banner */
+#git-stash .stash-decision-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  #git-stash .stash-decision-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+#git-stash .stash-decision-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+#git-stash .stash-decision-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  box-shadow: 0 0 10px var(--cyan);
+}
+@media (min-width: 768px) {
+  #git-stash .stash-decision-divider {
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, var(--cyan), transparent);
+  }
+}
+#git-stash .stash-decision-item {
+  font-size: 1rem;
+}
+#git-stash .stash-arrow-right {
+  color: var(--text-muted);
+  margin: 0 8px;
+}
+#git-stash .stash-decision-item strong {
+  color: var(--cyan);
+}

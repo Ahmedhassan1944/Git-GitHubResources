@@ -40,6 +40,7 @@
         <li><a href="#practice" class="nav-link">Practice</a></li>
         <li><a href="#pull-requests" class="nav-link">Pull Requests</a></li>
         <li><a href="#git-aliases" class="nav-link">Git Aliases</a></li>
+        <li><a href="#git-stash" class="nav-link">Git Stash</a></li>
       </ul>
       <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
     </div>
@@ -1388,6 +1389,358 @@ git exchange feature/login'>⧉ Copy</button>
     </div>
   </section>
 
+  <!-- ===== GIT STASH SECTION ===== -->
+  <section id="git-stash" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Temporary Storage</span>
+        <h2 class="section-title">Git <span class="gradient-text">Stash</span></h2>
+        <p class="section-desc">Save your unfinished work without committing. Switch context instantly.</p>
+      </div>
+
+      <!-- B. Concept Overview -->
+      <div class="stash-overview-grid">
+        <div class="stash-card reveal stash-zone-wrap">
+          <h3 class="stash-card-title">What is Git Stash?</h3>
+          <div class="stash-zones">
+            <div class="stash-zone" style="--zone-clr: var(--green)">
+              <div class="stash-zone-icon">📁</div>
+              <div class="stash-zone-text">
+                <h4>Working Directory</h4>
+                <p>Your active, unfinished code.</p>
+              </div>
+            </div>
+            <div class="stash-arrow">
+              <span class="stash-cmd">git stash</span>
+              <div class="stash-line">↓</div>
+            </div>
+            <div class="stash-zone" style="--zone-clr: var(--purple)">
+              <div class="stash-zone-icon">📦</div>
+              <div class="stash-zone-text">
+                <h4>Stash Stack</h4>
+                <p>Safe storage for later.</p>
+              </div>
+            </div>
+            <div class="stash-arrow">
+              <span class="stash-cmd">git stash pop</span>
+              <div class="stash-line">↑</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stash-card reveal">
+          <h3 class="stash-card-title">Real-World Scenario</h3>
+          <div class="stash-timeline">
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">👨‍💻</div>
+              <div class="stash-step-text">Working on Feature A</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--purple)">
+              <div class="stash-step-icon">🚨</div>
+              <div class="stash-step-text">Urgent bug reported!</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">📦</div>
+              <div class="stash-step-text">Run <code>git stash</code> — work is saved</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--purple)">
+              <div class="stash-step-icon">🌿</div>
+              <div class="stash-step-text">Switch to <code>hotfix</code> branch</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">🐛</div>
+              <div class="stash-step-text">Fix the bug &amp; commit</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--purple)">
+              <div class="stash-step-icon">🔙</div>
+              <div class="stash-step-text">Return to feature branch</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">✅</div>
+              <div class="stash-step-text">Run <code>git stash pop</code> — continue Feature A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C. What Gets Saved? -->
+      <div class="stash-saves-wrap reveal mt-12">
+        <h3 class="stash-section-title">What Gets Saved?</h3>
+        <div class="stash-saves-grid">
+          <div class="stash-card stash-saves-col">
+            <h4 class="stash-saves-title">✅ Default `git stash` saves:</h4>
+            <ul class="stash-saves-list">
+              <li><span style="color: var(--green)">✓</span> Tracked modified files</li>
+              <li><span style="color: var(--green)">✓</span> Tracked staged files</li>
+            </ul>
+          </div>
+          <div class="stash-card stash-saves-col">
+            <h4 class="stash-saves-title">❌ Default does NOT save:</h4>
+            <ul class="stash-saves-list">
+              <li><span style="color: var(--red)">✗</span> Untracked new files</li>
+              <li><span style="color: var(--red)">✗</span> Ignored files</li>
+            </ul>
+          </div>
+          <div class="stash-card stash-saves-col">
+            <h4 class="stash-saves-title">✅ With `-u` also saves:</h4>
+            <ul class="stash-saves-list">
+              <li><span style="color: var(--green)">✓</span> Untracked new files</li>
+            </ul>
+          </div>
+        </div>
+        <div class="stash-warning-banner">
+          💡 Always use <code>git stash -u</code> when you have new files you haven't run <code>git add</code> on yet.
+        </div>
+      </div>
+
+      <!-- D. Commands Reference -->
+      <div class="stash-cmd-wrap mt-12">
+        <h3 class="stash-section-title reveal">Commands Reference</h3>
+        <div class="stash-filter-bar reveal">
+          <button class="stash-filter-btn active" data-filter="All">All</button>
+          <button class="stash-filter-btn" data-filter="Create">Create</button>
+          <button class="stash-filter-btn" data-filter="Inspect">Inspect</button>
+          <button class="stash-filter-btn" data-filter="Restore">Restore</button>
+          <button class="stash-filter-btn" data-filter="Clean">Clean</button>
+        </div>
+        <div class="stash-grid">
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash" data-copy="git stash">⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash</h4>
+            <p class="stash-cmd-desc">Save tracked changes and clean working directory</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span></code></pre>
+          </div>
+          
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash push" data-copy='git stash push -m "message"'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash push -m "msg"</h4>
+            <p class="stash-cmd-desc">Save with a descriptive name (<strong>recommended</strong>)</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> push -m <span style="color: var(--green)">"message"</span></code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash save" data-copy='git stash save "message"'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash save "msg"</h4>
+            <p class="stash-cmd-desc">⚠️ Deprecated syntax — prefer <code>push -m</code></p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> save <span style="color: var(--green)">"message"</span></code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash -u" data-copy='git stash -u'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash -u</h4>
+            <p class="stash-cmd-desc">Include untracked new files (or <code>--include-untracked</code>)</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> -u</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Inspect">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git stash list" data-copy='git stash list'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash list</h4>
+            <p class="stash-cmd-desc">Show all saved stashes</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> list</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Inspect">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git stash show" data-copy='git stash show'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash show</h4>
+            <p class="stash-cmd-desc">Show changed files in latest stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> show</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Inspect">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git stash show -p" data-copy='git stash show -p'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash show -p</h4>
+            <p class="stash-cmd-desc">Show full diff of latest stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> show -p</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash apply" data-copy='git stash apply'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash apply</h4>
+            <p class="stash-cmd-desc">Restore changes, keep stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> apply</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash apply stash@{2}" data-copy='git stash apply stash@{2}'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash apply stash@{2}</h4>
+            <p class="stash-cmd-desc">Restore a specific stash by index</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> apply stash@{2}</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash apply --index" data-copy='git stash apply --index'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash apply --index</h4>
+            <p class="stash-cmd-desc">Restore changes AND original staging state</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> apply --index</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash pop" data-copy='git stash pop'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash pop</h4>
+            <p class="stash-cmd-desc">Restore changes AND delete stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> pop</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash pop --index" data-copy='git stash pop --index'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash pop --index</h4>
+            <p class="stash-cmd-desc">Restore changes &amp; staging, then delete stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> pop --index</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Clean">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--red)">Clean</span>
+              <button class="copy-btn" aria-label="Copy git stash drop stash@{1}" data-copy='git stash drop stash@{1}'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash drop stash@{1}</h4>
+            <p class="stash-cmd-desc">Delete one specific stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> drop stash@{1}</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card stash-danger-card reveal" data-category="Clean">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--red)">Clean</span>
+              <button class="copy-btn" aria-label="Copy git stash clear" data-copy='git stash clear'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash clear</h4>
+            <p class="stash-cmd-desc">Delete ALL stashes permanently (danger)</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> clear</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- E. apply vs pop -->
+      <div class="stash-compare-wrap mt-12 reveal">
+        <h3 class="stash-section-title">`apply` vs `pop`</h3>
+        <div class="stash-compare-grid">
+          <div class="stash-card">
+            <h4 class="stash-compare-title">git stash apply</h4>
+            <ul class="stash-compare-list">
+              <li><span style="color: var(--green)">✅</span> Restores changes to Working Directory</li>
+              <li><span style="color: var(--green)">✅</span> Keeps stash in list</li>
+              <li><span style="color: var(--cyan)">🔁</span> Can be applied multiple times</li>
+              <li>💡 Use when: you might need the stash again</li>
+            </ul>
+          </div>
+          <div class="stash-vs">VS</div>
+          <div class="stash-card stash-glow-card" style="--glow-clr: var(--cyan)">
+            <h4 class="stash-compare-title">git stash pop</h4>
+            <ul class="stash-compare-list">
+              <li><span style="color: var(--green)">✅</span> Restores changes to Working Directory</li>
+              <li><span style="color: var(--red)">❌</span> Deletes stash after restore</li>
+              <li><span style="color: var(--yellow)">⚡</span> Most common workflow</li>
+              <li>💡 Use when: you're done with the stash</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. Stash Numbering -->
+      <div class="stash-demo-wrap mt-12 reveal">
+        <h3 class="stash-section-title">Stash Numbering</h3>
+        <div class="stash-demo-card">
+          <p class="stash-demo-text">Git automatically renumbers all stashes after a drop.</p>
+          <div class="stash-stack" id="stash-stack-demo">
+            <div class="stash-stack-item" id="stash-item-0">
+              <span class="stash-item-id">stash@{0}</span> — <span class="stash-item-msg">"feat: login UI"</span>
+            </div>
+            <div class="stash-stack-item" id="stash-item-1">
+              <span class="stash-item-id">stash@{1}</span> — <span class="stash-item-msg">"fix: navbar colors"</span>
+            </div>
+            <div class="stash-stack-item" id="stash-item-2">
+              <span class="stash-item-id">stash@{2}</span> — <span class="stash-item-msg">"wip: dashboard"</span>
+            </div>
+          </div>
+          <button class="btn btn-outline stash-demo-btn mt-4" id="stash-demo-drop-btn">Drop stash@{1}</button>
+        </div>
+      </div>
+
+      <!-- G. Common Mistakes -->
+      <div class="stash-mistakes-wrap mt-12 reveal">
+        <h3 class="stash-section-title">⚠️ Common Mistakes</h3>
+        <div class="stash-mistakes-grid">
+          <div class="stash-card stash-warning">
+            <h4>Thinking stash saves untracked files</h4>
+            <p>Use <code>-u</code> flag for new files</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Thinking `pop` never causes conflicts</h4>
+            <p>pop is a merge; conflicts can happen</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Thinking restored changes always go to staging</h4>
+            <p>They go to Working Directory by default; use <code>--index</code> to restore staging state</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Forgetting `pop` deletes the stash</h4>
+            <p>Use <code>apply</code> if you're unsure</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Using `clear` by accident</h4>
+            <p>Clears ALL stashes permanently, no undo</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Using stash as long-term storage</h4>
+            <p>Create a branch instead</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- H. Stash vs Branch -->
+      <div class="stash-decision-wrap mt-12 reveal">
+        <div class="stash-decision-card">
+          <div class="stash-decision-col">
+            <div class="stash-decision-item">⏱️ Short interruption (minutes/hours)? <span class="stash-arrow-right">→</span> Use <strong>git stash</strong></div>
+            <div class="stash-decision-item">📅 Long interruption (days/weeks)? <span class="stash-arrow-right">→</span> Create a <strong>branch</strong></div>
+          </div>
+          <div class="stash-decision-divider"></div>
+          <div class="stash-decision-col">
+            <div class="stash-decision-item">🤝 Need to share work with teammates? <span class="stash-arrow-right">→</span> Create a <strong>branch</strong></div>
+            <div class="stash-decision-item">💾 Need a backup? <span class="stash-arrow-right">→</span> Create a <strong>branch</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-glow" aria-hidden="true"></div>
@@ -1415,6 +1768,7 @@ git exchange feature/login'>⧉ Copy</button>
             <li><a href="#workflow">Workflow</a></li>
             <li><a href="#concepts">Core Concepts</a></li>
             <li><a href="#collaboration">Collaboration</a></li>
+            <li><a href="#git-stash">Git Stash</a></li>
           </ul>
         </div>
         <div class="footer-col">
