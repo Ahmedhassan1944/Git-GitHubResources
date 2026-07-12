@@ -3412,3 +3412,596 @@ button {
 [data-theme="light"] #stash-cinema .sc-desc-bar { background: rgba(255,255,255,0.9); border-top-color: rgba(0,0,0,0.1); }
 [data-theme="light"] #stash-cinema .sc-cmd-btn:hover { background: rgba(0,0,0,0.05); color: var(--text-main); }
 [data-theme="light"] #stash-cinema .sc-file { background: rgba(0,0,0,0.05); }
+
+/* =========================================
+   GIT CLEAN & RESTORE SECTION
+   ========================================= */
+
+#git-clean-restore .gc-hidden {
+  display: none !important;
+}
+
+#git-clean-restore .gc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: var(--transition);
+}
+
+#git-clean-restore .gc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+#git-clean-restore .gc-card-title {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  color: var(--text-main);
+}
+
+#git-clean-restore .gc-section-title {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+#git-clean-restore .gc-badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid currentColor;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+#git-clean-restore .gc-badge-blue { color: var(--blue); }
+#git-clean-restore .gc-badge-red { color: var(--red); }
+
+#git-clean-restore .gc-btn-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#git-clean-restore .gc-btn-danger:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+/* A. Recap Strip */
+#git-clean-restore .gc-recap-wrap {
+  text-align: center;
+}
+
+#git-clean-restore .gc-recap-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+#git-clean-restore .gc-recap-zone {
+  font-weight: 600;
+  color: var(--text-main);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+#git-clean-restore .gc-recap-arrow {
+  color: var(--cyan);
+  font-weight: bold;
+}
+
+#git-clean-restore .gc-caption {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* B. Clean Concept Grid */
+#git-clean-restore .gc-clean-concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+#git-clean-restore .gc-file-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+#git-clean-restore .gc-file-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+}
+
+#git-clean-restore .gc-tracked {
+  border-left-color: var(--green);
+}
+
+#git-clean-restore .gc-untracked {
+  border-left: 3px dashed var(--text-muted);
+  opacity: 0.8;
+}
+
+#git-clean-restore .gc-alert-card {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+#git-clean-restore .gc-alert-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#git-clean-restore .gc-alert-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+#git-clean-restore .gc-wrong { color: var(--red); }
+#git-clean-restore .gc-right { color: var(--green); }
+
+/* C. Demos */
+#git-clean-restore .gc-demo-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+#git-clean-restore .gc-demo-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#git-clean-restore .gc-demo-reset-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: auto;
+}
+
+#git-clean-restore .gc-demo-reset-btn:hover {
+  color: var(--text-main);
+}
+
+#git-clean-restore .gc-demo-files {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#git-clean-restore .gc-demo-file-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+#git-clean-restore .gc-demo-tag {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Demo States */
+#git-clean-restore .gc-demo-untracked.gc-preview-state {
+  border: 1px dashed var(--blue);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+#git-clean-restore .gc-demo-untracked.gc-preview-state .gc-demo-tag::after {
+  content: " (Would remove)";
+  color: var(--blue);
+}
+
+#git-clean-restore .gc-demo-untracked.gc-deleted-state {
+  opacity: 0;
+  transform: scale(0.95);
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: -8px; /* negate gap */
+  border: 0;
+}
+
+#git-clean-restore .gc-demo-tracked.gc-safe-pulse {
+  animation: gc-pulse 1s ease;
+}
+
+@keyframes gc-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); border-color: var(--green); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); border-color: var(--border); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+#git-clean-restore .gc-terminal-output {
+  background: #000;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  white-space: pre-line;
+}
+
+#git-clean-restore .gc-demo-banner {
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+}
+
+#git-clean-restore .gc-banner-preview {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+#git-clean-restore .gc-banner-deleted {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+/* D. Commands Grid */
+#git-clean-restore .gc-cmds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+#git-clean-restore .gc-cmd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+#git-clean-restore .gc-cmd-title {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+#git-clean-restore .gc-cmd-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+#git-clean-restore .gc-code {
+  background: #000;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+}
+
+/* E. Mental Model */
+#git-clean-restore .gc-mental-model {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+#git-clean-restore .gc-model-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+#git-clean-restore .gc-model-cmd {
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  background: rgba(0, 245, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+#git-clean-restore .gc-model-path {
+  font-weight: 500;
+}
+
+#git-clean-restore .gc-model-note {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+#git-clean-restore .gc-model-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.5;
+  margin: 8px 0;
+}
+
+/* F. Restore Demo */
+#git-clean-restore .gc-restore-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+  #git-clean-restore .gc-restore-panels { grid-template-columns: 1fr; }
+}
+
+#git-clean-restore .gc-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+#git-clean-restore .gc-panel-title {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#git-clean-restore .gc-panel-content {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+#git-clean-restore .gc-file-token {
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid var(--purple);
+  color: var(--purple);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+}
+
+#git-clean-restore .gc-empty-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  transition: opacity 0.3s;
+}
+
+/* Restore Demo States */
+#git-clean-restore .gc-moving-token {
+  transform: translateY(100px); /* Will be controlled by JS for accurate pos */
+  opacity: 0;
+}
+
+#git-clean-restore .gc-wd-token {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+#git-clean-restore .gc-wd-token::after {
+  content: " (Tracked + Modified)";
+  font-size: 0.75rem;
+}
+
+#git-clean-restore .gc-banner-restore {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+/* G. Comparison */
+#git-clean-restore .gc-compare-grid {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 800px) {
+  #git-clean-restore .gc-compare-grid { flex-direction: column; }
+}
+
+#git-clean-restore .gc-compare-grid .gc-card {
+  flex: 1;
+  width: 100%;
+}
+
+#git-clean-restore .gc-compare-title {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--cyan);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+#git-clean-restore .gc-compare-vs {
+  font-weight: 800;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+}
+
+#git-clean-restore .gc-compare-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#git-clean-restore .gc-compare-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#git-clean-restore .gc-compare-list li:last-child {
+  border-bottom: none;
+}
+
+/* H. Mistakes */
+#git-clean-restore .gc-mistakes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+#git-clean-restore .gc-warning-card {
+  border-left: 4px solid var(--yellow);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+#git-clean-restore .gc-warning-card h4 {
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+
+#git-clean-restore .gc-warning-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+#git-clean-restore .gc-col-span-full {
+  grid-column: 1 / -1;
+}
+
+/* I. Quiz */
+#git-clean-restore .gc-quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+#git-clean-restore .gc-quiz-title {
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+#git-clean-restore .gc-quiz-setup {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: #000;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+#git-clean-restore .gc-quiz-q {
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+#git-clean-restore .gc-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#git-clean-restore .gc-quiz-option {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+#git-clean-restore .gc-quiz-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#git-clean-restore .gc-quiz-option.gc-correct {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+#git-clean-restore .gc-quiz-option.gc-wrong-ans {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--red);
+  color: var(--red);
+  opacity: 0.6;
+}
+
+#git-clean-restore .gc-quiz-explanation {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid var(--green);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  display: none;
+}
+
+#git-clean-restore .gc-quiz-card.gc-answered .gc-quiz-explanation {
+  display: block;
+}
+
+#git-clean-restore .gc-quiz-card.gc-answered .gc-quiz-option:not(.gc-correct):not(.gc-wrong-ans) {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Light Theme Support */
+[data-theme="light"] #git-clean-restore .gc-card { background: #fff; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #git-clean-restore .gc-code, [data-theme="light"] #git-clean-restore .gc-terminal-output, [data-theme="light"] #git-clean-restore .gc-quiz-setup { background: #f8f9fa; border-color: rgba(0,0,0,0.1); color: #333; }
+[data-theme="light"] #git-clean-restore .gc-file-row, [data-theme="light"] #git-clean-restore .gc-demo-file-row, [data-theme="light"] #git-clean-restore .gc-panel { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #git-clean-restore .gc-recap-strip { background: #fff; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #git-clean-restore .gc-recap-zone { background: rgba(0,0,0,0.05); }
+[data-theme="light"] #git-clean-restore .gc-quiz-option { background: #fff; border-color: rgba(0,0,0,0.1); color: #333; }
+[data-theme="light"] #git-clean-restore .gc-quiz-option:hover { background: rgba(0,0,0,0.03); }
+
