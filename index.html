@@ -42,6 +42,7 @@
         <li><a href="#git-aliases" class="nav-link">Git Aliases</a></li>
         <li><a href="#git-stash" class="nav-link">Git Stash</a></li>
         <li><a href="#git-clean-restore" class="nav-link">Clean &amp; Restore</a></li>
+        <li><a href="#git-reset" class="nav-link">Git Reset</a></li>
       </ul>
       <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
     </div>
@@ -2220,6 +2221,772 @@ git exchange feature/login'>⧉ Copy</button>
     </div>
   </section>
 
+  <!-- ===== GIT RESET SECTION ===== -->
+  <section id="git-reset" class="section">
+    <div class="container">
+
+      <!-- A. Section Header -->
+      <div class="section-header reveal">
+        <span class="section-tag">Rewriting History</span>
+        <h2 class="section-title">Resetting <span class="gradient-text">The HEAD</span></h2>
+        <p class="section-desc">Move HEAD backwards in time. Understand exactly which layers Git touches — and when that becomes dangerous.</p>
+      </div>
+
+      <!-- B. Why Reset Exists -->
+      <div class="gr-motivation-card reveal">
+        <h3 class="gr-card-heading">Why Would You Ever Want to Move Backwards?</h3>
+        <div class="gr-scenarios-grid">
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">✍️</span>
+            <strong class="gr-scenario-title">Wrong commit message</strong>
+            <p>You committed with a typo or unclear message and want to redo it.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🧩</span>
+            <strong class="gr-scenario-title">Too many small commits</strong>
+            <p>You made 5 tiny commits and want to squash them into one clean commit before pushing.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🔬</span>
+            <strong class="gr-scenario-title">Experimental work</strong>
+            <p>You tried something locally and want to cleanly undo all of it.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">📦</span>
+            <strong class="gr-scenario-title">Wrong files staged</strong>
+            <p>You committed files that shouldn't be there and need to restart.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🔁</span>
+            <strong class="gr-scenario-title">Prepare for rebase</strong>
+            <p>You need to clean up local history before merging into main.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🧹</span>
+            <strong class="gr-scenario-title">Start a feature over</strong>
+            <p>You've realized the approach is wrong and want a clean slate from a known good commit.</p>
+          </div>
+        </div>
+        <blockquote class="gr-motivation-quote">
+          &ldquo;In all of these cases, the solution is the same: move HEAD to a previous commit. What changes is <strong>how much Git resets alongside HEAD</strong>.&rdquo;
+        </blockquote>
+      </div>
+
+      <!-- C. HEAD Explained -->
+      <div class="gr-card reveal">
+        <h3 class="gr-card-heading">HEAD Is Not a Commit — It&rsquo;s a Pointer</h3>
+        <p class="gr-card-sub">HEAD is simply a label that tracks <em>which commit you are currently at</em>. When you reset, you move this label.</p>
+        <div class="gr-head-diagram" id="gr-head-diagram" aria-label="Commit timeline animation showing HEAD pointer">
+          <div class="gr-commit-track">
+            <div class="gr-commit-node" data-label="A" data-sha="a1b2c3"></div>
+            <div class="gr-commit-line" aria-hidden="true"></div>
+            <div class="gr-commit-node" data-label="B" data-sha="b4d5e6"></div>
+            <div class="gr-commit-line" aria-hidden="true"></div>
+            <div class="gr-commit-node gr-commit-dim" id="gr-node-c" data-label="C" data-sha="c7f8a9"></div>
+            <div class="gr-commit-line gr-commit-line-dim" id="gr-line-cd" aria-hidden="true"></div>
+            <div class="gr-commit-node gr-commit-dim" id="gr-node-d" data-label="D" data-sha="d0b1c2"></div>
+          </div>
+          <div class="gr-head-pointer" id="gr-head-pointer" aria-label="HEAD pointer">
+            <div class="gr-head-arrow">&#8593;</div>
+            <div class="gr-head-label">HEAD</div>
+          </div>
+          <div class="gr-head-desc gr-hidden" id="gr-head-desc">
+            After <code>git reset &lt;commit-B&gt;</code>, HEAD now points to B. Commits C and D are no longer in your active history — but <strong>what happens to their changes</strong> depends on the reset mode.
+          </div>
+        </div>
+        <div class="gr-diagram-controls">
+          <button class="gr-anim-btn" id="gr-head-move-btn" aria-label="Move HEAD to commit B">&larr; Move HEAD to B</button>
+          <button class="gr-anim-btn gr-anim-btn-outline" id="gr-head-reset-btn" aria-label="Reset HEAD animation">&#8635; Reset</button>
+        </div>
+      </div>
+
+      <!-- D. Three-Area Strip -->
+      <div class="gr-area-strip reveal">
+        <div class="gr-area-col">
+          <span class="gr-area-icon" aria-hidden="true">💾</span>
+          <strong>Repository</strong>
+          <p>The .git folder. Stores every commit and the full history.</p>
+        </div>
+        <div class="gr-area-arrow" aria-hidden="true">&rarr;</div>
+        <div class="gr-area-col">
+          <span class="gr-area-icon" aria-hidden="true">📋</span>
+          <strong>Staging Area</strong>
+          <p>Files you have <code>git add</code>ed, ready for the next commit.</p>
+        </div>
+        <div class="gr-area-arrow" aria-hidden="true">&rarr;</div>
+        <div class="gr-area-col">
+          <span class="gr-area-icon" aria-hidden="true">📁</span>
+          <strong>Working Directory</strong>
+          <p>Your actual files on disk. Where you write and edit code.</p>
+        </div>
+      </div>
+      <p class="gr-area-caption"><code>git reset</code> always moves HEAD in the Repository. The reset <strong>mode</strong> decides what happens to Staging and Working Directory.</p>
+
+      <!-- E. git log Explainer -->
+      <div class="gr-card gr-log-card reveal">
+        <h3 class="gr-card-heading">Reading History Before You Reset</h3>
+        <div class="gr-log-layout">
+          <div class="gr-log-left">
+            <div class="gr-code-block">
+              <div class="gr-code-header">
+                <span>git log output</span>
+                <button class="copy-btn" aria-label="Copy git log command" data-copy="git log">&#10697; Copy</button>
+              </div>
+              <pre><code><span class="gr-sha">commit f7a3d91</span>
+Author: Alex Dev &lt;alex@example.com&gt;
+Date:   Mon Jul 7 10:22:00 2026
+
+    Add login page UI
+
+<span class="gr-sha">commit b2c8e14</span>
+Author: Alex Dev &lt;alex@example.com&gt;
+Date:   Sun Jul 6 18:45:00 2026
+
+    Fix navbar overflow bug</code></pre>
+            </div>
+          </div>
+          <div class="gr-log-right">
+            <ul class="gr-log-explain">
+              <li><span class="gr-log-icon">🔑</span><span><strong>SHA</strong> — The unique ID of every commit. You need this for <code>git reset &lt;commit&gt;</code>.</span></li>
+              <li><span class="gr-log-icon">✍️</span><span><strong>Message</strong> — What was changed. Helps you identify the target commit.</span></li>
+              <li><span class="gr-log-icon">👤</span><span><strong>Author</strong> — Who made the commit.</span></li>
+              <li><span class="gr-log-icon">📅</span><span><strong>Date</strong> — When it was committed. Useful for time-based orientation.</span></li>
+            </ul>
+            <div class="gr-tip-banner">
+              💡 Copy the first 7 characters of the SHA — that&rsquo;s all Git needs for reset.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. Mode Concept Intro Banner -->
+      <div class="gr-card gr-mode-intro-card reveal">
+        <h3 class="gr-card-heading">Reset Always Moves HEAD — The Mode Controls Everything Else</h3>
+        <div class="gr-mode-rows">
+          <div class="gr-mode-row gr-mode-soft">
+            <span class="gr-mode-pill gr-pill-soft">--soft</span>
+            <span class="gr-mode-arrow">&#8594;</span>
+            <span>Moves HEAD only</span>
+          </div>
+          <div class="gr-mode-row gr-mode-mixed">
+            <span class="gr-mode-pill gr-pill-mixed">--mixed</span>
+            <span class="gr-mode-arrow">&#8594;</span>
+            <span>Moves HEAD + clears Staging Area</span>
+          </div>
+          <div class="gr-mode-row gr-mode-hard">
+            <span class="gr-mode-pill gr-pill-hard">--hard</span>
+            <span class="gr-mode-arrow">&#8594;</span>
+            <span>Moves HEAD + clears Staging Area + clears Working Directory</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- G. Soft Reset -->
+      <div class="gr-card gr-reset-mode-card gr-soft-card reveal">
+        <div class="gr-mode-card-header">
+          <span class="gr-mode-badge gr-badge-soft">--soft</span>
+          <h3 class="gr-mode-card-title">Soft Reset</h3>
+        </div>
+        <div class="gr-mode-body">
+          <div class="gr-checklist">
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Repository</strong> — HEAD moves to target commit</span></div>
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Staging Area</strong> — Previous commit&rsquo;s changes appear here (staged, ready to commit again)</span></div>
+            <div class="gr-check-row gr-check-no"><span class="gr-check-icon">&#10005;</span><span><strong>Working Directory</strong> — Completely untouched</span></div>
+          </div>
+          <div class="gr-before-after" id="gr-soft-ba">
+            <div class="gr-ba-panel">
+              <div class="gr-ba-label">Before</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B &rarr; <span class="gr-sha-inline">C</span> &rarr; <span class="gr-sha-inline">D</span> <span class="gr-head-tag">(HEAD&rarr;D)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content gr-muted">(empty)</span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-muted">(clean)</span>
+              </div>
+            </div>
+            <div class="gr-ba-sep" aria-hidden="true">&rarr;</div>
+            <div class="gr-ba-panel" id="gr-soft-after">
+              <div class="gr-ba-label">After</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B <span class="gr-head-tag">(HEAD&rarr;B)</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-soft" id="gr-soft-stage-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content" id="gr-soft-stage-content"><span class="gr-muted">(empty)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-muted">(unchanged)</span>
+              </div>
+            </div>
+          </div>
+          <button class="gr-run-btn gr-run-soft" id="gr-soft-run-btn" aria-label="Simulate git reset --soft B">&#9654; Run git reset --soft B</button>
+          <blockquote class="gr-use-case">
+            &ldquo;You made 3 small commits but want to combine them into one. Soft reset to the commit before your first small commit. All changes land in Staging — commit once with a single clean message.&rdquo;
+          </blockquote>
+          <button class="copy-btn" aria-label="Copy git reset --soft command" data-copy="git reset --soft &lt;commit&gt;">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- H. Mixed Reset -->
+      <div class="gr-card gr-reset-mode-card gr-mixed-card reveal">
+        <div class="gr-mode-card-header">
+          <span class="gr-mode-badge gr-badge-mixed">--mixed</span>
+          <h3 class="gr-mode-card-title">Mixed Reset <span class="gr-default-label">(Git&rsquo;s Default)</span></h3>
+        </div>
+        <div class="gr-mode-body">
+          <div class="gr-checklist">
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Repository</strong> — HEAD moves to target commit</span></div>
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Staging Area</strong> — Cleared. Changes become <em>unstaged modified</em> files.</span></div>
+            <div class="gr-check-row gr-check-no"><span class="gr-check-icon">&#10005;</span><span><strong>Working Directory</strong> — Untouched. Your edits still exist.</span></div>
+          </div>
+          <div class="gr-insight-banner">
+            Mixed reset is <code>git reset</code> with no flag. It clears the staging area but keeps your work in the Working Directory — you decide what to re-stage.
+          </div>
+          <div class="gr-before-after" id="gr-mixed-ba">
+            <div class="gr-ba-panel">
+              <div class="gr-ba-label">Before</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B &rarr; <span class="gr-sha-inline">C</span> &rarr; <span class="gr-sha-inline">D</span> <span class="gr-head-tag">(HEAD&rarr;D)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content gr-file-pill">app.js &#9989;</span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-muted">(modified files)</span>
+              </div>
+            </div>
+            <div class="gr-ba-sep" aria-hidden="true">&rarr;</div>
+            <div class="gr-ba-panel" id="gr-mixed-after">
+              <div class="gr-ba-label">After</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B <span class="gr-head-tag">(HEAD&rarr;B)</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-mixed" id="gr-mixed-stage-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content" id="gr-mixed-stage-content"><span class="gr-file-pill">app.js &#9989;</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-mixed" id="gr-mixed-wd-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content" id="gr-mixed-wd-content"><span class="gr-muted">(modified files)</span></span>
+              </div>
+            </div>
+          </div>
+          <button class="gr-run-btn gr-run-mixed" id="gr-mixed-run-btn" aria-label="Simulate git reset --mixed B">&#9654; Run git reset --mixed B</button>
+          <blockquote class="gr-use-case">
+            &ldquo;You staged the wrong file or staged too much. Mixed reset clears the staging area but leaves your actual code changes safe in the Working Directory.&rdquo;
+          </blockquote>
+          <button class="copy-btn" aria-label="Copy git reset --mixed command" data-copy="git reset --mixed &lt;commit&gt;">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- I. Hard Reset -->
+      <div class="gr-card gr-reset-mode-card gr-hard-card reveal">
+        <div class="gr-mode-card-header">
+          <span class="gr-mode-badge gr-badge-hard">--hard</span>
+          <h3 class="gr-mode-card-title">Hard Reset</h3>
+        </div>
+        <div class="gr-mode-body">
+          <div class="gr-checklist">
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Repository</strong> — HEAD moves to target commit</span></div>
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Staging Area</strong> — Completely wiped</span></div>
+            <div class="gr-check-row gr-check-yes gr-check-danger"><span class="gr-check-icon">&#10003;</span><span><strong>Working Directory</strong> — Completely wiped. <strong>Your code changes are gone.</strong></span></div>
+          </div>
+          <div class="gr-danger-banner">
+            &#9888;&#65039; Hard reset is the only reset mode that can delete unrecoverable work. If you have uncommitted changes in your Working Directory, they will be gone permanently.
+          </div>
+          <div class="gr-before-after" id="gr-hard-ba">
+            <div class="gr-ba-panel">
+              <div class="gr-ba-label">Before</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B &rarr; <span class="gr-sha-inline">C</span> &rarr; <span class="gr-sha-inline">D</span> <span class="gr-head-tag">(HEAD&rarr;D)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content gr-file-pill">auth.js &#9989;</span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-file-pill-warn">login.js &#9998;&#65039;</span>
+              </div>
+            </div>
+            <div class="gr-ba-sep" aria-hidden="true">&rarr;</div>
+            <div class="gr-ba-panel" id="gr-hard-after">
+              <div class="gr-ba-label">After</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B <span class="gr-head-tag">(HEAD&rarr;B)</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-hard" id="gr-hard-stage-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content" id="gr-hard-stage-content"><span class="gr-file-pill">auth.js &#9989;</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-hard" id="gr-hard-wd-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content" id="gr-hard-wd-content"><span class="gr-file-pill-warn">login.js &#9998;&#65039;</span></span>
+              </div>
+            </div>
+          </div>
+          <button class="gr-run-btn gr-run-hard" id="gr-hard-run-btn" aria-label="Simulate git reset --hard B">&#9654; Run git reset --hard B</button>
+          <blockquote class="gr-use-case">
+            &ldquo;You experimented locally and want to completely discard everything. The project should be identical to commit B — no traces of your experiment.&rdquo;
+          </blockquote>
+          <button class="copy-btn" aria-label="Copy git reset --hard command" data-copy="git reset --hard &lt;commit&gt;">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- J. Interactive Reset Simulator -->
+      <div class="gr-card gr-simulator-card reveal">
+        <h3 class="gr-card-heading">Reset Mode Simulator — See Every Layer Change</h3>
+        <p class="gr-card-sub">Select a mode, then click &ldquo;Apply Reset&rdquo; to see all three Git layers respond in real time.</p>
+        <div class="gr-sim-controls">
+          <button class="gr-simulator-btn gr-sim-soft active" id="gr-sim-soft-btn" aria-pressed="true" aria-label="Select soft reset mode">Soft</button>
+          <button class="gr-simulator-btn gr-sim-mixed" id="gr-sim-mixed-btn" aria-pressed="false" aria-label="Select mixed reset mode">Mixed</button>
+          <button class="gr-simulator-btn gr-sim-hard" id="gr-sim-hard-btn" aria-pressed="false" aria-label="Select hard reset mode">Hard</button>
+        </div>
+        <div class="gr-sim-diagram">
+          <div class="gr-sim-panel" id="gr-sim-repo">
+            <div class="gr-sim-panel-title">💾 Repository</div>
+            <div class="gr-sim-panel-content" id="gr-sim-repo-content">A &rarr; B &rarr; <span class="gr-sha-sim" id="gr-sim-c">C</span> &rarr; <span class="gr-sha-sim" id="gr-sim-d">D</span> <span class="gr-sim-head">(HEAD &rarr; D)</span></div>
+          </div>
+          <div class="gr-sim-arrow" aria-hidden="true">&#8595;</div>
+          <div class="gr-sim-panel" id="gr-sim-stage">
+            <div class="gr-sim-panel-title">📋 Staging Area</div>
+            <div class="gr-sim-panel-content" id="gr-sim-stage-content"><span class="gr-sim-file">app.js</span>, <span class="gr-sim-file">auth.js</span> <span class="gr-sim-staged">(staged)</span></div>
+          </div>
+          <div class="gr-sim-arrow" aria-hidden="true">&#8595;</div>
+          <div class="gr-sim-panel" id="gr-sim-wd">
+            <div class="gr-sim-panel-title">📁 Working Directory</div>
+            <div class="gr-sim-panel-content" id="gr-sim-wd-content"><span class="gr-sim-file">login.js</span> <span class="gr-sim-modified">(modified)</span></div>
+          </div>
+        </div>
+        <div class="gr-sim-actions">
+          <button class="gr-run-btn" id="gr-sim-apply-btn" aria-label="Apply selected reset mode">Apply Reset</button>
+          <button class="gr-anim-btn gr-anim-btn-outline" id="gr-sim-reset-btn" aria-label="Reset simulator to initial state">&#8635; Reset All</button>
+        </div>
+        <div class="gr-sim-desc" id="gr-sim-desc" aria-live="polite">Select a mode above and click &ldquo;Apply Reset&rdquo; to see what happens.</div>
+      </div>
+
+      <!-- K. Force Push Explainer -->
+      <div class="gr-card reveal">
+        <h3 class="gr-card-heading">Why Normal Push Fails After Reset — and What Force Push Does</h3>
+        <div class="gr-force-layout">
+          <div class="gr-force-timelines">
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Local:</span>
+              <div class="gr-timeline-track">
+                <span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span>
+                <span class="gr-head-badge">(HEAD)</span>
+              </div>
+            </div>
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Remote:</span>
+              <div class="gr-timeline-track">
+                <span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill gr-pill-dim">C</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill gr-pill-dim">D</span>
+                <span class="gr-head-badge">(origin/main)</span>
+              </div>
+            </div>
+          </div>
+          <p class="gr-force-caption">After a reset, your local history is <em>behind</em> the remote. Git refuses to push because it would delete remote commits — it protects you.</p>
+          <div class="gr-terminal-block">
+            <pre><code><span class="gr-cmd-color">$ git push origin main</span>
+<span class="gr-error-color">! [rejected]        main -&gt; main (non-fast-forward)</span>
+error: failed to push some refs to 'origin'
+hint: Updates were rejected because the tip of your current branch is behind</code></pre>
+          </div>
+          <h4 class="gr-force-sub">Force Push — Overriding the Protection</h4>
+          <div class="gr-terminal-block">
+            <pre><code><span class="gr-cmd-color">$ git push origin main --force</span></code></pre>
+          </div>
+          <p class="gr-force-caption">Force push tells Git: &lsquo;I know what I&rsquo;m doing — overwrite remote history with my local history.&rsquo;</p>
+          <div class="gr-force-timelines">
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Local:</span>
+              <div class="gr-timeline-track"><span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span> <span class="gr-head-badge">(HEAD)</span></div>
+            </div>
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Remote:</span>
+              <div class="gr-timeline-track"><span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span> <span class="gr-deleted-label">(overwritten — C and D gone from GitHub)</span></div>
+            </div>
+          </div>
+          <button class="copy-btn" aria-label="Copy git push force command" data-copy="git push origin main --force">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- L. Force Push Team Warning -->
+      <div class="gr-card gr-danger-card reveal">
+        <h3 class="gr-card-heading">&#9888;&#65039; Force Push is Dangerous on Shared Branches</h3>
+        <div class="gr-collab-timeline">
+          <div class="gr-collab-step">
+            <span class="gr-collab-num">1</span>
+            <span>&#129489;&#8205;&#128187; Developer A and Developer B both pull from <code>main</code>. Timeline: <code>A &rarr; B &rarr; C &rarr; D</code></span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step">
+            <span class="gr-collab-num">2</span>
+            <span>&#128260; Developer B makes a new commit E. Timeline: <code>A &rarr; B &rarr; C &rarr; D &rarr; E</code></span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step gr-collab-danger">
+            <span class="gr-collab-num">3</span>
+            <span>&#9889; Developer A does <code>git reset --hard B</code> then <code>git push --force</code>. GitHub now shows: <code>A &rarr; B</code></span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step gr-collab-danger">
+            <span class="gr-collab-num">4</span>
+            <span>&#128561; Developer B tries to push commit E. Git rejects — their history no longer matches remote.</span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step gr-collab-danger">
+            <span class="gr-collab-num">5</span>
+            <span>&#128165; Developer B&rsquo;s entire history is now &ldquo;orphaned&rdquo; — they must manually resolve the conflict or lose their work.</span>
+          </div>
+        </div>
+        <div class="gr-safe-alt-card">
+          <h4 class="gr-safe-alt-title">&#10003; Safe Alternatives</h4>
+          <div class="gr-safe-row"><span class="gr-safe-icon">&#10003;</span><span><code>git revert &lt;commit&gt;</code> — Safely undoes a commit by creating a <strong>new</strong> commit. History is never rewritten. Safe for shared branches.</span></div>
+          <div class="gr-safe-row"><span class="gr-safe-icon">&#10003;</span><span>Only use <code>--force</code> on <strong>personal feature branches</strong> that no one else has pulled.</span></div>
+        </div>
+      </div>
+
+      <!-- M. Comparison Table -->
+      <div class="gr-card reveal">
+        <h3 class="gr-card-heading">Soft vs Mixed vs Hard — At a Glance</h3>
+        <div class="gr-table-wrap">
+          <table class="gr-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Mode</th>
+                <th scope="col">Moves HEAD</th>
+                <th scope="col">Clears Staging</th>
+                <th scope="col">Clears Working Dir</th>
+                <th scope="col">Work Lost?</th>
+                <th scope="col">Common Use Case</th>
+                <th scope="col">Danger Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>--soft</code></td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-no">&#10005;</td>
+                <td class="gr-td-no">&#10005;</td>
+                <td>Never</td>
+                <td>Squash commits, rewrite last commit message</td>
+                <td><span class="gr-danger-badge gr-danger-safe">&#129001; Safe</span></td>
+              </tr>
+              <tr>
+                <td><code>--mixed</code></td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-no">&#10005;</td>
+                <td>Never</td>
+                <td>Unstage wrong files, reorganize staged changes</td>
+                <td><span class="gr-danger-badge gr-danger-low">&#128993; Low Risk</span></td>
+              </tr>
+              <tr>
+                <td><code>--hard</code></td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td>Yes (uncommitted)</td>
+                <td>Discard all local experimentation</td>
+                <td><span class="gr-danger-badge gr-danger-high">&#128308; Dangerous</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- N. Real-World Scenario Cards -->
+      <div class="gr-scenarios-section reveal">
+        <h3 class="gr-section-heading">Real-World Scenarios — When to Use Each Mode</h3>
+        <div class="gr-scenario-cards-grid">
+          <div class="gr-scenario-rw-card gr-rw-soft">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-soft">--soft</span>
+              <h4>Wrong commit message</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Committed with message &lsquo;asdf&rsquo;. Embarrassing.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --soft HEAD~1</code> &rarr; edit message &rarr; commit again</div>
+            <div class="gr-rw-risk gr-risk-zero">&#129001; Risk: Zero — nothing is lost</div>
+          </div>
+          <div class="gr-scenario-rw-card gr-rw-mixed">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-mixed">--mixed</span>
+              <h4>Undo a mistaken git add</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Staged the wrong files before committing.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --mixed HEAD</code> clears staging; files remain modified</div>
+            <div class="gr-rw-risk gr-risk-low">&#128993; Risk: Low — all code stays in Working Directory</div>
+          </div>
+          <div class="gr-scenario-rw-card gr-rw-hard">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-hard">--hard</span>
+              <h4>Discard a failed experiment</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Spent 2 hours on an approach. It&rsquo;s wrong. Start over.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --hard &lt;last-good-commit&gt;</code> — project reverts completely</div>
+            <div class="gr-rw-risk gr-risk-high">&#128308; Risk: Irreversible if you had uncommitted work</div>
+          </div>
+          <div class="gr-scenario-rw-card gr-rw-mixed">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-soft">--soft + --force</span>
+              <h4>Squash before merging</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Made 6 small commits on a feature branch. Want 1 clean commit for the PR.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --soft &lt;commit-before-feature&gt;</code> &rarr; single commit &rarr; <code>git push --force</code> (safe on personal branch)</div>
+            <div class="gr-rw-risk gr-risk-low">&#128993; Risk: Low — only on personal feature branch</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- O. Common Mistakes -->
+      <div class="gr-mistakes-section reveal">
+        <h3 class="gr-section-heading">&#9888;&#65039; Common Misconceptions</h3>
+        <div class="gr-mistakes-grid">
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;HEAD is a commit&rdquo;</h4>
+            <p>HEAD is a pointer that points to a commit. They are not the same thing.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Hard reset deletes Git history forever&rdquo;</h4>
+            <p>Hard reset moves HEAD. Commits still exist via <code>git reflog</code> for ~90 days. What&rsquo;s lost is uncommitted work.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Reset automatically updates GitHub&rdquo;</h4>
+            <p>Reset only changes your local repository. GitHub is unaffected until you push (with <code>--force</code>).</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Force push is always dangerous&rdquo;</h4>
+            <p>Force push is safe on private feature branches no one else has pulled. It is dangerous on shared branches like <code>main</code>.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Mixed reset = losing my code&rdquo;</h4>
+            <p>Mixed reset never touches the Working Directory. All your code is safe — it just moves out of staging.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;<code>git restore</code> and <code>git reset</code> do the same thing&rdquo;</h4>
+            <p><code>git restore --staged</code> unstages a file. <code>git reset</code> moves HEAD. Completely different operations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- P. Prediction Exercises -->
+      <div class="gr-exercises-section reveal">
+        <h3 class="gr-section-heading">Prediction Exercises — What Will Happen?</h3>
+        <div class="gr-exercises-grid">
+
+          <div class="gr-exercise-card" id="gr-ex-1">
+            <h4 class="gr-ex-title">Exercise 1</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Repository:</strong> A &rarr; B &rarr; C &rarr; D <span class="gr-head-tag">(HEAD&rarr;D)</span></div>
+              <div class="gr-ex-layer"><strong>Staging Area:</strong> (empty)</div>
+              <div class="gr-ex-layer"><strong>Working Dir:</strong> (clean)</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git reset --soft B</code></div>
+            <p class="gr-ex-question">Where do the changes from C and D end up?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 1 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="wrong">Deleted permanently</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="correct">Staging Area</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="wrong">Working Directory</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="wrong">Still in Repository as commits</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-1-exp">
+              <strong>Correct!</strong> <code>--soft</code> moves HEAD to B, leaving changes from C and D staged — ready to be committed again as one clean commit.
+            </div>
+          </div>
+
+          <div class="gr-exercise-card" id="gr-ex-2">
+            <h4 class="gr-ex-title">Exercise 2</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Repository:</strong> A &rarr; B &rarr; C <span class="gr-head-tag">(HEAD&rarr;C)</span></div>
+              <div class="gr-ex-layer"><strong>Staging Area:</strong> style.css (staged)</div>
+              <div class="gr-ex-layer"><strong>Working Dir:</strong> style.css, app.js (modified)</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git reset --mixed A</code></div>
+            <p class="gr-ex-question">What is in the Staging Area after the reset?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 2 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="wrong">style.css</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="wrong">app.js</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="correct">Nothing</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="wrong">All files</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-2-exp">
+              <strong>Correct!</strong> <code>--mixed</code> clears the Staging Area entirely. style.css moves to the Working Directory as &ldquo;modified&rdquo;.
+            </div>
+          </div>
+
+          <div class="gr-exercise-card" id="gr-ex-3">
+            <h4 class="gr-ex-title">Exercise 3</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Repository:</strong> A &rarr; B &rarr; C <span class="gr-head-tag">(HEAD&rarr;C)</span></div>
+              <div class="gr-ex-layer"><strong>Staging Area:</strong> login.js (staged)</div>
+              <div class="gr-ex-layer"><strong>Working Dir:</strong> login.js, README.md (modified)</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git reset --hard A</code></div>
+            <p class="gr-ex-question">What happens to login.js and README.md?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 3 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="wrong">Both move to Staging</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="wrong">Both stay in Working Directory</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="correct">Both are permanently deleted</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="wrong">They are committed to A</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-3-exp">
+              <strong>Correct — and be careful!</strong> <code>--hard</code> wipes both Staging and Working Directory. All uncommitted changes are gone.
+            </div>
+          </div>
+
+          <div class="gr-exercise-card" id="gr-ex-4">
+            <h4 class="gr-ex-title">Exercise 4 — Force Push</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Local:</strong> A &rarr; B <span class="gr-head-tag">(HEAD, after hard reset)</span></div>
+              <div class="gr-ex-layer"><strong>Remote:</strong> A &rarr; B &rarr; C &rarr; D</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git push origin main</code></div>
+            <p class="gr-ex-question">What happens?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 4 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="wrong">Push succeeds normally</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="correct">Git rejects the push</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="wrong">C and D deleted automatically</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="wrong">Local pulls C and D automatically</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-4-exp">
+              <strong>Correct!</strong> Git rejects the push because local history is behind remote. You must use <code>git push --force</code> — with great caution.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Q. Mini Quiz -->
+      <div class="gr-quiz-card reveal">
+        <h3 class="gr-card-heading">Test Your Understanding</h3>
+        <div class="gr-mini-quiz" id="gr-mini-quiz">
+          <div class="gr-quiz-progress">
+            <span id="gr-quiz-num">Question 1 of 5</span>
+            <div class="gr-quiz-bar"><div class="gr-quiz-bar-fill" id="gr-quiz-bar" style="width: 0%"></div></div>
+          </div>
+          <div class="gr-quiz-question" id="gr-quiz-question" aria-live="polite">What is HEAD?</div>
+          <div class="gr-quiz-options-wrap" id="gr-quiz-options" role="group" aria-label="Quiz answer options">
+            <button class="gr-mini-opt" data-val="A">A fixed snapshot of your code</button>
+            <button class="gr-mini-opt" data-val="B">A pointer to the current commit</button>
+            <button class="gr-mini-opt" data-val="C">The latest commit on GitHub</button>
+            <button class="gr-mini-opt" data-val="D">The first commit in the project</button>
+          </div>
+          <button class="gr-anim-btn" id="gr-quiz-next" style="display:none" aria-label="Next quiz question">Next &rarr;</button>
+          <div class="gr-quiz-result gr-hidden" id="gr-quiz-result" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- R. Commands Reference Grid -->
+      <div class="gr-cmds-section reveal">
+        <h3 class="gr-section-heading">Commands Reference</h3>
+        <div class="gr-cmds-grid">
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git log" data-copy="git log">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git log</code></h4>
+            <p class="gr-cmd-desc">View commit history, SHAs, authors, and messages.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git log</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git log --oneline" data-copy="git log --oneline">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git log --oneline</code></h4>
+            <p class="gr-cmd-desc">Compact one-line-per-commit view — great for reset targeting.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git log</span> --oneline</code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--green)">Safe Reset</span>
+              <button class="copy-btn" aria-label="Copy git reset --soft" data-copy="git reset --soft &lt;commit&gt;">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset --soft</code></h4>
+            <p class="gr-cmd-desc">Move HEAD only. Changes appear in Staging Area.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> --soft <span class="gr-c-str">&lt;commit&gt;</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--green)">Safe Reset</span>
+              <button class="copy-btn" aria-label="Copy git reset --mixed" data-copy="git reset --mixed &lt;commit&gt;">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset --mixed</code></h4>
+            <p class="gr-cmd-desc">Move HEAD and clear Staging. Changes stay in Working Directory. (Default)</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> --mixed <span class="gr-c-str">&lt;commit&gt;</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--red)">Destructive</span>
+              <button class="copy-btn" aria-label="Copy git reset --hard" data-copy="git reset --hard &lt;commit&gt;">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset --hard</code></h4>
+            <p class="gr-cmd-desc">Move HEAD and wipe Staging + Working Directory. Uncommitted work is lost.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> --hard <span class="gr-c-str">&lt;commit&gt;</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--green)">Safe Reset</span>
+              <button class="copy-btn" aria-label="Copy git reset HEAD~1" data-copy="git reset HEAD~1">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset HEAD~1</code></h4>
+            <p class="gr-cmd-desc">Shorthand to undo exactly one commit back (mixed by default).</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> HEAD~1</code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--purple)">Remote</span>
+              <button class="copy-btn" aria-label="Copy git push force" data-copy="git push origin main --force">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git push --force</code></h4>
+            <p class="gr-cmd-desc">Overwrite remote history with local history. Use with caution.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git push</span> origin main --force</code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--cyan)">Recovery</span>
+              <button class="copy-btn" aria-label="Copy git reflog" data-copy="git reflog">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reflog</code></h4>
+            <p class="gr-cmd-desc">View all HEAD movements. Recover commits after a hard reset for ~90 days.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reflog</span></code></pre>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-glow" aria-hidden="true"></div>
@@ -2249,6 +3016,7 @@ git exchange feature/login'>⧉ Copy</button>
             <li><a href="#collaboration">Collaboration</a></li>
             <li><a href="#git-stash">Git Stash</a></li>
             <li><a href="#git-clean-restore">Clean &amp; Restore</a></li>
+            <li><a href="#git-reset">Git Reset</a></li>
           </ul>
         </div>
         <div class="footer-col">
