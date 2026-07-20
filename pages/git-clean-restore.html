@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Git &amp; GitHub Complete Learning Reference — Interactive premium educational page for mastering version control." name="description"/>
+<meta content="Git &amp; GitHub Complete Guide | LocalSchool" property="og:title"/>
+<meta content="Master Git &amp; GitHub with an interactive visual reference." property="og:description"/>
+<title>Git &amp; GitHub Complete Reference | LocalSchool</title>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🌿&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+<link href="../css/pages/git-clean-restore.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ===== PARTICLES BACKGROUND ===== -->
+<div aria-hidden="true" id="particles-bg"></div>
+<!-- ===== SCROLL PROGRESS ===== -->
+<div aria-hidden="true" id="progress-bar"></div>
+<!-- ===== NAVBAR ===== -->
+<nav aria-label="Main navigation" id="navbar">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">
+<span class="logo-icon">🌿</span>
+<span>Git Reference</span>
+</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
+<ul class="nav-links" id="nav-links" role="list">
+<li><a class="nav-link" href="../index.html">Home</a></li>
+<li><a class="nav-link" href="lifecycle.html">Lifecycle</a></li>
+<li><a class="nav-link" href="commands.html">Commands</a></li>
+<li><a class="nav-link" href="workflow.html">Workflow</a></li>
+<li><a class="nav-link" href="concepts.html">Concepts</a></li>
+<li><a class="nav-link" href="practice.html">Practice</a></li>
+<li><a class="nav-link" href="pull-requests.html">Pull Requests</a></li>
+<li><a class="nav-link" href="git-aliases.html">Git Aliases</a></li>
+<li><a class="nav-link" href="git-stash.html">Git Stash</a></li>
+<li><a class="nav-link active" href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a class="nav-link" href="git-reset.html">Git Reset</a></li>
+<li><a class="nav-link" href="git-ignore.html">Git Ignore</a></li>
+</ul>
+<button aria-label="Toggle dark/light mode" class="theme-btn" id="theme-toggle" title="Toggle theme">🌙</button>
+</div>
+</nav>
+<!-- ===== HERO SECTION ===== -->
+<!-- ===== GIT LIFECYCLE SECTION ===== -->
+<!-- ===== GIT STASH CINEMA ===== -->
+<!-- ===== COMMANDS SECTION ===== -->
+<!-- ===== WORKFLOW TIMELINE SECTION ===== -->
+<!-- ===== CONCEPTS SECTION ===== -->
+<!-- ===== COLLABORATION SECTION ===== -->
+<!-- ===== PRACTICE TERMINAL SECTION ===== -->
+<!-- ===== GENERATE & TEST SSH KEYS SECTION ===== -->
+<!-- ===== PULL REQUEST DEEP DIVE SECTION ===== -->
+<!-- ===== GIT ALIASES SECTION ===== -->
+<!-- ===== GIT STASH SECTION ===== -->
+<!-- ===== GIT CLEAN & RESTORE SECTION ===== -->
+<section class="section section-alt" id="git-clean-restore">
+<div class="container">
+<div class="section-header reveal">
+<span class="section-tag">Cleanup &amp; Undo</span>
+<h2 class="section-title">Clean <span class="gradient-text">&amp; Restore</span></h2>
+<p class="section-desc">Remove untracked clutter safely, and undo a mistaken git add without losing your work.</p>
+</div>
+<!-- A. Prerequisite Recap -->
+<div class="gc-recap-wrap reveal mt-12">
+<div class="gc-recap-strip">
+<div class="gc-recap-zone">📁 Working Directory</div>
+<div class="gc-recap-arrow">→</div>
+<div class="gc-recap-zone">📋 Staging Area</div>
+<div class="gc-recap-arrow">→</div>
+<div class="gc-recap-zone">💾 Repository</div>
+</div>
+<p class="gc-caption">Git Clean acts on the Working Directory. Git Restore --staged acts on the Staging Area.</p>
+</div>
+<!-- B. Git Clean — Concept Block -->
+<div class="gc-clean-concept-grid mt-12 reveal">
+<div class="gc-card">
+<h3 class="gc-card-title">What is an untracked file?</h3>
+<div class="gc-file-tree">
+<div class="gc-file-row gc-tracked">
+<span class="gc-file-name">📄 app.js</span>
+<span class="gc-file-status">✅ Tracked</span>
+</div>
+<div class="gc-file-row gc-tracked">
+<span class="gc-file-name">📄 style.css</span>
+<span class="gc-file-status">✅ Tracked</span>
+</div>
+<div class="gc-file-row gc-untracked">
+<span class="gc-file-name">📄 notes.txt</span>
+<span class="gc-file-status">⚪ Untracked</span>
+</div>
+<div class="gc-file-row gc-untracked">
+<span class="gc-file-name">📄 temp.log</span>
+<span class="gc-file-status">⚪ Untracked</span>
+</div>
+</div>
+</div>
+<div class="gc-card gc-alert-card">
+<h3 class="gc-card-title">⚠️ Common Misconception</h3>
+<ul class="gc-alert-list">
+<li class="gc-wrong"><span class="gc-icon">❌</span> "git clean deletes everything in the Working Directory" — <strong>WRONG</strong></li>
+<li class="gc-right"><span class="gc-icon">✅</span> "git clean only removes untracked files — tracked files and their edits are always safe"</li>
+</ul>
+</div>
+</div>
+<!-- C. Git Clean — Preview vs Delete Demo -->
+<div class="gc-demo-wrap mt-12 reveal">
+<h3 class="gc-card-title">Preview vs Delete (Interactive)</h3>
+<div class="gc-card gc-clean-demo-card">
+<div class="gc-demo-controls">
+<button class="gc-demo-btn btn-outline" id="gc-clean-preview-btn">Run git clean -n</button>
+<button class="gc-demo-btn gc-btn-danger" id="gc-clean-force-btn">Run git clean -f</button>
+<button aria-label="Reset Demo" class="gc-demo-reset-btn" id="gc-clean-reset-btn">↺ Reset Demo</button>
+</div>
+<div class="gc-demo-files" id="gc-clean-files">
+<div class="gc-demo-file-row gc-demo-tracked" id="gc-clean-app">
+<span>app.js</span>
+<span class="gc-demo-tag">Tracked, Modified (always safe)</span>
+</div>
+<div class="gc-demo-file-row gc-demo-untracked" id="gc-clean-notes">
+<span>notes.txt</span>
+<span class="gc-demo-tag">Untracked</span>
+</div>
+<div class="gc-demo-file-row gc-demo-untracked" id="gc-clean-temp">
+<span>temp.log</span>
+<span class="gc-demo-tag">Untracked</span>
+</div>
+</div>
+<div class="gc-terminal-output gc-hidden" id="gc-clean-terminal"></div>
+<div class="gc-demo-banner gc-hidden" id="gc-clean-banner"></div>
+</div>
+</div>
+<!-- D. Git Clean — Commands Reference Cards -->
+<div class="gc-cmds-grid mt-12 reveal">
+<div class="gc-card gc-cmd-card">
+<div class="gc-cmd-header">
+<span class="gc-badge gc-badge-blue">Preview</span>
+<button aria-label="Copy git clean -n" class="copy-btn" data-copy="git clean -n">⧉ Copy</button>
+</div>
+<h4 class="gc-cmd-title">git clean -n</h4>
+<p class="gc-cmd-desc">Shows what would be deleted. Deletes nothing. Always run this first.</p>
+<pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -n</code></pre>
+</div>
+<div class="gc-card gc-cmd-card">
+<div class="gc-cmd-header">
+<span class="gc-badge gc-badge-red">Delete</span>
+<button aria-label="Copy git clean -f" class="copy-btn" data-copy="git clean -f">⧉ Copy</button>
+</div>
+<h4 class="gc-cmd-title">git clean -f</h4>
+<p class="gc-cmd-desc">Deletes untracked files only. Tracked files are never affected.</p>
+<pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -f</code></pre>
+</div>
+<div class="gc-card gc-cmd-card">
+<div class="gc-cmd-header">
+<span class="gc-badge gc-badge-red">Delete</span>
+<button aria-label="Copy git clean -fd" class="copy-btn" data-copy="git clean -fd">⧉ Copy</button>
+</div>
+<h4 class="gc-cmd-title">git clean -fd</h4>
+<p class="gc-cmd-desc">Also removes untracked <strong>directories</strong>, not just files.</p>
+<pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -fd</code></pre>
+</div>
+<div class="gc-card gc-cmd-card">
+<div class="gc-cmd-header">
+<span class="gc-badge gc-badge-red">Delete</span>
+<button aria-label="Copy git clean -fx" class="copy-btn" data-copy="git clean -fx">⧉ Copy</button>
+</div>
+<h4 class="gc-cmd-title">git clean -fx</h4>
+<p class="gc-cmd-desc">Also removes files ignored by <code>.gitignore</code> — use with extra care.</p>
+<pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -fx</code></pre>
+</div>
+</div>
+<!-- E. Git Restore --staged — Concept Block -->
+<div class="gc-restore-concept-wrap mt-12 reveal">
+<h3 class="gc-section-title">Git Restore --staged</h3>
+<div class="gc-mental-model">
+<div class="gc-model-row">
+<span class="gc-model-cmd">git add</span>
+<span class="gc-model-icon">⬆️</span>
+<span class="gc-model-path">Working Directory → Staging Area</span>
+</div>
+<div class="gc-model-divider"></div>
+<div class="gc-model-row">
+<span class="gc-model-cmd">git restore --staged</span>
+<span class="gc-model-icon">⬇️</span>
+<span class="gc-model-path">Staging Area → Working Directory <span class="gc-model-note">(undo the add — work is NOT lost)</span></span>
+</div>
+</div>
+</div>
+<!-- F. Git Restore --staged — Interactive Before/After Demo -->
+<div class="gc-restore-demo-wrap mt-12 reveal">
+<h3 class="gc-card-title">Restore --staged Demo</h3>
+<div class="gc-card gc-restore-card">
+<div class="gc-demo-controls">
+<button class="gc-demo-btn btn-primary" id="gc-restore-btn">Run git restore --staged app.js</button>
+<button aria-label="Reset Demo" class="gc-demo-reset-btn" id="gc-restore-reset-btn">↺ Reset Demo</button>
+</div>
+<div class="gc-restore-panels">
+<div class="gc-panel">
+<h4 class="gc-panel-title">Working Directory</h4>
+<div class="gc-panel-content" id="gc-restore-wd">
+<span class="gc-empty-text" id="gc-wd-empty">(empty / clean)</span>
+</div>
+</div>
+<div class="gc-panel">
+<h4 class="gc-panel-title">Staging Area</h4>
+<div class="gc-panel-content" id="gc-restore-stage">
+<div class="gc-file-token" id="gc-restore-file">app.js</div>
+<span class="gc-empty-text gc-hidden" id="gc-stage-empty">(empty)</span>
+</div>
+</div>
+</div>
+<div class="gc-demo-banner gc-hidden" id="gc-restore-banner"></div>
+</div>
+</div>
+<!-- G. Git Clean vs Git Restore --staged — Comparison Table -->
+<div class="gc-compare-wrap mt-12 reveal">
+<h3 class="gc-section-title">Comparison</h3>
+<div class="gc-compare-grid">
+<div class="gc-card">
+<h4 class="gc-compare-title">git clean</h4>
+<ul class="gc-compare-list">
+<li><strong>Works on:</strong> Untracked files</li>
+<li><strong>Action:</strong> Deletes files</li>
+<li><strong>Recoverable:</strong> ⚠️ Not easily</li>
+<li><strong>Flags:</strong> <code>-n</code> preview, <code>-f</code> force</li>
+</ul>
+</div>
+<div class="gc-compare-vs">VS</div>
+<div class="gc-card">
+<h4 class="gc-compare-title">git restore --staged</h4>
+<ul class="gc-compare-list">
+<li><strong>Works on:</strong> Tracked, staged files</li>
+<li><strong>Action:</strong> Removes from Staging Area only</li>
+<li><strong>Recoverable:</strong> ✅ Always — no data lost</li>
+<li><strong>Flags:</strong> none needed, just the filename</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- H. Common Mistakes — Warning Cards Grid -->
+<div class="gc-mistakes-wrap mt-12 reveal">
+<h3 class="gc-section-title">⚠️ Common Mistakes</h3>
+<div class="gc-mistakes-grid">
+<div class="gc-card gc-warning-card">
+<h4>Thinking <code>git clean</code> deletes tracked files</h4>
+<p>It never touches tracked files, only untracked ones.</p>
+</div>
+<div class="gc-card gc-warning-card">
+<h4>Thinking <code>git clean</code> deletes modified tracked files</h4>
+<p>Modified tracked files are always safe.</p>
+</div>
+<div class="gc-card gc-warning-card">
+<h4>Thinking <code>git clean -n</code> deletes anything</h4>
+<p><code>-n</code> is preview-only, zero files removed.</p>
+</div>
+<div class="gc-card gc-warning-card">
+<h4>Thinking <code>git restore --staged</code> removes your changes</h4>
+<p>It only unstages; your edits stay in the Working Directory.</p>
+</div>
+<div class="gc-card gc-warning-card gc-col-span-full">
+<h4>Thinking <code>git restore --staged</code> restores the last commit</h4>
+<p>It does not touch file content at all, only the staging state.</p>
+</div>
+</div>
+</div>
+<!-- I. Practical Exercises — Quiz Cards -->
+<div class="gc-quiz-wrap mt-12 reveal">
+<h3 class="gc-section-title">Test Your Knowledge</h3>
+<div class="gc-quiz-grid">
+<!-- Ex 1 -->
+<div class="gc-card gc-quiz-card" data-answer="preview">
+<h4 class="gc-quiz-title">Scenario 1</h4>
+<p class="gc-quiz-setup">Given: <code>app.js (Modified)</code>, <code>notes.txt (Untracked)</code></p>
+<p class="gc-quiz-q">Predict the output of <code>git clean -n</code>:</p>
+<div class="gc-quiz-options">
+<button class="gc-quiz-option" data-val="delete-both">Deletes both files</button>
+<button class="gc-quiz-option" data-val="delete-notes">Deletes notes.txt</button>
+<button class="gc-quiz-option" data-val="preview">Would remove notes.txt (Preview only)</button>
+</div>
+<div class="gc-quiz-explanation">
+<strong>Correct!</strong> <code>-n</code> is preview only. Nothing is deleted, and <code>app.js</code> is tracked so it wouldn't be affected anyway.
+            </div>
+</div>
+<!-- Ex 2 -->
+<div class="gc-card gc-quiz-card" data-answer="delete-notes">
+<h4 class="gc-quiz-title">Scenario 2</h4>
+<p class="gc-quiz-setup">Given: <code>app.js (Modified)</code>, <code>notes.txt (Untracked)</code></p>
+<p class="gc-quiz-q">Predict the result after <code>git clean -f</code>:</p>
+<div class="gc-quiz-options">
+<button class="gc-quiz-option" data-val="delete-both">Deletes both files</button>
+<button class="gc-quiz-option" data-val="delete-notes">notes.txt deleted, app.js safe</button>
+<button class="gc-quiz-option" data-val="nothing">Nothing happens</button>
+</div>
+<div class="gc-quiz-explanation">
+<strong>Correct!</strong> <code>notes.txt</code> is untracked and deleted. <code>app.js</code> still exists with its modifications because it's tracked.
+            </div>
+</div>
+<!-- Ex 3 -->
+<div class="gc-card gc-quiz-card" data-answer="unstaged">
+<h4 class="gc-quiz-title">Scenario 3</h4>
+<p class="gc-quiz-setup">Given: <code>app.js (Staged)</code></p>
+<p class="gc-quiz-q">Predict the result after <code>git restore --staged app.js</code>:</p>
+<div class="gc-quiz-options">
+<button class="gc-quiz-option" data-val="deleted">Edits in app.js are lost</button>
+<button class="gc-quiz-option" data-val="unstaged">app.js moves back to Working Directory as Modified</button>
+<button class="gc-quiz-option" data-val="commit">app.js is committed</button>
+</div>
+<div class="gc-quiz-explanation">
+<strong>Correct!</strong> Nothing is lost. It simply leaves the Staging Area and goes back to being modified in the Working Directory.
+            </div>
+</div>
+<!-- Ex 4 -->
+<div class="gc-card gc-quiz-card" data-answer="combo">
+<h4 class="gc-quiz-title">Scenario 4</h4>
+<p class="gc-quiz-setup">Given: <code>app.js (Modified)</code>, <code>style.css (Staged)</code>, <code>notes.txt (Untracked)</code></p>
+<p class="gc-quiz-q">Predict the final state after running <code>git clean -f</code> then <code>git restore --staged style.css</code>:</p>
+<div class="gc-quiz-options">
+<button class="gc-quiz-option" data-val="combo">notes.txt deleted → style.css unstaged → app.js unchanged</button>
+<button class="gc-quiz-option" data-val="wrong1">All files deleted</button>
+<button class="gc-quiz-option" data-val="wrong2">notes.txt and app.js deleted → style.css unstaged</button>
+</div>
+<div class="gc-quiz-explanation">
+<strong>Correct!</strong> <code>notes.txt</code> deleted (untracked). <code>style.css</code> unstaged to Working Directory as Modified. <code>app.js</code> unchanged throughout.
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== GIT RESET SECTION ===== -->
+<!-- ===== GIT IGNORE SECTION ===== -->
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+<div aria-hidden="true" class="footer-glow"></div>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="footer-logo">🌿 Git Reference</div>
+<p>A premium interactive learning resource for mastering Git &amp; GitHub — part of the LocalSchool offline learning platform.</p>
+<div class="social-links">
+<a aria-label="GitHub" class="social-btn" href="#" title="GitHub">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+</a>
+<a aria-label="Twitter" class="social-btn" href="#" title="Twitter">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+<a aria-label="LinkedIn" class="social-btn" href="#" title="LinkedIn">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Learn</h4>
+<ul>
+<li><a href="lifecycle.html">Git Lifecycle</a></li>
+<li><a href="workflow.html">Workflow</a></li>
+<li><a href="concepts.html">Core Concepts</a></li>
+<li><a href="collaboration.html">Collaboration</a></li>
+<li><a href="git-stash.html">Git Stash</a></li>
+<li><a href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a href="git-reset.html">Git Reset</a></li>
+<li><a href="git-ignore.html">Git Ignore</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Commands</h4>
+<ul>
+<li><a href="commands.html">git init</a></li>
+<li><a href="commands.html">git commit</a></li>
+<li><a href="commands.html">git branch</a></li>
+<li><a href="commands.html">git push</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Resources</h4>
+<ul>
+<li><a href="practice.html">Practice Terminal</a></li>
+<li><a href="https://git-scm.com/doc" rel="noopener" target="_blank">Official Docs ↗</a></li>
+<li><a href="https://github.com" rel="noopener" target="_blank">GitHub ↗</a></li>
+<li><a href="https://learngitbranching.js.org" rel="noopener" target="_blank">Learn Branching ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LocalSchool — Git &amp; GitHub Reference. Built for offline learning.</p>
+<p class="footer-made">Made with 💙 for developers</p>
+</div>
+</div>
+</footer>
+<!-- ===== BACK TO TOP ===== -->
+<button aria-label="Back to top" id="back-to-top" title="Back to top">↑</button>
+<!-- ===== COPY TOAST ===== -->
+<div aria-live="polite" id="copy-toast" role="status">✓ Copied!</div>
+<script src="../js/script.js"></script>
+<script src="../js/pages/git-clean-restore.js"></script>
+</body>
+</html>

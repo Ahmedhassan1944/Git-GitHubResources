@@ -1,0 +1,1015 @@
+/* =========================================
+   Git Reset Section — gr- namespace
+   ========================================= */
+
+/* ---- Shared Layout ---- */
+#git-reset .gr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+  transition: var(--transition);
+}
+#git-reset .gr-card:hover { box-shadow: var(--shadow-lg); }
+
+#git-reset .gr-card-heading {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 16px;
+}
+#git-reset .gr-card-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: -8px 0 20px;
+}
+#git-reset .gr-section-heading {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 20px;
+}
+#git-reset .gr-hidden { display: none !important; }
+
+/* ---- B. Motivation Card ---- */
+#git-reset .gr-motivation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+#git-reset .gr-scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+#git-reset .gr-scenario-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: var(--transition);
+}
+#git-reset .gr-scenario-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 245, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+#git-reset .gr-scenario-icon {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+#git-reset .gr-scenario-title {
+  display: block;
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+#git-reset .gr-scenario-card p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.5;
+}
+#git-reset .gr-motivation-quote {
+  border-left: 3px solid var(--cyan);
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  background: rgba(0, 245, 255, 0.04);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ---- C. HEAD Diagram ---- */
+#git-reset .gr-head-diagram {
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px 24px 20px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+}
+#git-reset .gr-commit-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+#git-reset .gr-commit-node {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: opacity 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  cursor: default;
+}
+#git-reset .gr-commit-node::before {
+  content: attr(data-label);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+#git-reset .gr-commit-node::after {
+  content: attr(data-sha);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--yellow);
+  position: absolute;
+  bottom: -20px;
+  white-space: nowrap;
+}
+#git-reset .gr-commit-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  max-width: 60px;
+  min-width: 30px;
+  transition: opacity 0.5s ease;
+}
+#git-reset .gr-commit-dim {
+  opacity: 0.3;
+  border-color: var(--text-muted);
+  box-shadow: none;
+}
+#git-reset .gr-commit-line-dim { opacity: 0.2; }
+
+/* HEAD Pointer */
+#git-reset .gr-head-pointer {
+  position: absolute;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  /* Start at D (rightmost) position: 4 nodes, 3 lines */
+  right: calc(24px + 26px); /* ~26px = half node width */
+  transition: right 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#git-reset .gr-head-pointer.gr-head-at-b {
+  /* Move to B position ~ from right */
+  right: calc(50% - 26px + 60px);
+}
+#git-reset .gr-head-arrow {
+  font-size: 1.3rem;
+  line-height: 1;
+  text-shadow: 0 0 8px var(--cyan);
+}
+#git-reset .gr-head-label {
+  text-shadow: 0 0 8px var(--cyan);
+}
+#git-reset .gr-head-desc {
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  animation: gr-fade-in 0.4s ease;
+}
+@keyframes gr-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+#git-reset .gr-diagram-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+#git-reset .gr-anim-btn {
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  color: #000;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+#git-reset .gr-anim-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+#git-reset .gr-anim-btn-outline {
+  background: transparent;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+}
+#git-reset .gr-anim-btn-outline:hover { background: rgba(0, 245, 255, 0.08); }
+
+/* ---- D. Three-Area Strip ---- */
+#git-reset .gr-area-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+#git-reset .gr-area-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 20px;
+  flex: 1;
+  min-width: 140px;
+}
+#git-reset .gr-area-icon { font-size: 1.8rem; margin-bottom: 8px; }
+#git-reset .gr-area-col strong { color: var(--text-main); font-size: 0.9rem; margin-bottom: 4px; }
+#git-reset .gr-area-col p { color: var(--text-muted); font-size: 0.8rem; margin: 0; }
+#git-reset .gr-area-arrow {
+  color: var(--border);
+  font-size: 1.5rem;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+#git-reset .gr-area-caption {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 0 0 32px;
+  padding: 0 8px;
+}
+
+/* ---- E. git log Card ---- */
+#git-reset .gr-log-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 680px) { #git-reset .gr-log-layout { grid-template-columns: 1fr; } }
+#git-reset .gr-code-block {
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#git-reset .gr-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+#git-reset .gr-code-block pre {
+  margin: 0;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-main);
+  overflow-x: auto;
+  line-height: 1.6;
+}
+#git-reset .gr-sha { color: var(--yellow); font-weight: 600; }
+#git-reset .gr-log-explain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+#git-reset .gr-log-explain li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+#git-reset .gr-log-icon { font-size: 1.1rem; flex-shrink: 0; }
+#git-reset .gr-log-explain strong { color: var(--text-main); }
+#git-reset .gr-tip-banner {
+  background: rgba(0, 245, 255, 0.07);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+/* ---- F. Mode Intro Banner ---- */
+#git-reset .gr-mode-rows { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+#git-reset .gr-mode-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+  background: var(--bg-glass);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+#git-reset .gr-mode-soft { border-left-color: var(--green); }
+#git-reset .gr-mode-mixed { border-left-color: var(--yellow); }
+#git-reset .gr-mode-hard { border-left-color: var(--red); }
+#git-reset .gr-mode-pill {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#git-reset .gr-pill-soft { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid var(--green); }
+#git-reset .gr-pill-mixed { background: rgba(245, 158, 11, 0.15); color: var(--yellow); border: 1px solid var(--yellow); }
+#git-reset .gr-pill-hard { background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); }
+#git-reset .gr-mode-arrow { color: var(--text-muted); }
+
+/* ---- G/H/I. Reset Mode Cards ---- */
+#git-reset .gr-reset-mode-card { border-top: 3px solid transparent; }
+#git-reset .gr-soft-card { border-top-color: var(--green); }
+#git-reset .gr-soft-card:hover { box-shadow: 0 8px 30px rgba(16,185,129,0.15); }
+#git-reset .gr-mixed-card { border-top-color: var(--yellow); }
+#git-reset .gr-mixed-card:hover { box-shadow: 0 8px 30px rgba(245,158,11,0.15); }
+#git-reset .gr-hard-card { border-top-color: var(--red); }
+#git-reset .gr-hard-card:hover { box-shadow: 0 8px 30px rgba(239,68,68,0.15); }
+
+#git-reset .gr-mode-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+#git-reset .gr-mode-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+#git-reset .gr-badge-soft { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid var(--green); }
+#git-reset .gr-badge-mixed { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid var(--yellow); }
+#git-reset .gr-badge-hard { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid var(--red); }
+#git-reset .gr-mode-card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0; }
+#git-reset .gr-default-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
+#git-reset .gr-mode-body { display: flex; flex-direction: column; gap: 20px; }
+
+/* Checklist */
+#git-reset .gr-checklist { display: flex; flex-direction: column; gap: 10px; }
+#git-reset .gr-check-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  background: var(--bg-glass);
+}
+#git-reset .gr-check-icon {
+  font-weight: 800;
+  font-size: 0.9rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+#git-reset .gr-check-yes .gr-check-icon { color: var(--green); }
+#git-reset .gr-check-no .gr-check-icon { color: var(--red); opacity: 0.5; }
+#git-reset .gr-check-danger { border: 1px solid rgba(239,68,68,0.3); }
+#git-reset .gr-check-danger .gr-check-icon { color: var(--red); }
+
+/* Before/After Diagrams */
+#git-reset .gr-before-after {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+#git-reset .gr-ba-panel {
+  flex: 1;
+  min-width: 200px;
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#git-reset .gr-ba-label {
+  padding: 8px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+}
+#git-reset .gr-ba-layer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px;
+  gap: 4px;
+  border-bottom: 1px solid rgba(48,54,61,0.4);
+  transition: background 0.4s ease;
+}
+#git-reset .gr-ba-layer:last-child { border-bottom: none; }
+#git-reset .gr-ba-layer-name { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; }
+#git-reset .gr-ba-content { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-main); }
+#git-reset .gr-muted { color: var(--text-muted) !important; }
+#git-reset .gr-ba-sep {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  align-self: center;
+  padding: 0 4px;
+}
+#git-reset .gr-sha-inline { color: var(--yellow); font-weight: 600; }
+#git-reset .gr-head-tag { color: var(--cyan); font-size: 0.75rem; font-family: var(--font-mono); }
+#git-reset .gr-file-pill { color: var(--green); }
+#git-reset .gr-file-pill-warn { color: var(--yellow); }
+
+/* Animated layer states */
+#git-reset .gr-layer-soft { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3) !important; }
+#git-reset .gr-layer-mixed { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.3) !important; }
+#git-reset .gr-layer-hard { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.35) !important; }
+
+/* Flash animation */
+@keyframes gr-flash-green { 0%,100%{background:transparent} 50%{background:rgba(16,185,129,0.25)} }
+@keyframes gr-flash-yellow { 0%,100%{background:transparent} 50%{background:rgba(245,158,11,0.25)} }
+@keyframes gr-flash-red { 0%,100%{background:transparent} 50%{background:rgba(239,68,68,0.3)} }
+#git-reset .gr-flash-green { animation: gr-flash-green 0.5s ease; }
+#git-reset .gr-flash-yellow { animation: gr-flash-yellow 0.5s ease; }
+#git-reset .gr-flash-red { animation: gr-flash-red 0.6s ease; }
+
+#git-reset .gr-run-btn {
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  color: #000;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+  align-self: flex-start;
+}
+#git-reset .gr-run-btn:hover { opacity: 0.85; transform: translateY(-1px); box-shadow: var(--shadow-glow); }
+#git-reset .gr-run-soft { background: linear-gradient(135deg, var(--green), #059669); }
+#git-reset .gr-run-mixed { background: linear-gradient(135deg, var(--yellow), #d97706); }
+#git-reset .gr-run-hard { background: linear-gradient(135deg, var(--red), #b91c1c); color: #fff; }
+
+#git-reset .gr-use-case {
+  border-left: 3px solid var(--text-muted);
+  padding: 10px 16px;
+  margin: 0;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 0 6px 6px 0;
+}
+#git-reset .gr-insight-banner {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+#git-reset .gr-danger-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: #fca5a5;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ---- J. Simulator ---- */
+#git-reset .gr-simulator-card { background: var(--bg-card); }
+#git-reset .gr-sim-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+#git-reset .gr-simulator-btn {
+  flex: 1;
+  min-width: 90px;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+#git-reset .gr-simulator-btn:hover { border-color: var(--cyan); color: var(--text-main); }
+#git-reset .gr-sim-soft.active, #git-reset .gr-sim-soft:focus { border-color: var(--green); color: var(--green); background: rgba(16,185,129,0.1); }
+#git-reset .gr-sim-mixed.active, #git-reset .gr-sim-mixed:focus { border-color: var(--yellow); color: var(--yellow); background: rgba(245,158,11,0.1); }
+#git-reset .gr-sim-hard.active, #git-reset .gr-sim-hard:focus { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.1); }
+
+#git-reset .gr-sim-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+#git-reset .gr-sim-panel {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+#git-reset .gr-sim-panel:last-child { border-bottom: none; }
+#git-reset .gr-sim-arrow {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+#git-reset .gr-sim-panel-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+#git-reset .gr-sim-panel-content {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-main);
+}
+#git-reset .gr-sha-sim { color: var(--yellow); }
+#git-reset .gr-sha-sim.gr-dim { opacity: 0.3; }
+#git-reset .gr-sim-head { color: var(--cyan); font-size: 0.75rem; }
+#git-reset .gr-sim-file { color: var(--text-main); }
+#git-reset .gr-sim-staged { color: var(--green); }
+#git-reset .gr-sim-modified { color: var(--yellow); }
+
+/* Simulator panel state classes */
+#git-reset .gr-sim-panel-soft { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3); }
+#git-reset .gr-sim-panel-mixed { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.3); }
+#git-reset .gr-sim-panel-hard { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.35); }
+#git-reset .gr-sim-panel-neutral { background: rgba(139,149,158,0.06); border-color: rgba(139,149,158,0.2); }
+
+#git-reset .gr-sim-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+#git-reset .gr-sim-desc {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  min-height: 48px;
+  transition: var(--transition);
+}
+
+/* ---- K. Force Push ---- */
+#git-reset .gr-force-layout { display: flex; flex-direction: column; gap: 20px; }
+#git-reset .gr-force-timelines { display: flex; flex-direction: column; gap: 10px; }
+#git-reset .gr-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+#git-reset .gr-timeline-label {
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  min-width: 55px;
+  flex-shrink: 0;
+}
+#git-reset .gr-timeline-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+#git-reset .gr-commit-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  border: 1px solid var(--cyan);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+#git-reset .gr-pill-dim { opacity: 0.3; border-color: var(--text-muted); }
+#git-reset .gr-tl-arrow { color: var(--text-muted); font-size: 0.9rem; }
+#git-reset .gr-head-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  padding: 2px 8px;
+  background: rgba(0, 245, 255, 0.08);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  border-radius: 20px;
+}
+#git-reset .gr-deleted-label { color: var(--red); font-size: 0.75rem; font-family: var(--font-mono); }
+#git-reset .gr-force-caption { color: var(--text-muted); font-size: 0.88rem; margin: 0; }
+#git-reset .gr-force-sub { color: var(--text-main); font-size: 0.95rem; margin: 0; }
+#git-reset .gr-terminal-block {
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+#git-reset .gr-terminal-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7; }
+#git-reset .gr-cmd-color { color: var(--cyan); }
+#git-reset .gr-error-color { color: var(--red); }
+
+/* ---- L. Danger Card ---- */
+#git-reset .gr-danger-card { border-top: 3px solid var(--red); }
+#git-reset .gr-danger-card:hover { box-shadow: 0 8px 30px rgba(239,68,68,0.15); }
+#git-reset .gr-collab-timeline { display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; }
+#git-reset .gr-collab-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+#git-reset .gr-collab-step:hover { background: rgba(255,255,255,0.02); }
+#git-reset .gr-collab-danger { color: #fca5a5; }
+#git-reset .gr-collab-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-main);
+  flex-shrink: 0;
+}
+#git-reset .gr-collab-connector {
+  height: 12px;
+  width: 1px;
+  background: var(--border);
+  margin-left: 28px;
+}
+#git-reset .gr-safe-alt-card {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
+#git-reset .gr-safe-alt-title { color: var(--green); font-size: 0.9rem; margin: 0 0 14px; }
+#git-reset .gr-safe-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+#git-reset .gr-safe-row:last-child { margin-bottom: 0; }
+#git-reset .gr-safe-icon { color: var(--green); flex-shrink: 0; }
+
+/* ---- M. Comparison Table ---- */
+#git-reset .gr-table-wrap { overflow-x: auto; }
+#git-reset .gr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+#git-reset .gr-table th {
+  text-align: left;
+  padding: 10px 14px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+#git-reset .gr-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(48,54,61,0.5);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+#git-reset .gr-table tr:last-child td { border-bottom: none; }
+#git-reset .gr-table tr:hover td { background: rgba(255,255,255,0.02); }
+#git-reset .gr-td-yes { color: var(--green); font-weight: 700; }
+#git-reset .gr-td-no { color: var(--text-muted); opacity: 0.4; }
+#git-reset .gr-danger-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+#git-reset .gr-danger-safe { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+#git-reset .gr-danger-low { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+#git-reset .gr-danger-high { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+
+/* ---- N. Scenario Cards ---- */
+#git-reset .gr-scenarios-section { margin-bottom: 32px; }
+#git-reset .gr-scenario-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+#git-reset .gr-scenario-rw-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition);
+}
+#git-reset .gr-scenario-rw-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+#git-reset .gr-rw-soft { border-left-color: var(--green); }
+#git-reset .gr-rw-mixed { border-left-color: var(--yellow); }
+#git-reset .gr-rw-hard { border-left-color: var(--red); }
+#git-reset .gr-rw-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+#git-reset .gr-rw-header h4 { margin: 0; font-size: 0.9rem; color: var(--text-main); }
+#git-reset .gr-rw-mode-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+#git-reset .gr-rw-problem, #git-reset .gr-rw-solution, #git-reset .gr-rw-risk {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+#git-reset .gr-rw-problem strong, #git-reset .gr-rw-solution strong { color: var(--text-main); }
+#git-reset .gr-risk-zero { color: var(--green); }
+#git-reset .gr-risk-low { color: var(--yellow); }
+#git-reset .gr-risk-high { color: var(--red); }
+
+/* ---- O. Mistake Cards ---- */
+#git-reset .gr-mistakes-section { margin-bottom: 32px; }
+#git-reset .gr-mistakes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+#git-reset .gr-mistake-card {
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-left: 4px solid var(--yellow);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: var(--transition);
+}
+#git-reset .gr-mistake-card:hover { background: rgba(245,158,11,0.08); }
+#git-reset .gr-mistake-icon { font-size: 1.3rem; }
+#git-reset .gr-mistake-card h4 { margin: 0; font-size: 0.88rem; color: var(--text-main); }
+#git-reset .gr-mistake-card p { margin: 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ---- P. Exercise Cards ---- */
+#git-reset .gr-exercises-section { margin-bottom: 32px; }
+#git-reset .gr-exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+#git-reset .gr-exercise-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition);
+}
+#git-reset .gr-ex-title { font-size: 0.9rem; font-weight: 700; color: var(--cyan); margin: 0; }
+#git-reset .gr-ex-state {
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#git-reset .gr-ex-layer { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+#git-reset .gr-ex-cmd {
+  background: rgba(0, 245, 255, 0.07);
+  border: 1px solid rgba(0,245,255,0.2);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+#git-reset .gr-ex-question { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+#git-reset .gr-ex-options { display: flex; flex-direction: column; gap: 8px; }
+#git-reset .gr-quiz-option {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+#git-reset .gr-quiz-option:hover { border-color: var(--cyan); color: var(--text-main); }
+#git-reset .gr-quiz-option.gr-correct {
+  background: rgba(16,185,129,0.15);
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: 600;
+}
+#git-reset .gr-quiz-option.gr-wrong {
+  background: rgba(239,68,68,0.1);
+  border-color: var(--red);
+  color: var(--red);
+}
+#git-reset .gr-quiz-option:disabled { cursor: default; }
+#git-reset .gr-ex-explanation {
+  background: rgba(16,185,129,0.07);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  animation: gr-fade-in 0.3s ease;
+}
+
+/* ---- Q. Mini Quiz ---- */
+#git-reset .gr-quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+#git-reset .gr-mini-quiz { display: flex; flex-direction: column; gap: 20px; }
+#git-reset .gr-quiz-progress { display: flex; flex-direction: column; gap: 8px; }
+#git-reset .gr-quiz-progress span { font-size: 0.8rem; color: var(--text-muted); }
+#git-reset .gr-quiz-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+#git-reset .gr-quiz-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+#git-reset .gr-quiz-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+#git-reset .gr-quiz-options-wrap { display: flex; flex-direction: column; gap: 10px; }
+#git-reset .gr-mini-opt {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+#git-reset .gr-mini-opt:hover { border-color: var(--cyan); color: var(--text-main); }
+#git-reset .gr-mini-opt.gr-opt-correct { background: rgba(16,185,129,0.15); border-color: var(--green); color: var(--green); font-weight: 700; }
+#git-reset .gr-mini-opt.gr-opt-wrong { background: rgba(239,68,68,0.1); border-color: var(--red); color: var(--red); }
+#git-reset .gr-quiz-result {
+  background: rgba(0,245,255,0.07);
+  border: 1px solid rgba(0,245,255,0.2);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  animation: gr-fade-in 0.4s ease;
+}
+
+/* ---- R. Commands Grid ---- */
+#git-reset .gr-cmds-section { margin-bottom: 32px; }
+#git-reset .gr-cmds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+#git-reset .gr-cmd-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition);
+}
+#git-reset .gr-cmd-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+#git-reset .gr-cmd-top { display: flex; justify-content: space-between; align-items: center; }
+#git-reset .gr-cmd-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(var(--cmd-clr, #00f5ff), 0.1);
+  color: var(--cmd-clr);
+  border: 1px solid color-mix(in srgb, var(--cmd-clr) 40%, transparent);
+}
+#git-reset .gr-cmd-name { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 0; }
+#git-reset .gr-cmd-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+#git-reset .gr-cmd-code {
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+#git-reset .gr-c-cmd { color: var(--cyan); }
+#git-reset .gr-c-str { color: var(--green); }
+
+/* ---- Light Theme Overrides ---- */
+[data-theme="light"] #git-reset .gr-card,
+[data-theme="light"] #git-reset .gr-motivation-card,
+[data-theme="light"] #git-reset .gr-quiz-card,
+[data-theme="light"] #git-reset .gr-exercise-card,
+[data-theme="light"] #git-reset .gr-cmd-card,
+[data-theme="light"] #git-reset .gr-scenario-rw-card { background: #fff; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #git-reset .gr-ba-panel,
+[data-theme="light"] #git-reset .gr-head-diagram,
+[data-theme="light"] #git-reset .gr-code-block,
+[data-theme="light"] #git-reset .gr-terminal-block,
+[data-theme="light"] #git-reset .gr-cmd-code,
+[data-theme="light"] #git-reset .gr-ex-state { background: #f4f6f9; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] #git-reset .gr-ba-content,
+[data-theme="light"] #git-reset .gr-sim-panel-content { color: #1a1a2e; }
+[data-theme="light"] #git-reset .gr-quiz-option,
+[data-theme="light"] #git-reset .gr-mini-opt,
+[data-theme="light"] #git-reset .gr-simulator-btn { background: #fff; border-color: rgba(0,0,0,0.12); color: #555; }
+[data-theme="light"] #git-reset .gr-area-strip { background: #fff; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] #git-reset .gr-sim-diagram { background: #f4f6f9; }
+[data-theme="light"] #git-reset .gr-sim-panel { border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] #git-reset .gr-mistake-card { background: rgba(245,158,11,0.04); }

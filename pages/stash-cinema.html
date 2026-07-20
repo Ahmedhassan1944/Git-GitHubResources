@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Git &amp; GitHub Complete Learning Reference — Interactive premium educational page for mastering version control." name="description"/>
+<meta content="Git &amp; GitHub Complete Guide | LocalSchool" property="og:title"/>
+<meta content="Master Git &amp; GitHub with an interactive visual reference." property="og:description"/>
+<title>Git &amp; GitHub Complete Reference | LocalSchool</title>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🌿&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ===== PARTICLES BACKGROUND ===== -->
+<div aria-hidden="true" id="particles-bg"></div>
+<!-- ===== SCROLL PROGRESS ===== -->
+<div aria-hidden="true" id="progress-bar"></div>
+<!-- ===== NAVBAR ===== -->
+<nav aria-label="Main navigation" id="navbar">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">
+<span class="logo-icon">🌿</span>
+<span>Git Reference</span>
+</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
+<ul class="nav-links" id="nav-links" role="list">
+<li><a class="nav-link" href="../index.html">Home</a></li>
+<li><a class="nav-link" href="lifecycle.html">Lifecycle</a></li>
+<li><a class="nav-link" href="commands.html">Commands</a></li>
+<li><a class="nav-link" href="workflow.html">Workflow</a></li>
+<li><a class="nav-link" href="concepts.html">Concepts</a></li>
+<li><a class="nav-link" href="practice.html">Practice</a></li>
+<li><a class="nav-link" href="pull-requests.html">Pull Requests</a></li>
+<li><a class="nav-link" href="git-aliases.html">Git Aliases</a></li>
+<li><a class="nav-link" href="git-stash.html">Git Stash</a></li>
+<li><a class="nav-link" href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a class="nav-link" href="git-reset.html">Git Reset</a></li>
+<li><a class="nav-link" href="git-ignore.html">Git Ignore</a></li>
+</ul>
+<button aria-label="Toggle dark/light mode" class="theme-btn" id="theme-toggle" title="Toggle theme">🌙</button>
+</div>
+</nav>
+<!-- ===== HERO SECTION ===== -->
+<!-- ===== GIT LIFECYCLE SECTION ===== -->
+<!-- ===== GIT STASH CINEMA ===== -->
+<section class="section reveal" id="stash-cinema">
+<div class="container">
+<div class="section-header reveal">
+<span class="section-tag">Interactive Scene Player</span>
+<h2 class="section-title">Git Stash <span class="gradient-text">Cinema</span></h2>
+<p class="section-desc">Select a command. Watch the scene play out inside Git.</p>
+</div>
+<div class="sc-cinema-layout reveal">
+<!-- COMMAND PANEL (Left) -->
+<div class="sc-panel">
+<div class="sc-panel-header">
+            🎬 STASH COMMANDS
+          </div>
+<hr class="sc-panel-divider"/>
+<div class="sc-panel-scroll">
+<div class="sc-group">
+<div class="sc-group-label" style="--grp-clr: var(--green);">📦 CREATE</div>
+<button class="sc-cmd-btn" data-scene="stash">git stash <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-named">git stash push -m "msg" <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-untracked">git stash -u <span class="sc-play-ind">▶ playing</span></button>
+</div>
+<div class="sc-group">
+<div class="sc-group-label" style="--grp-clr: var(--blue);">🔍 INSPECT</div>
+<button class="sc-cmd-btn" data-scene="stash-list">git stash list <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-show">git stash show <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-show-diff">git stash show -p <span class="sc-play-ind">▶ playing</span></button>
+</div>
+<div class="sc-group">
+<div class="sc-group-label" style="--grp-clr: var(--purple);">♻️ RESTORE</div>
+<button class="sc-cmd-btn" data-scene="stash-apply">git stash apply <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-apply-index">git stash apply stash@{1} <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-pop">git stash pop <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-pop-index">git stash pop --index <span class="sc-play-ind">▶ playing</span></button>
+</div>
+<div class="sc-group">
+<div class="sc-group-label" style="--grp-clr: var(--red);">🗑️ CLEAN</div>
+<button class="sc-cmd-btn" data-scene="stash-drop">git stash drop stash@{1} <span class="sc-play-ind">▶ playing</span></button>
+<button class="sc-cmd-btn" data-scene="stash-clear">git stash clear <span class="sc-play-ind">▶ playing</span></button>
+</div>
+</div>
+</div>
+<!-- LIFECYCLE SCREEN (Right) -->
+<div class="sc-screen">
+<div class="sc-screen-titlebar">
+<div class="sc-dots">
+<span class="sc-dot" style="background:#ff5f56;"></span>
+<span class="sc-dot" style="background:#ffbd2e;"></span>
+<span class="sc-dot" style="background:#27c93f;"></span>
+</div>
+<div class="sc-screen-title">git-visualizer — scene: idle</div>
+<button class="sc-reset-btn">[RESET]</button>
+</div>
+<div class="sc-screen-body" id="sc-screen-body">
+<div class="sc-zones-grid">
+<!-- Zone 1: Working Dir -->
+<div class="sc-zone sc-zone-wd" id="sc-zone-wd">
+<div class="sc-zone-title">📁 Working Dir</div>
+<div class="sc-file-container" id="sc-files-wd">
+<span class="sc-file" id="sc-file-app">app.js ✏️</span>
+<span class="sc-file" id="sc-file-style">style.css ✏️</span>
+<span class="sc-file sc-hidden" id="sc-file-new">new-file.js 🆕</span>
+</div>
+<div class="sc-zone-label sc-hidden" id="sc-label-wd"></div>
+</div>
+<!-- Zone 2: Staging Area -->
+<div class="sc-zone sc-zone-stage" id="sc-zone-stage">
+<div class="sc-zone-title">📋 Staging Area</div>
+<div class="sc-file-container" id="sc-files-stage">
+<span class="sc-file" id="sc-file-utils">utils.js ✅</span>
+</div>
+<div class="sc-zone-label sc-hidden" id="sc-label-stage"></div>
+</div>
+<!-- Zone 3: Local Repo -->
+<div class="sc-zone sc-zone-repo">
+<div class="sc-zone-title">💾 Local Repo</div>
+<div class="sc-file-container"></div>
+</div>
+<!-- Zone 4: Remote -->
+<div class="sc-zone sc-zone-remote">
+<div class="sc-zone-title">☁️ Remote</div>
+<div class="sc-file-container"></div>
+</div>
+<!-- Zone 5: Stash Stack -->
+<div class="sc-zone sc-zone-stash" id="sc-zone-stash">
+<div class="sc-zone-title">📦 STASH STACK</div>
+<div class="sc-stash-container" id="sc-stash-stack">
+<span class="sc-stash-pill" id="sc-pill-1">stash@{0}</span>
+<span class="sc-stash-pill" id="sc-pill-2">stash@{1}</span>
+</div>
+<!-- Dynamic overlays inside stash -->
+<div class="sc-overlay sc-hidden" id="sc-list-overlay">
+<div>stash@{0}  WIP on main: abc1234 — working on feature</div>
+<div>stash@{1}  WIP on main: def5678 — hotfix prep</div>
+</div>
+<div class="sc-overlay sc-hidden" id="sc-show-overlay">
+<div>📄 app.js     | 3 changes</div>
+<div>📄 style.css  | 1 change</div>
+<div>2 files changed, 4 lines</div>
+<div class="sc-diff-block sc-hidden" id="sc-diff-block">
+<div class="diff-minus">- const old = 'value';</div>
+<div class="diff-plus">+ const new = 'updated';</div>
+</div>
+</div>
+<div class="sc-zone-label sc-hidden" id="sc-label-stash"></div>
+</div>
+</div>
+<div class="sc-desc-bar">
+<div class="sc-desc-cmd"><span id="sc-cmd-text"></span><span class="sc-cursor">_</span></div>
+<div class="sc-desc-text" id="sc-desc-text"></div>
+</div>
+<div id="sc-particles-container"></div>
+<div class="sc-hidden" id="sc-flash"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== COMMANDS SECTION ===== -->
+<!-- ===== WORKFLOW TIMELINE SECTION ===== -->
+<!-- ===== CONCEPTS SECTION ===== -->
+<!-- ===== COLLABORATION SECTION ===== -->
+<!-- ===== PRACTICE TERMINAL SECTION ===== -->
+<!-- ===== GENERATE & TEST SSH KEYS SECTION ===== -->
+<!-- ===== PULL REQUEST DEEP DIVE SECTION ===== -->
+<!-- ===== GIT ALIASES SECTION ===== -->
+<!-- ===== GIT STASH SECTION ===== -->
+<!-- ===== GIT CLEAN & RESTORE SECTION ===== -->
+<!-- ===== GIT RESET SECTION ===== -->
+<!-- ===== GIT IGNORE SECTION ===== -->
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+<div aria-hidden="true" class="footer-glow"></div>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="footer-logo">🌿 Git Reference</div>
+<p>A premium interactive learning resource for mastering Git &amp; GitHub — part of the LocalSchool offline learning platform.</p>
+<div class="social-links">
+<a aria-label="GitHub" class="social-btn" href="#" title="GitHub">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+</a>
+<a aria-label="Twitter" class="social-btn" href="#" title="Twitter">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+<a aria-label="LinkedIn" class="social-btn" href="#" title="LinkedIn">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Learn</h4>
+<ul>
+<li><a href="lifecycle.html">Git Lifecycle</a></li>
+<li><a href="workflow.html">Workflow</a></li>
+<li><a href="concepts.html">Core Concepts</a></li>
+<li><a href="collaboration.html">Collaboration</a></li>
+<li><a href="git-stash.html">Git Stash</a></li>
+<li><a href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a href="git-reset.html">Git Reset</a></li>
+<li><a href="git-ignore.html">Git Ignore</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Commands</h4>
+<ul>
+<li><a href="commands.html">git init</a></li>
+<li><a href="commands.html">git commit</a></li>
+<li><a href="commands.html">git branch</a></li>
+<li><a href="commands.html">git push</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Resources</h4>
+<ul>
+<li><a href="practice.html">Practice Terminal</a></li>
+<li><a href="https://git-scm.com/doc" rel="noopener" target="_blank">Official Docs ↗</a></li>
+<li><a href="https://github.com" rel="noopener" target="_blank">GitHub ↗</a></li>
+<li><a href="https://learngitbranching.js.org" rel="noopener" target="_blank">Learn Branching ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LocalSchool — Git &amp; GitHub Reference. Built for offline learning.</p>
+<p class="footer-made">Made with 💙 for developers</p>
+</div>
+</div>
+</footer>
+<!-- ===== BACK TO TOP ===== -->
+<button aria-label="Back to top" id="back-to-top" title="Back to top">↑</button>
+<!-- ===== COPY TOAST ===== -->
+<div aria-live="polite" id="copy-toast" role="status">✓ Copied!</div>
+<script src="../js/script.js"></script>
+<script src="../js/pages/stash-cinema.js"></script>
+</body>
+</html>

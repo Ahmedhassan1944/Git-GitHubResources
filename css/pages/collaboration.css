@@ -1,0 +1,98 @@
+/* =========================================
+   12. Collaboration Section
+   ========================================= */
+.collab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+}
+
+.collab-flow {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 24px;
+}
+
+.flow-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.flow-step {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.flow-step:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+}
+
+.highlight-step {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: var(--green);
+}
+
+.flow-arrow {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  animation: float 2s infinite;
+}
+
+.collab-tips {
+  background: rgba(13, 17, 23, 0.5);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 32px 24px;
+}
+
+.tip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.tip-icon {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.tip-item p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.tip-item code {
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--text-main);
+}

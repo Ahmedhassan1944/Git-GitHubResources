@@ -12,7 +12,8 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+<link href="../css/pages/workflow.css" rel="stylesheet"/>
 </head>
 <body>
 <!-- ===== PARTICLES BACKGROUND ===== -->
@@ -22,7 +23,7 @@
 <!-- ===== NAVBAR ===== -->
 <nav aria-label="Main navigation" id="navbar">
 <div class="nav-inner">
-<a class="nav-logo" href="index.html">
+<a class="nav-logo" href="../index.html">
 <span class="logo-icon">🌿</span>
 <span>Git Reference</span>
 </a>
@@ -30,76 +31,86 @@
 <span></span><span></span><span></span>
 </button>
 <ul class="nav-links" id="nav-links" role="list">
-<li><a class="nav-link active" href="index.html">Home</a></li>
-<li><a class="nav-link" href="pages/lifecycle.html">Lifecycle</a></li>
-<li><a class="nav-link" href="pages/commands.html">Commands</a></li>
-<li><a class="nav-link" href="pages/workflow.html">Workflow</a></li>
-<li><a class="nav-link" href="pages/concepts.html">Concepts</a></li>
-<li><a class="nav-link" href="pages/practice.html">Practice</a></li>
-<li><a class="nav-link" href="pages/pull-requests.html">Pull Requests</a></li>
-<li><a class="nav-link" href="pages/git-aliases.html">Git Aliases</a></li>
-<li><a class="nav-link" href="pages/git-stash.html">Git Stash</a></li>
-<li><a class="nav-link" href="pages/git-clean-restore.html">Clean &amp; Restore</a></li>
-<li><a class="nav-link" href="pages/git-reset.html">Git Reset</a></li>
-<li><a class="nav-link" href="pages/git-ignore.html">Git Ignore</a></li>
+<li><a class="nav-link" href="../index.html">Home</a></li>
+<li><a class="nav-link" href="lifecycle.html">Lifecycle</a></li>
+<li><a class="nav-link" href="commands.html">Commands</a></li>
+<li><a class="nav-link active" href="workflow.html">Workflow</a></li>
+<li><a class="nav-link" href="concepts.html">Concepts</a></li>
+<li><a class="nav-link" href="practice.html">Practice</a></li>
+<li><a class="nav-link" href="pull-requests.html">Pull Requests</a></li>
+<li><a class="nav-link" href="git-aliases.html">Git Aliases</a></li>
+<li><a class="nav-link" href="git-stash.html">Git Stash</a></li>
+<li><a class="nav-link" href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a class="nav-link" href="git-reset.html">Git Reset</a></li>
+<li><a class="nav-link" href="git-ignore.html">Git Ignore</a></li>
 </ul>
 <button aria-label="Toggle dark/light mode" class="theme-btn" id="theme-toggle" title="Toggle theme">🌙</button>
 </div>
 </nav>
 <!-- ===== HERO SECTION ===== -->
-<section class="hero-section" id="home">
-<div aria-hidden="true" class="hero-bg-grid"></div>
-<div aria-hidden="true" class="floating-icons">
-<span class="fi fi-1">⬡</span>
-<span class="fi fi-2">🌿</span>
-<span class="fi fi-3">⬢</span>
-<span class="fi fi-4">◈</span>
-<span class="fi fi-5">⬡</span>
-<span class="fi fi-6">🌿</span>
-</div>
-<div class="hero-content">
-<div class="hero-badge reveal">
-<span class="badge-dot"></span>
-        Interactive Learning Platform
-      </div>
-<h1 class="hero-title reveal">
-<span class="title-line-1">Git &amp; GitHub</span>
-<span class="title-line-2 gradient-text">Complete Guide</span>
-</h1>
-<p class="hero-typing reveal">
-<span class="typing-prefix">→ </span>
-<span id="typing-text"></span>
-<span aria-hidden="true" class="typing-cursor">|</span>
-</p>
-<p class="hero-desc reveal">Master version control from zero to hero. Explore every Git command, workflow, and concept with beautiful interactive references built for modern developers.</p>
-<div class="hero-ctas reveal">
-<a class="btn btn-primary" href="pages/lifecycle.html">Start Learning <span>→</span></a>
-<a class="btn btn-outline" href="pages/commands.html">View Commands</a>
-</div>
-<div class="hero-stats reveal">
-<div class="stat-card">
-<span class="stat-num">20+</span>
-<span class="stat-label">Commands</span>
-</div>
-<div class="stat-card">
-<span class="stat-num">8</span>
-<span class="stat-label">Concepts</span>
-</div>
-<div class="stat-card">
-<span class="stat-num">5</span>
-<span class="stat-label">Workflows</span>
-</div>
-</div>
-</div>
-<div aria-hidden="true" class="hero-scroll-hint">
-<span>Scroll to explore</span>
-<div class="scroll-arrow"></div>
-</div>
-</section>
 <!-- ===== GIT LIFECYCLE SECTION ===== -->
 <!-- ===== GIT STASH CINEMA ===== -->
 <!-- ===== COMMANDS SECTION ===== -->
 <!-- ===== WORKFLOW TIMELINE SECTION ===== -->
+<section class="section" id="workflow">
+<div class="container">
+<div class="section-header reveal">
+<span class="section-tag">Step by Step</span>
+<h2 class="section-title">Git <span class="gradient-text">Workflow</span></h2>
+<p class="section-desc">The standard flow from editing to publishing on GitHub.</p>
+</div>
+<div class="timeline-wrap">
+<div aria-hidden="true" class="timeline-line"></div>
+<div class="timeline-steps">
+<div class="timeline-step reveal">
+<div class="step-marker"><span>1</span></div>
+<div class="step-card">
+<div class="step-icon">✏️</div>
+<h3>Edit</h3>
+<p>Modify files in your working directory with your code editor.</p>
+<div class="step-tag">Working Directory</div>
+</div>
+</div>
+<div class="timeline-step reveal">
+<div class="step-marker"><span>2</span></div>
+<div class="step-card">
+<div class="step-icon">➕</div>
+<h3>Stage</h3>
+<p>Select which changes to include in the next commit.</p>
+<div class="step-tag code-tag">git add .</div>
+</div>
+</div>
+<div class="timeline-step reveal">
+<div class="step-marker"><span>3</span></div>
+<div class="step-card">
+<div class="step-icon">💾</div>
+<h3>Commit</h3>
+<p>Save a permanent snapshot of staged changes with a message.</p>
+<div class="step-tag code-tag">git commit -m "msg"</div>
+</div>
+</div>
+<div class="timeline-step reveal">
+<div class="step-marker"><span>4</span></div>
+<div class="step-card">
+<div class="step-icon">⬆️</div>
+<h3>Push</h3>
+<p>Upload your commits to the remote repository on GitHub.</p>
+<div class="step-tag code-tag">git push origin main</div>
+</div>
+</div>
+<div class="timeline-step reveal">
+<div class="step-marker"><span>5</span></div>
+<div class="step-card">
+<div class="step-icon">🐙</div>
+<h3>GitHub</h3>
+<p>Your changes are now live, visible, and ready for collaboration!</p>
+<div class="step-tag">Remote Repository</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- ===== CONCEPTS SECTION ===== -->
 <!-- ===== COLLABORATION SECTION ===== -->
 <!-- ===== PRACTICE TERMINAL SECTION ===== -->
@@ -133,29 +144,29 @@
 <div class="footer-col">
 <h4>Learn</h4>
 <ul>
-<li><a href="pages/lifecycle.html">Git Lifecycle</a></li>
-<li><a href="pages/workflow.html">Workflow</a></li>
-<li><a href="pages/concepts.html">Core Concepts</a></li>
-<li><a href="pages/collaboration.html">Collaboration</a></li>
-<li><a href="pages/git-stash.html">Git Stash</a></li>
-<li><a href="pages/git-clean-restore.html">Clean &amp; Restore</a></li>
-<li><a href="pages/git-reset.html">Git Reset</a></li>
-<li><a href="pages/git-ignore.html">Git Ignore</a></li>
+<li><a href="lifecycle.html">Git Lifecycle</a></li>
+<li><a href="workflow.html">Workflow</a></li>
+<li><a href="concepts.html">Core Concepts</a></li>
+<li><a href="collaboration.html">Collaboration</a></li>
+<li><a href="git-stash.html">Git Stash</a></li>
+<li><a href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a href="git-reset.html">Git Reset</a></li>
+<li><a href="git-ignore.html">Git Ignore</a></li>
 </ul>
 </div>
 <div class="footer-col">
 <h4>Commands</h4>
 <ul>
-<li><a href="pages/commands.html">git init</a></li>
-<li><a href="pages/commands.html">git commit</a></li>
-<li><a href="pages/commands.html">git branch</a></li>
-<li><a href="pages/commands.html">git push</a></li>
+<li><a href="commands.html">git init</a></li>
+<li><a href="commands.html">git commit</a></li>
+<li><a href="commands.html">git branch</a></li>
+<li><a href="commands.html">git push</a></li>
 </ul>
 </div>
 <div class="footer-col">
 <h4>Resources</h4>
 <ul>
-<li><a href="pages/practice.html">Practice Terminal</a></li>
+<li><a href="practice.html">Practice Terminal</a></li>
 <li><a href="https://git-scm.com/doc" rel="noopener" target="_blank">Official Docs ↗</a></li>
 <li><a href="https://github.com" rel="noopener" target="_blank">GitHub ↗</a></li>
 <li><a href="https://learngitbranching.js.org" rel="noopener" target="_blank">Learn Branching ↗</a></li>
@@ -172,6 +183,6 @@
 <button aria-label="Back to top" id="back-to-top" title="Back to top">↑</button>
 <!-- ===== COPY TOAST ===== -->
 <div aria-live="polite" id="copy-toast" role="status">✓ Copied!</div>
-<script src="js/script.js"></script>
+<script src="../js/script.js"></script>
 </body>
 </html>

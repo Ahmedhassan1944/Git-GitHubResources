@@ -1,0 +1,62 @@
+/* =========================================
+   11. Concepts Section
+   ========================================= */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.concept-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.concept-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--acc);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.concept-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+
+.concept-card:hover .concept-icon-wrap {
+  background: var(--acc);
+}
+
+.concept-card:hover .concept-icon-wrap span {
+  filter: brightness(0) invert(1);
+}
+
+.concept-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.concept-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.concept-card code {
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--text-main);
+}

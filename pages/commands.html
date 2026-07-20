@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Git &amp; GitHub Complete Learning Reference — Interactive premium educational page for mastering version control." name="description"/>
+<meta content="Git &amp; GitHub Complete Guide | LocalSchool" property="og:title"/>
+<meta content="Master Git &amp; GitHub with an interactive visual reference." property="og:description"/>
+<title>Git &amp; GitHub Complete Reference | LocalSchool</title>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🌿&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+<link href="../css/pages/commands.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ===== PARTICLES BACKGROUND ===== -->
+<div aria-hidden="true" id="particles-bg"></div>
+<!-- ===== SCROLL PROGRESS ===== -->
+<div aria-hidden="true" id="progress-bar"></div>
+<!-- ===== NAVBAR ===== -->
+<nav aria-label="Main navigation" id="navbar">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">
+<span class="logo-icon">🌿</span>
+<span>Git Reference</span>
+</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
+<ul class="nav-links" id="nav-links" role="list">
+<li><a class="nav-link" href="../index.html">Home</a></li>
+<li><a class="nav-link" href="lifecycle.html">Lifecycle</a></li>
+<li><a class="nav-link active" href="commands.html">Commands</a></li>
+<li><a class="nav-link" href="workflow.html">Workflow</a></li>
+<li><a class="nav-link" href="concepts.html">Concepts</a></li>
+<li><a class="nav-link" href="practice.html">Practice</a></li>
+<li><a class="nav-link" href="pull-requests.html">Pull Requests</a></li>
+<li><a class="nav-link" href="git-aliases.html">Git Aliases</a></li>
+<li><a class="nav-link" href="git-stash.html">Git Stash</a></li>
+<li><a class="nav-link" href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a class="nav-link" href="git-reset.html">Git Reset</a></li>
+<li><a class="nav-link" href="git-ignore.html">Git Ignore</a></li>
+</ul>
+<button aria-label="Toggle dark/light mode" class="theme-btn" id="theme-toggle" title="Toggle theme">🌙</button>
+</div>
+</nav>
+<!-- ===== HERO SECTION ===== -->
+<!-- ===== GIT LIFECYCLE SECTION ===== -->
+<!-- ===== GIT STASH CINEMA ===== -->
+<!-- ===== COMMANDS SECTION ===== -->
+<section class="section section-alt" id="commands">
+<div class="container">
+<div class="section-header reveal">
+<span class="section-tag">Reference</span>
+<h2 class="section-title">Commands <span class="gradient-text">Reference</span></h2>
+<p class="section-desc">Every essential Git command explained with examples.</p>
+</div>
+<!-- Search + Filter -->
+<div class="cmd-toolbar reveal">
+<div class="cmd-search-wrap">
+<span class="search-icon">🔍</span>
+<input aria-label="Search commands" autocomplete="off" id="cmd-search" placeholder="Search commands..." type="text"/>
+</div>
+<div aria-label="Filter commands by category" class="cmd-filters" role="group">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="Setup">Setup</button>
+<button class="filter-btn" data-filter="Basic">Basic</button>
+<button class="filter-btn" data-filter="Branching">Branching</button>
+<button class="filter-btn" data-filter="Remote">Remote</button>
+<button class="filter-btn" data-filter="History">History</button>
+</div>
+</div>
+<!-- Command Cards Grid -->
+<div class="commands-grid" id="commands-grid">
+<!-- SETUP -->
+<div class="cmd-card reveal" data-category="Setup" data-cmd="git init">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+<button aria-label="Copy git init command" class="copy-btn" data-copy="git init
+# Creates a .git folder in your project">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🚀</span>
+<h3 class="cmd-name">git init</h3>
+</div>
+<p class="cmd-desc">Initialize a new local repository in the current directory.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git init</span>
+<span class="c-cmt"># Creates a .git folder in your project</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Setup" data-cmd="git config">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+<button aria-label="Copy git config command" class="copy-btn" data-copy='git config --global user.name "Your Name"
+git config --global user.email "you@email.com"'>⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">⚙️</span>
+<h3 class="cmd-name">git config</h3>
+</div>
+<p class="cmd-desc">Set user identity and global preferences for Git. Additionally, edit the global config with <code>git config --global --edit</code> – سوف يدخل ال vim. اضغط i لتجربة إدخال البيانات، أدخل البيانات التي تريدها، ثم اضغط :wq! للخروج من هذا الوضع.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git config</span> --global user.name <span class="c-str">"Your Name"</span>
+<span class="c-cmd">git config</span> --global user.email <span class="c-str">"you@email.com"</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Setup" data-cmd="git config --global --edit">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+<button aria-label="Copy git config --global --edit command" class="copy-btn" data-copy="git config --global --edit">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">⚙️</span>
+<h3 class="cmd-name">git config --global --edit</h3>
+</div>
+<p class="cmd-desc">سوف يدخل ال vim. اضغط i لتجربة إدخال البيانات، أدخل البيانات التي تريدها، ثم اضغط :wq! للخروج من هذا الوضع.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git config --global --edit</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Setup" data-cmd="git clone">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+<button aria-label="Copy git clone command" class="copy-btn" data-copy="git clone https://github.com/user/repo.git">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">📥</span>
+<h3 class="cmd-name">git clone</h3>
+</div>
+<p class="cmd-desc">Clone a remote repository to your local machine.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git clone</span> https://github.com/user/repo.git
+<span class="c-cmd">git clone</span> git@github.com:user/repo.git</code></pre>
+</div>
+<!-- BASIC -->
+<div class="cmd-card reveal" data-category="Basic" data-cmd="git status">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+<button aria-label="Copy git status command" class="copy-btn" data-copy="git status">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">📊</span>
+<h3 class="cmd-name">git status</h3>
+</div>
+<p class="cmd-desc">Show the status of your working directory and staging area.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git status</span>
+<span class="c-cmd">git status</span> -s  <span class="c-cmt"># Short format</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Basic" data-cmd="git add">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+<button aria-label="Copy git add command" class="copy-btn" data-copy="git add .">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">➕</span>
+<h3 class="cmd-name">git add</h3>
+</div>
+<p class="cmd-desc">Add file changes to the staging area for the next commit.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git add</span> file.txt      <span class="c-cmt"># Single file</span>
+<span class="c-cmd">git add</span> .             <span class="c-cmt"># All changes</span>
+<span class="c-cmd">git add</span> -p            <span class="c-cmt"># Interactive</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Basic" data-cmd="git commit">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+<button aria-label="Copy git commit command" class="copy-btn" data-copy='git commit -m "your message"'>⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">💾</span>
+<h3 class="cmd-name">git commit</h3>
+</div>
+<p class="cmd-desc">Save staged changes as a permanent snapshot in history.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git commit</span> -m <span class="c-str">"message"</span>
+<span class="c-cmd">git commit</span> -am <span class="c-str">"msg"</span>  <span class="c-cmt"># Add + commit</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Basic" data-cmd="git restore">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+<button aria-label="Copy git restore command" class="copy-btn" data-copy="git restore file.txt">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">↩️</span>
+<h3 class="cmd-name">git restore</h3>
+</div>
+<p class="cmd-desc">Discard changes in the working directory or unstage files.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git restore</span> file.txt      <span class="c-cmt"># Discard changes</span>
+<span class="c-cmd">git restore</span> --staged file  <span class="c-cmt"># Unstage file</span></code></pre>
+</div>
+<!-- BRANCHING -->
+<div class="cmd-card reveal" data-category="Branching" data-cmd="git branch">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+<button aria-label="Copy git branch command" class="copy-btn" data-copy="git branch">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🌿</span>
+<h3 class="cmd-name">git branch</h3>
+</div>
+<p class="cmd-desc">List, create, or delete branches in your repository.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git branch</span>            <span class="c-cmt"># List branches</span>
+<span class="c-cmd">git branch</span> new-feat   <span class="c-cmt"># Create branch</span>
+<span class="c-cmd">git branch</span> -d old     <span class="c-cmt"># Delete branch</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Branching" data-cmd="git checkout">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+<button aria-label="Copy git checkout command" class="copy-btn" data-copy="git checkout -b new-feature">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🔀</span>
+<h3 class="cmd-name">git checkout</h3>
+</div>
+<p class="cmd-desc">Switch branches or restore working tree files.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git checkout</span> main
+<span class="c-cmd">git checkout</span> -b new-feature  <span class="c-cmt"># Create &amp; switch</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Branching" data-cmd="git merge">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+<button aria-label="Copy git merge command" class="copy-btn" data-copy="git merge feature-branch">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🔗</span>
+<h3 class="cmd-name">git merge</h3>
+</div>
+<p class="cmd-desc">Integrate changes from one branch into the current branch.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git checkout</span> main
+<span class="c-cmd">git merge</span> feature-branch</code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Branching" data-cmd="git stash">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+<button aria-label="Copy git stash command" class="copy-btn" data-copy="git stash">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">📦</span>
+<h3 class="cmd-name">git stash</h3>
+</div>
+<p class="cmd-desc">Temporarily shelve changes to switch context quickly.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git stash</span>             <span class="c-cmt"># Save changes</span>
+<span class="c-cmd">git stash</span> pop         <span class="c-cmt"># Restore changes</span>
+<span class="c-cmd">git stash</span> list        <span class="c-cmt"># View stashes</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Branching" data-cmd="git rebase">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+<button aria-label="Copy git rebase command" class="copy-btn" data-copy="git rebase main">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🔄</span>
+<h3 class="cmd-name">git rebase</h3>
+</div>
+<p class="cmd-desc">Reapply commits on top of another base branch.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git rebase</span> main
+<span class="c-cmd">git rebase</span> -i HEAD~3   <span class="c-cmt"># Interactive</span></code></pre>
+</div>
+<!-- REMOTE -->
+<div class="cmd-card reveal" data-category="Remote" data-cmd="git remote">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+<button aria-label="Copy git remote command" class="copy-btn" data-copy="git remote -v">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🌐</span>
+<h3 class="cmd-name">git remote</h3>
+</div>
+<p class="cmd-desc">Manage connections to remote repositories.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git remote</span> -v                  <span class="c-cmt"># List remotes</span>
+<span class="c-cmd">git remote add</span> origin &lt;url&gt;   <span class="c-cmt"># Add remote</span>
+<span class="c-cmd">git remote remove</span> origin       <span class="c-cmt"># Remove</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Remote" data-cmd="git push">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+<button aria-label="Copy git push command" class="copy-btn" data-copy="git push origin main">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">⬆️</span>
+<h3 class="cmd-name">git push</h3>
+</div>
+<p class="cmd-desc">Upload local commits to the remote repository on GitHub.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git push</span> origin main
+<span class="c-cmd">git push</span> -u origin main    <span class="c-cmt"># Set upstream</span>
+<span class="c-cmd">git push</span> --force           <span class="c-cmt"># Force push</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Remote" data-cmd="git pull">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+<button aria-label="Copy git pull command" class="copy-btn" data-copy="git pull origin main">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">⬇️</span>
+<h3 class="cmd-name">git pull</h3>
+</div>
+<p class="cmd-desc">Fetch and integrate changes from a remote repository.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git pull</span> origin main
+<span class="c-cmd">git pull</span> --rebase origin main</code></pre>
+</div>
+<div class="cmd-card reveal" data-category="Remote" data-cmd="git fetch">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+<button aria-label="Copy git fetch command" class="copy-btn" data-copy="git fetch origin">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">📡</span>
+<h3 class="cmd-name">git fetch</h3>
+</div>
+<p class="cmd-desc">Download objects from remote without merging them.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git fetch</span> origin
+<span class="c-cmd">git fetch</span> --all</code></pre>
+</div>
+<!-- HISTORY -->
+<div class="cmd-card reveal" data-category="History" data-cmd="git log">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+<button aria-label="Copy git log command" class="copy-btn" data-copy="git log --oneline --graph">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">📜</span>
+<h3 class="cmd-name">git log</h3>
+</div>
+<p class="cmd-desc">View the full commit history of the repository.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git log</span>
+<span class="c-cmd">git log</span> --oneline --graph
+<span class="c-cmd">git log</span> -n 5</code></pre>
+</div>
+<div class="cmd-card reveal" data-category="History" data-cmd="git diff">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+<button aria-label="Copy git diff command" class="copy-btn" data-copy="git diff --staged">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🔍</span>
+<h3 class="cmd-name">git diff</h3>
+</div>
+<p class="cmd-desc">Show differences between commits, branches, or working tree.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git diff</span>              <span class="c-cmt"># Unstaged changes</span>
+<span class="c-cmd">git diff</span> --staged     <span class="c-cmt"># Staged changes</span>
+<span class="c-cmd">git diff</span> HEAD~1 HEAD  <span class="c-cmt"># Between commits</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="History" data-cmd="git reset">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+<button aria-label="Copy git reset command" class="copy-btn" data-copy="git reset --soft HEAD~1">⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">⏪</span>
+<h3 class="cmd-name">git reset</h3>
+</div>
+<p class="cmd-desc">Move HEAD to a previous commit, optionally modifying index.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git reset</span> --soft HEAD~1  <span class="c-cmt"># Keep staged</span>
+<span class="c-cmd">git reset</span> --hard HEAD~1  <span class="c-cmt"># Discard all</span></code></pre>
+</div>
+<div class="cmd-card reveal" data-category="History" data-cmd="git tag">
+<div class="cmd-card-header">
+<span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+<button aria-label="Copy git tag command" class="copy-btn" data-copy='git tag -a v1.0.0 -m "Release"'>⧉ Copy</button>
+</div>
+<div class="cmd-title-row">
+<span class="cmd-icon">🏷️</span>
+<h3 class="cmd-name">git tag</h3>
+</div>
+<p class="cmd-desc">Create, list, or delete tags to mark release points.</p>
+<pre class="cmd-code"><code><span class="c-cmd">git tag</span> v1.0.0
+<span class="c-cmd">git tag</span> -a v1.0.0 -m <span class="c-str">"Release"</span>
+<span class="c-cmd">git push</span> origin --tags</code></pre>
+</div>
+</div><!-- /commands-grid -->
+<p class="no-results" id="no-results" style="display:none;">No commands found. Try a different search.</p>
+</div>
+</section>
+<!-- ===== WORKFLOW TIMELINE SECTION ===== -->
+<!-- ===== CONCEPTS SECTION ===== -->
+<!-- ===== COLLABORATION SECTION ===== -->
+<!-- ===== PRACTICE TERMINAL SECTION ===== -->
+<!-- ===== GENERATE & TEST SSH KEYS SECTION ===== -->
+<!-- ===== PULL REQUEST DEEP DIVE SECTION ===== -->
+<!-- ===== GIT ALIASES SECTION ===== -->
+<!-- ===== GIT STASH SECTION ===== -->
+<!-- ===== GIT CLEAN & RESTORE SECTION ===== -->
+<!-- ===== GIT RESET SECTION ===== -->
+<!-- ===== GIT IGNORE SECTION ===== -->
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+<div aria-hidden="true" class="footer-glow"></div>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="footer-logo">🌿 Git Reference</div>
+<p>A premium interactive learning resource for mastering Git &amp; GitHub — part of the LocalSchool offline learning platform.</p>
+<div class="social-links">
+<a aria-label="GitHub" class="social-btn" href="#" title="GitHub">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+</a>
+<a aria-label="Twitter" class="social-btn" href="#" title="Twitter">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+<a aria-label="LinkedIn" class="social-btn" href="#" title="LinkedIn">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Learn</h4>
+<ul>
+<li><a href="lifecycle.html">Git Lifecycle</a></li>
+<li><a href="workflow.html">Workflow</a></li>
+<li><a href="concepts.html">Core Concepts</a></li>
+<li><a href="collaboration.html">Collaboration</a></li>
+<li><a href="git-stash.html">Git Stash</a></li>
+<li><a href="git-clean-restore.html">Clean &amp; Restore</a></li>
+<li><a href="git-reset.html">Git Reset</a></li>
+<li><a href="git-ignore.html">Git Ignore</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Commands</h4>
+<ul>
+<li><a href="commands.html">git init</a></li>
+<li><a href="commands.html">git commit</a></li>
+<li><a href="commands.html">git branch</a></li>
+<li><a href="commands.html">git push</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Resources</h4>
+<ul>
+<li><a href="practice.html">Practice Terminal</a></li>
+<li><a href="https://git-scm.com/doc" rel="noopener" target="_blank">Official Docs ↗</a></li>
+<li><a href="https://github.com" rel="noopener" target="_blank">GitHub ↗</a></li>
+<li><a href="https://learngitbranching.js.org" rel="noopener" target="_blank">Learn Branching ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LocalSchool — Git &amp; GitHub Reference. Built for offline learning.</p>
+<p class="footer-made">Made with 💙 for developers</p>
+</div>
+</div>
+</footer>
+<!-- ===== BACK TO TOP ===== -->
+<button aria-label="Back to top" id="back-to-top" title="Back to top">↑</button>
+<!-- ===== COPY TOAST ===== -->
+<div aria-live="polite" id="copy-toast" role="status">✓ Copied!</div>
+<script src="../js/script.js"></script>
+</body>
+</html>
