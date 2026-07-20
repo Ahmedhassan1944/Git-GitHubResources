@@ -43,6 +43,7 @@
         <li><a href="#git-stash" class="nav-link">Git Stash</a></li>
         <li><a href="#git-clean-restore" class="nav-link">Clean &amp; Restore</a></li>
         <li><a href="#git-reset" class="nav-link">Git Reset</a></li>
+        <li><a href="#git-ignore" class="nav-link">Git Ignore</a></li>
       </ul>
       <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
     </div>
@@ -2987,6 +2988,601 @@ hint: Updates were rejected because the tip of your current branch is behind</co
     </div>
   </section>
 
+  <!-- ===== GIT IGNORE SECTION ===== -->
+  <section id="git-ignore" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">File Tracking Control</span>
+        <h2 class="section-title">Git <span class="gradient-text">Ignore</span></h2>
+        <p class="section-desc">Tell Git which files should never become part of your history — and understand exactly why that matters.</p>
+      </div>
+
+      <!-- A. Prerequisite Recap Strip -->
+      <div class="gc-recap-strip reveal gi-recap-strip">
+        <div class="gc-recap-flow">
+          📁 Working Directory  →  Untracked File  →  <span style="color:var(--cyan)">git add</span>  →  Tracked File  →  <span style="color:var(--purple)">git commit</span>  →  Repository
+        </div>
+        <p class="gc-recap-caption">Git Ignore only influences files that have <strong>never been tracked</strong>. Once tracked, <code>.gitignore</code> has no effect.</p>
+      </div>
+
+      <!-- B. Why Git Ignore Exists — Real-World Motivation Cards -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Why Does .gitignore Exist?</h3>
+        <div class="gi-motivation-grid">
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🔐</div>
+            <h4 class="gi-mot-title">Secret Files (.env)</h4>
+            <p class="gi-mot-desc">API keys, database passwords, and tokens should never be committed to Git history.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">📦</div>
+            <h4 class="gi-mot-title">Downloaded Dependencies (node_modules/)</h4>
+            <p class="gi-mot-desc">Hundreds of megabytes of packages that can be reinstalled with <code>npm install</code>.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🏗️</div>
+            <h4 class="gi-mot-title">Build Artifacts (dist/, build/)</h4>
+            <p class="gi-mot-desc">Generated output files — they change every build and bloat your history.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">📋</div>
+            <h4 class="gi-mot-title">Log Files (*.log)</h4>
+            <p class="gi-mot-desc">Runtime logs are machine-generated noise that adds nothing to your project history.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">💻</div>
+            <h4 class="gi-mot-title">IDE Config (.vscode/, .idea/)</h4>
+            <p class="gi-mot-desc">Personal editor preferences that vary per developer and should not be shared.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🗂️</div>
+            <h4 class="gi-mot-title">OS Files (.DS_Store, Thumbs.db)</h4>
+            <p class="gi-mot-desc">Invisible files created by macOS and Windows that have nothing to do with your code.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🧪</div>
+            <h4 class="gi-mot-title">Test Coverage Reports</h4>
+            <p class="gi-mot-desc">Generated test output — reproducible on any machine, no need to track it.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">⚡</div>
+            <h4 class="gi-mot-title">Cache Folders (.cache/, .next/)</h4>
+            <p class="gi-mot-desc">Temporary performance artifacts that are rebuilt automatically.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- C. Tracked vs Untracked Visual Explorer -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Tracked vs Untracked — The Foundation</h3>
+        <p class="gi-text">Git only knows about files you have explicitly introduced via <code>git add</code>. A file in your folder that has never been <code>git add</code>ed is <strong>Untracked</strong> — invisible to Git's tracking system.</p>
+        <div class="gi-explorer reveal">
+          <div class="gi-exp-header">📁 my-project/</div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 app.js</span><span class="gi-exp-spacer"></span><span class="gi-badge-tracked">✅ Tracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 style.css</span><span class="gi-exp-spacer"></span><span class="gi-badge-tracked">✅ Tracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 README.md</span><span class="gi-exp-spacer"></span><span class="gi-badge-tracked">✅ Tracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 notes.txt</span><span class="gi-exp-spacer"></span><span class="gi-badge-untracked">⚪ Untracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 .env</span><span class="gi-exp-spacer"></span><span class="gi-badge-untracked">⚪ Untracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">└── 📁 node_modules/</span><span class="gi-exp-spacer"></span><span class="gi-badge-untracked">⚪ Untracked</span></div>
+        </div>
+        <div class="gi-info-box reveal">
+          <strong>Key insight</strong>: <code>.gitignore</code> rules only prevent Git from tracking <strong>Untracked</strong> files. If a file is already Tracked, adding it to <code>.gitignore</code> does nothing.
+        </div>
+      </div>
+
+      <!-- D. .gitignore File — Introduction Card -->
+      <div class="gi-intro-card reveal">
+        <div class="gi-intro-left">
+          <ul class="gi-intro-list">
+            <li>📄 It is a plain text file named <code>.gitignore</code></li>
+            <li>📍 Placed in the root of your repository</li>
+            <li>📝 Each line is a pattern telling Git what to ignore</li>
+            <li>🚫 It does NOT delete files</li>
+            <li>🙈 It does NOT hide files from your OS</li>
+            <li>⚙️ It ONLY affects Git's file tracking decisions</li>
+          </ul>
+        </div>
+        <div class="gi-intro-right">
+          <div class="gi-code-header">
+            <span>.gitignore</span>
+            <button class="copy-btn" aria-label="Copy gitignore" data-copy="# Dependencies&#10;node_modules/&#10;&#10;# Environment secrets&#10;.env&#10;.env.local&#10;&#10;# Build output&#10;dist/&#10;build/&#10;&#10;# Logs&#10;*.log&#10;&#10;# OS files&#10;.DS_Store&#10;Thumbs.db&#10;&#10;# Editor config&#10;.vscode/&#10;.idea/">⧉ Copy</button>
+          </div>
+          <pre class="gi-code-block"><code><span class="c-cmt"># Dependencies</span>
+node_modules/
+
+<span class="c-cmt"># Environment secrets</span>
+.env
+.env.local
+
+<span class="c-cmt"># Build output</span>
+dist/
+build/
+
+<span class="c-cmt"># Logs</span>
+*.log
+
+<span class="c-cmt"># OS files</span>
+.DS_Store
+Thumbs.db
+
+<span class="c-cmt"># Editor config</span>
+.vscode/
+.idea/</code></pre>
+        </div>
+      </div>
+
+      <!-- E. Pattern Rules — Tabbed Visualizer -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Pattern Syntax — How Rules Work</h3>
+        <div class="gi-tabs reveal">
+          <div class="gi-tab-nav" role="tablist">
+            <button class="gi-tab-btn gi-tab-active" data-tab="gi-tab-1" role="tab" aria-selected="true">Specific File</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-2" role="tab" aria-selected="false">Wildcard (*.ext)</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-3" role="tab" aria-selected="false">Entire Folder</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-4" role="tab" aria-selected="false">Characters (*, ?, [])</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-5" role="tab" aria-selected="false">Negation (!)</button>
+          </div>
+          <div class="gi-tab-content">
+            <!-- Tab 1 -->
+            <div class="gi-tab-panel gi-tab-active" data-panel="gi-tab-1" role="tabpanel">
+              <div class="gi-tab-split">
+                <div class="gi-tab-desc">
+                  <h4>Rule: <code>password.txt</code></h4>
+                  <p>Ignores exactly one file with that exact name.</p>
+                  <button class="copy-btn" aria-label="Copy password.txt" data-copy="password.txt">⧉ Copy password.txt</button>
+                </div>
+                <div class="gi-tab-vis">
+                  <div class="gi-file-tree">
+                    <div class="gi-file-row">app.js</div>
+                    <div class="gi-file-row gi-ignored-row">password.txt <span class="gi-ignored-tag">Ignored</span></div>
+                    <div class="gi-file-row">style.css</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 2 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-2" role="tabpanel">
+              <div class="gi-tab-split">
+                <div class="gi-tab-desc">
+                  <h4>Rule: <code>*.log</code></h4>
+                  <p><code>*</code> means "any filename". This ignores every file ending in <code>.log</code> regardless of name.</p>
+                  <div class="gi-tab-copies">
+                    <button class="copy-btn" aria-label="Copy *.log" data-copy="*.log">⧉ *.log</button>
+                    <button class="copy-btn" aria-label="Copy *.xlsx" data-copy="*.xlsx">⧉ *.xlsx</button>
+                    <button class="copy-btn" aria-label="Copy *.pdf" data-copy="*.pdf">⧉ *.pdf</button>
+                    <button class="copy-btn" aria-label="Copy *.tmp" data-copy="*.tmp">⧉ *.tmp</button>
+                    <button class="copy-btn" aria-label="Copy *.docx" data-copy="*.docx">⧉ *.docx</button>
+                  </div>
+                </div>
+                <div class="gi-tab-vis">
+                  <div class="gi-file-tree">
+                    <div class="gi-file-row">app.js</div>
+                    <div class="gi-file-row gi-ignored-row" style="animation-delay: 0.1s">error.log <span class="gi-ignored-tag">Ignored</span></div>
+                    <div class="gi-file-row gi-ignored-row" style="animation-delay: 0.3s">access.log <span class="gi-ignored-tag">Ignored</span></div>
+                    <div class="gi-file-row gi-ignored-row" style="animation-delay: 0.5s">debug.log <span class="gi-ignored-tag">Ignored</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 3 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-3" role="tabpanel">
+              <div class="gi-tab-split">
+                <div class="gi-tab-desc">
+                  <h4>Rule: <code>node_modules/</code></h4>
+                  <p>The trailing <code>/</code> means "this is a folder". Every file inside it — no matter how deeply nested — is ignored.</p>
+                  <div class="gi-tab-copies">
+                    <button class="copy-btn" aria-label="Copy node_modules/" data-copy="node_modules/">⧉ node_modules/</button>
+                    <button class="copy-btn" aria-label="Copy dist/" data-copy="dist/">⧉ dist/</button>
+                    <button class="copy-btn" aria-label="Copy build/" data-copy="build/">⧉ build/</button>
+                    <button class="copy-btn" aria-label="Copy temp/" data-copy="temp/">⧉ temp/</button>
+                  </div>
+                </div>
+                <div class="gi-tab-vis">
+                  <div class="gi-file-tree">
+                    <div class="gi-file-row">src/</div>
+                    <div class="gi-folder-wrap">
+                      <div class="gi-file-row gi-ignored-row">📁 node_modules/ <span class="gi-ignored-tag">Ignored Folder</span></div>
+                      <div class="gi-folder-contents">
+                        <div class="gi-file-row gi-ignored-row dim">react/</div>
+                        <div class="gi-file-row gi-ignored-row dim">lodash/</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 4 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-4" role="tabpanel">
+              <div class="gi-char-grid">
+                <div class="gi-char-row">
+                  <div class="gi-char-def">
+                    <strong><code>*</code></strong> → matches any sequence of characters<br>
+                    <small>example: <code>*.log</code></small>
+                  </div>
+                  <div class="gi-char-ex">
+                    <span class="gi-match-yes">✓ error.log</span>
+                    <span class="gi-match-yes">✓ app.log</span>
+                    <span class="gi-match-yes">✓ x.log</span>
+                    <span class="gi-match-no">✗ app.js</span>
+                  </div>
+                </div>
+                <div class="gi-char-row">
+                  <div class="gi-char-def">
+                    <strong><code>?</code></strong> → matches exactly one character<br>
+                    <small>example: <code>file?.txt</code></small>
+                  </div>
+                  <div class="gi-char-ex">
+                    <span class="gi-match-yes">✓ file1.txt</span>
+                    <span class="gi-match-yes">✓ fileA.txt</span>
+                    <span class="gi-match-no">✗ file10.txt</span>
+                  </div>
+                </div>
+                <div class="gi-char-row">
+                  <div class="gi-char-def">
+                    <strong><code>[abc]</code></strong> → matches one character from the set<br>
+                    <small>example: <code>file[123].txt</code></small>
+                  </div>
+                  <div class="gi-char-ex">
+                    <span class="gi-match-yes">✓ file1.txt</span>
+                    <span class="gi-match-yes">✓ file2.txt</span>
+                    <span class="gi-match-yes">✓ file3.txt</span>
+                    <span class="gi-match-no">✗ file4.txt</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 5 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-5" role="tabpanel">
+              <div class="gi-negation-wrap">
+                <div class="gi-neg-header">
+                  <h4>Rules: <code>*.md</code> then <code>!README.md</code></h4>
+                  <p>The <code>!</code> prefix <strong>un-ignores</strong> a previously ignored file. Rules are processed top-to-bottom. The last matching rule wins.</p>
+                  <button class="copy-btn" aria-label="Copy negation rule" data-copy="*.md&#10;!README.md">⧉ Copy</button>
+                </div>
+                <div class="gi-neg-cols">
+                  <div class="gi-neg-col">
+                    <div class="gi-neg-file">README.md</div>
+                    <div class="gi-neg-flow">
+                      <span>matched *.md &rarr; ignored</span>
+                      <span>matched !README.md &rarr; un-ignored</span>
+                    </div>
+                    <div class="gi-badge-tracked">✅ Tracked</div>
+                  </div>
+                  <div class="gi-neg-col">
+                    <div class="gi-neg-file">Notes.md</div>
+                    <div class="gi-neg-flow">
+                      <span>matched *.md &rarr; ignored</span>
+                      <span class="dim">no exception</span>
+                    </div>
+                    <div class="gi-badge-ignored">🚫 Ignored</div>
+                  </div>
+                  <div class="gi-neg-col">
+                    <div class="gi-neg-file">Guide.md</div>
+                    <div class="gi-neg-flow">
+                      <span>matched *.md &rarr; ignored</span>
+                      <span class="dim">no exception</span>
+                    </div>
+                    <div class="gi-badge-ignored">🚫 Ignored</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. The Critical Concept -->
+      <div class="gi-sub-section">
+        <div class="gi-critical-card reveal">
+          <h3 class="gi-crit-title">⚠️ .gitignore Only Works For Untracked Files</h3>
+          <div class="gi-crit-steps">
+            <div class="gi-crit-step" id="gi-step-1">
+              <h4>Step 1 — Setup</h4>
+              <pre class="gi-code-block"><code><span class="c-cmt"># config.json gets committed</span>
+<span class="c-cmd">git add</span> config.json
+<span class="c-cmd">git commit</span> -m <span class="c-str">"add config"</span></code></pre>
+              <div class="gi-crit-file">config.json <span class="gi-badge-tracked">✅ Tracked</span></div>
+              <button class="gi-crit-btn" id="gi-btn-step2">Now add to .gitignore &rarr;</button>
+            </div>
+            
+            <div class="gi-crit-step gi-step-hidden" id="gi-step-2">
+              <h4>Step 2 — Added to .gitignore</h4>
+              <pre class="gi-code-block"><code><span class="c-cmt"># .gitignore</span>
+config.json</code></pre>
+              <div class="gi-crit-file">config.json <span class="gi-badge-tracked">✅ Tracked</span> <span class="gi-q-mark">Ignored?</span></div>
+              <button class="gi-crit-btn" id="gi-btn-step3">Check Git's response &rarr;</button>
+            </div>
+            
+            <div class="gi-crit-step gi-step-hidden" id="gi-step-3">
+              <h4>Step 3 — The Answer</h4>
+              <div class="gi-crit-file">config.json <span class="gi-badge-tracked">✅ Still Tracked</span></div>
+              <div class="gi-info-banner">
+                <strong>Git says:</strong> "I already know about <code>config.json</code>. It's in my tracking system. <code>.gitignore</code> cannot reach files I'm already tracking."<br><br>
+                <strong>Why:</strong> Git's tracking state is stored in the index. Once a file is indexed, <code>.gitignore</code> patterns are never evaluated for it.
+              </div>
+              <div class="gi-rm-cached">
+                <h4>How to fix it:</h4>
+                <pre class="gi-code-block"><code><span class="c-cmd">git rm --cached</span> config.json
+<span class="c-cmt"># Now Git forgets it ever tracked this file</span>
+<span class="c-cmt"># .gitignore can now apply</span>
+<span class="c-cmd">git commit</span> -m <span class="c-str">"stop tracking config.json"</span></code></pre>
+                <div class="gi-rm-actions">
+                  <button class="gi-crit-btn" id="gi-btn-sim">▶ Simulate git rm --cached</button>
+                  <button class="copy-btn" aria-label="Copy git rm" data-copy="git rm --cached config.json">⧉ Copy</button>
+                </div>
+                <div class="gi-sim-result gi-step-hidden" id="gi-sim-result">
+                  <div class="gi-crit-file" id="gi-sim-file">config.json <span class="gi-badge-ignored">✅ Ignored</span></div>
+                  <div class="gi-info-banner">The local file still exists on your disk — <code>git rm --cached</code> only removes it from Git's index, not from your file system.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G. Security Warning -->
+      <div class="gi-sub-section">
+        <div class="gi-danger-card reveal">
+          <h3 class="gi-danger-title">🔴 Security Warning: The .env Trap</h3>
+          <div class="gi-danger-timeline">
+            <div class="gi-dt-step">👨‍💻 1. Developer creates project — writes API keys and DB password into <code>.env</code></div>
+            <div class="gi-dt-step">😰 2. Accidentally runs <code>git add .env</code> then <code>git commit</code></div>
+            <div class="gi-dt-step">🌐 3. Pushes to GitHub — <code>.env</code> is now <strong>public in Git history</strong></div>
+            <div class="gi-dt-step">💡 4. Realizes the mistake — adds <code>.env</code> to <code>.gitignore</code></div>
+            <div class="gi-dt-step">❓ 5. "Is the secret safe now?"</div>
+          </div>
+          <div class="gi-danger-terminal">
+            ❌ NO. The secret is NOT safe.
+
+Git history is permanent. Every previous commit still contains .env.
+Anyone with access to the repository can run:
+
+  git log --all -- .env
+  git show &lt;commit-hash&gt;:.env
+
+...and retrieve the original secrets.
+          </div>
+          <h4 class="gi-danger-action-title">What you must do:</h4>
+          <div class="gi-danger-grid">
+            <div class="gi-d-card">
+              <div class="gi-d-icon">🔄</div>
+              <h5>Rotate Immediately</h5>
+              <p>Revoke and regenerate ALL exposed credentials right now</p>
+            </div>
+            <div class="gi-d-card">
+              <div class="gi-d-icon">🗑️</div>
+              <h5>Remove from index</h5>
+              <p><code>git rm --cached .env</code> + commit</p>
+            </div>
+            <div class="gi-d-card">
+              <div class="gi-d-icon">📝</div>
+              <h5>Add to .gitignore</h5>
+              <p>Prevent future accidents</p>
+            </div>
+            <div class="gi-d-card">
+              <div class="gi-d-icon">📚</div>
+              <h5>Rewrite History (Adv)</h5>
+              <p><code>git filter-branch</code> or BFG Repo Cleaner</p>
+            </div>
+          </div>
+          <div class="gi-danger-banner">
+            <strong>Key insight:</strong> <code>git rm --cached</code> removes the file from future commits — but it cannot erase it from past commits. The secret already exists in your commit history. Treat exposed credentials as permanently compromised.
+          </div>
+          <div class="gi-danger-actions">
+             <button class="copy-btn" aria-label="Copy .env" data-copy=".env">⧉ Copy .env</button>
+             <button class="copy-btn" aria-label="Copy git rm cached" data-copy="git rm --cached .env">⧉ Copy git rm --cached .env</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- H. Common Mistakes -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Common Mistakes</h3>
+        <div class="gi-myth-grid">
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "I added .env to .gitignore — it's safe"</div>
+            <div class="gi-myth-y">✅ Reality: Only safe if <code>.env</code> was never committed. Check your history.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: ".gitignore deletes the file"</div>
+            <div class="gi-myth-y">✅ Reality: It only affects tracking. Your local file is untouched.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "Adding a tracked file to .gitignore ignores it"</div>
+            <div class="gi-myth-y">✅ Reality: No. Use <code>git rm --cached</code> first.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "I can use .gitignore to hide files from collaborators"</div>
+            <div class="gi-myth-y">✅ Reality: It only affects untracked files. Already-tracked files are still visible to everyone.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "node_modules/ and dist/ don't need ignoring"</div>
+            <div class="gi-myth-y">✅ Reality: Always ignore them — they create enormous repositories and break <code>git clone</code>.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "I need to add .gitignore after finishing the project"</div>
+            <div class="gi-myth-y">✅ Reality: Add it before your first commit. Retrofitting is much harder.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- I. Best Practices -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Standard .gitignore Template</h3>
+        <div class="gi-template-card reveal">
+          <div class="gi-code-header">
+            <span>Standard Template</span>
+            <button class="copy-btn" aria-label="Copy template" data-copy="# ─── Secrets ───────────────────────────────────&#10;.env&#10;.env.local&#10;.env.production&#10;*.pem&#10;*.key&#10;&#10;# ─── Dependencies ───────────────────────────────&#10;node_modules/&#10;vendor/&#10;&#10;# ─── Build Output ───────────────────────────────&#10;dist/&#10;build/&#10;out/&#10;.next/&#10;.nuxt/&#10;&#10;# ─── Logs ───────────────────────────────────────&#10;*.log&#10;npm-debug.log*&#10;yarn-debug.log*&#10;&#10;# ─── OS Files ───────────────────────────────────&#10;.DS_Store&#10;Thumbs.db&#10;desktop.ini&#10;&#10;# ─── Editor / IDE ───────────────────────────────&#10;.vscode/&#10;.idea/&#10;*.swp&#10;*.swo&#10;&#10;# ─── Testing & Coverage ─────────────────────────&#10;coverage/&#10;.nyc_output/">⧉ Copy Template</button>
+          </div>
+          <pre class="gi-code-block"><code><span class="c-cmt"># ─── Secrets ───────────────────────────────────</span>
+.env
+.env.local
+.env.production
+*.pem
+*.key
+
+<span class="c-cmt"># ─── Dependencies ───────────────────────────────</span>
+node_modules/
+vendor/
+
+<span class="c-cmt"># ─── Build Output ───────────────────────────────</span>
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+<span class="c-cmt"># ─── Logs ───────────────────────────────────────</span>
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+<span class="c-cmt"># ─── OS Files ───────────────────────────────────</span>
+.DS_Store
+Thumbs.db
+desktop.ini
+
+<span class="c-cmt"># ─── Editor / IDE ───────────────────────────────</span>
+.vscode/
+.idea/
+*.swp
+*.swo
+
+<span class="c-cmt"># ─── Testing & Coverage ─────────────────────────</span>
+coverage/
+.nyc_output/</code></pre>
+          <div class="gi-tip-card">
+            Visit <a href="https://gitignore.io" target="_blank" rel="noopener">gitignore.io</a> to generate language/framework-specific templates.
+          </div>
+        </div>
+      </div>
+
+      <!-- J. Prediction Exercises -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Test Your Understanding</h3>
+        <div class="gi-quiz-grid">
+          
+          <div class="gi-quiz-card reveal" data-answer="readme-tracked">
+            <h4 class="gi-quiz-title">Exercise 1</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>.gitignore:
+  *.md
+  !README.md
+
+Files in project:
+  README.md
+  Notes.md
+  Guide.md</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: Which files does Git track?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="all-tracked">All three are tracked</button>
+              <button class="gi-quiz-option" data-val="readme-tracked">Only README.md is tracked</button>
+              <button class="gi-quiz-option" data-val="none-tracked">None are tracked</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> <code>*.md</code> ignores all markdown files. <code>!README.md</code> creates an exception — only README.md survives as tracked.
+            </div>
+          </div>
+          
+          <div class="gi-quiz-card reveal" data-answer="still-tracked">
+            <h4 class="gi-quiz-title">Exercise 2</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>Steps:
+  1. git add config.json
+  2. git commit -m "add config"
+  3. Add "config.json" to .gitignore</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: Will Git ignore config.json after step 3?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="still-tracked">No — it's already tracked, .gitignore has no effect</button>
+              <button class="gi-quiz-option" data-val="now-ignored">Yes — .gitignore overrides the tracking</button>
+              <button class="gi-quiz-option" data-val="deleted">The file gets deleted from the project</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> <code>.gitignore</code> only affects untracked files. <code>config.json</code> was committed — it's in Git's index. Use <code>git rm --cached config.json</code> to stop tracking it.
+            </div>
+          </div>
+          
+          <div class="gi-quiz-card reveal" data-answer="folder-ignored">
+            <h4 class="gi-quiz-title">Exercise 3</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>.gitignore:
+  node_modules/</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: What does Git ignore?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="folder-ignored">The entire node_modules/ folder and everything inside it</button>
+              <button class="gi-quiz-option" data-val="one-file">Only a file named node_modules</button>
+              <button class="gi-quiz-option" data-val="nothing">Nothing — you need to list every file inside</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> A trailing <code>/</code> in <code>.gitignore</code> means "this is a directory". Everything inside, at any depth of nesting, is ignored.
+            </div>
+          </div>
+          
+          <div class="gi-quiz-card reveal" data-answer="env-not-safe">
+            <h4 class="gi-quiz-title">Exercise 4</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>Scenario:
+  - Developer committed .env 3 months ago
+  - Yesterday added .env to .gitignore
+  - Ran git rm --cached .env + committed</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: Are the API keys safe from exposure?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="env-not-safe">No — they still exist in the 3-month-old commit in Git history</button>
+              <button class="gi-quiz-option" data-val="env-safe">Yes — git rm --cached removed them completely</button>
+              <button class="gi-quiz-option" data-val="env-maybe">Only if nobody has cloned the repository yet</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> <code>git rm --cached</code> removes the file from future commits only. The 3-month-old commit still contains the original <code>.env</code>. The keys must be rotated immediately.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- K. Summary -->
+      <div class="gi-sub-section">
+        <div class="gi-summary-card reveal">
+          <h3 class="gi-summary-title">Key Takeaways</h3>
+          <div class="gi-summary-grid">
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--cyan)">🎯</span>
+              <span><code>.gitignore</code> exists to keep repositories clean from noise, secrets, and generated files</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--red)">🔒</span>
+              <span>Never commit <code>.env</code> — add it to <code>.gitignore</code> before your first <code>git add</code></span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--yellow)">⚠️</span>
+              <span><code>.gitignore</code> only works on <strong>untracked</strong> files — it cannot un-track already-committed files</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--purple)">🗂️</span>
+              <span>To stop tracking a committed file: <code>git rm --cached &lt;file&gt;</code> + commit</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--blue)">📜</span>
+              <span>Git history is permanent — <code>git rm --cached</code> does NOT erase past commits</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--green)">✨</span>
+              <span>The <code>!</code> prefix creates exceptions — <code>!README.md</code> overrides a <code>*.md</code> ignore rule</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--pink)">🔄</span>
+              <span>When in doubt, use <a href="https://gitignore.io" target="_blank" rel="noopener">gitignore.io</a> to generate battle-tested templates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-glow" aria-hidden="true"></div>
@@ -3017,6 +3613,7 @@ hint: Updates were rejected because the tip of your current branch is behind</co
             <li><a href="#git-stash">Git Stash</a></li>
             <li><a href="#git-clean-restore">Clean &amp; Restore</a></li>
             <li><a href="#git-reset">Git Reset</a></li>
+            <li><a href="#git-ignore">Git Ignore</a></li>
           </ul>
         </div>
         <div class="footer-col">
