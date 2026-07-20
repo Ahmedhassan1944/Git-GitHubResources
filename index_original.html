@@ -1,0 +1,3653 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Git & GitHub Complete Learning Reference — Interactive premium educational page for mastering version control." />
+  <meta property="og:title" content="Git & GitHub Complete Guide | LocalSchool" />
+  <meta property="og:description" content="Master Git & GitHub with an interactive visual reference." />
+  <title>Git &amp; GitHub Complete Reference | LocalSchool</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== PARTICLES BACKGROUND ===== -->
+  <div id="particles-bg" aria-hidden="true"></div>
+
+  <!-- ===== SCROLL PROGRESS ===== -->
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span>Git Reference</span>
+      </a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#lifecycle" class="nav-link">Lifecycle</a></li>
+        <li><a href="#commands" class="nav-link">Commands</a></li>
+        <li><a href="#workflow" class="nav-link">Workflow</a></li>
+        <li><a href="#concepts" class="nav-link">Concepts</a></li>
+        <li><a href="#practice" class="nav-link">Practice</a></li>
+        <li><a href="#pull-requests" class="nav-link">Pull Requests</a></li>
+        <li><a href="#git-aliases" class="nav-link">Git Aliases</a></li>
+        <li><a href="#git-stash" class="nav-link">Git Stash</a></li>
+        <li><a href="#git-clean-restore" class="nav-link">Clean &amp; Restore</a></li>
+        <li><a href="#git-reset" class="nav-link">Git Reset</a></li>
+        <li><a href="#git-ignore" class="nav-link">Git Ignore</a></li>
+      </ul>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="home" class="hero-section">
+    <div class="hero-bg-grid" aria-hidden="true"></div>
+    <div class="floating-icons" aria-hidden="true">
+      <span class="fi fi-1">⬡</span>
+      <span class="fi fi-2">🌿</span>
+      <span class="fi fi-3">⬢</span>
+      <span class="fi fi-4">◈</span>
+      <span class="fi fi-5">⬡</span>
+      <span class="fi fi-6">🌿</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <span class="badge-dot"></span>
+        Interactive Learning Platform
+      </div>
+      <h1 class="hero-title reveal">
+        <span class="title-line-1">Git &amp; GitHub</span>
+        <span class="title-line-2 gradient-text">Complete Guide</span>
+      </h1>
+      <p class="hero-typing reveal">
+        <span class="typing-prefix">→ </span>
+        <span id="typing-text"></span>
+        <span class="typing-cursor" aria-hidden="true">|</span>
+      </p>
+      <p class="hero-desc reveal">Master version control from zero to hero. Explore every Git command, workflow, and concept with beautiful interactive references built for modern developers.</p>
+      <div class="hero-ctas reveal">
+        <a href="#lifecycle" class="btn btn-primary">Start Learning <span>→</span></a>
+        <a href="#commands" class="btn btn-outline">View Commands</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="stat-card">
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Commands</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">8</span>
+          <span class="stat-label">Concepts</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Workflows</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===== GIT LIFECYCLE SECTION ===== -->
+  <section id="lifecycle" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Visual Overview</span>
+        <h2 class="section-title">Git <span class="gradient-text">Lifecycle</span></h2>
+        <p class="section-desc">Understand how changes move from your editor to the world.</p>
+      </div>
+      <div class="lifecycle-grid">
+        <div class="lifecycle-card reveal" data-stage="1">
+          <div class="lc-icon-wrap" style="--clr:#10b981">🗂️</div>
+          <div class="lc-content">
+            <h3>Working Directory</h3>
+            <p>Your local files where you edit code. Changes here are <em>untracked</em>.</p>
+          </div>
+          <div class="lc-badge" style="--clr:#10b981">Untracked</div>
+        </div>
+        <div class="lifecycle-arrow reveal" aria-hidden="true">
+          <span class="arrow-cmd">git add</span>
+          <div class="arrow-line"><div class="arrow-head">→</div></div>
+        </div>
+        <div class="lifecycle-card reveal" data-stage="2">
+          <div class="lc-icon-wrap" style="--clr:#3b82f6">📋</div>
+          <div class="lc-content">
+            <h3>Staging Area</h3>
+            <p>Files added to the index. Ready to be committed as the next snapshot.</p>
+          </div>
+          <div class="lc-badge" style="--clr:#3b82f6">Staged</div>
+        </div>
+        <div class="lifecycle-arrow reveal" aria-hidden="true">
+          <span class="arrow-cmd">git commit</span>
+          <div class="arrow-line"><div class="arrow-head">→</div></div>
+        </div>
+        <div class="lifecycle-card reveal" data-stage="3">
+          <div class="lc-icon-wrap" style="--clr:#8b5cf6">💾</div>
+          <div class="lc-content">
+            <h3>Local Repository</h3>
+            <p>The <code>.git</code> folder. A complete history of every commit you've made.</p>
+          </div>
+          <div class="lc-badge" style="--clr:#8b5cf6">Committed</div>
+        </div>
+        <div class="lifecycle-arrow reveal" aria-hidden="true">
+          <span class="arrow-cmd">git push</span>
+          <div class="arrow-line"><div class="arrow-head">→</div></div>
+        </div>
+        <div class="lifecycle-card reveal" data-stage="4">
+          <div class="lc-icon-wrap" style="--clr:#00f5ff">☁️</div>
+          <div class="lc-content">
+            <h3>Remote Repository</h3>
+            <p>GitHub, GitLab, etc. The shared, cloud-hosted version of your project.</p>
+          </div>
+          <div class="lc-badge" style="--clr:#00f5ff">Remote</div>
+        </div>
+      </div>
+
+      <!-- STASH SIDE-POCKET DIAGRAM -->
+      <div class="lc-stash-zone reveal">
+        <div class="lc-stash-connectors-down">
+          <div class="lc-stash-connector lc-stash-conn-1">
+            <span class="lc-stash-cmd">git stash</span>
+            <div class="lc-stash-line"></div>
+            <div class="lc-stash-arrow">▼</div>
+          </div>
+          <div class="lc-stash-connector lc-stash-conn-2">
+            <span class="lc-stash-cmd">git stash</span>
+            <div class="lc-stash-line"></div>
+            <div class="lc-stash-arrow">▼</div>
+          </div>
+        </div>
+
+        <div class="lc-stash-card">
+          <div class="lc-icon-wrap" style="--clr:#f59e0b">📦</div>
+          <div class="lc-content">
+            <h3>Stash Stack</h3>
+            <p>Temporary shelf for unfinished work. Not part of commit history.</p>
+            <div class="lc-stash-pills">
+              <span class="lc-stash-pill" id="stash-pill-demo">stash@{0}</span>
+              <span class="lc-stash-pill">stash@{1}</span>
+              <span class="lc-stash-pill">stash@{2}</span>
+            </div>
+            <p class="lc-stash-warning">⚠️ Not a substitute for commits or branches</p>
+          </div>
+          <div class="lc-badge" style="--clr:#f59e0b">Temporary</div>
+        </div>
+
+        <div class="lc-stash-connectors-up">
+          <div class="lc-stash-connector-up lc-stash-ret-1">
+            <div class="lc-stash-arrow">▲</div>
+            <div class="lc-stash-line"></div>
+            <span class="lc-stash-cmd">git stash pop</span>
+          </div>
+          <div class="lc-stash-connector-up lc-stash-ret-2">
+            <div class="lc-stash-arrow">▲</div>
+            <div class="lc-stash-line"></div>
+            <span class="lc-stash-cmd">git stash apply</span>
+          </div>
+        </div>
+
+        <div class="lc-stash-legend">
+          <div class="legend-item"><span class="legend-solid"></span> Normal flow</div>
+          <div class="legend-item"><span class="legend-dashed"></span> Stash escape (temporary)</div>
+        </div>
+      </div>
+
+      <div class="lc-stash-btn-wrap reveal">
+        <button class="lc-stash-btn" id="lc-stash-sim-btn" aria-label="Simulate urgent interrupt scenario">🚨 Simulate: Urgent Interrupt!</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GIT STASH CINEMA ===== -->
+  <section id="stash-cinema" class="section reveal">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Interactive Scene Player</span>
+        <h2 class="section-title">Git Stash <span class="gradient-text">Cinema</span></h2>
+        <p class="section-desc">Select a command. Watch the scene play out inside Git.</p>
+      </div>
+
+      <div class="sc-cinema-layout reveal">
+        <!-- COMMAND PANEL (Left) -->
+        <div class="sc-panel">
+          <div class="sc-panel-header">
+            🎬 STASH COMMANDS
+          </div>
+          <hr class="sc-panel-divider">
+          
+          <div class="sc-panel-scroll">
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--green);">📦 CREATE</div>
+              <button class="sc-cmd-btn" data-scene="stash">git stash <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-named">git stash push -m "msg" <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-untracked">git stash -u <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--blue);">🔍 INSPECT</div>
+              <button class="sc-cmd-btn" data-scene="stash-list">git stash list <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-show">git stash show <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-show-diff">git stash show -p <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--purple);">♻️ RESTORE</div>
+              <button class="sc-cmd-btn" data-scene="stash-apply">git stash apply <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-apply-index">git stash apply stash@{1} <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-pop">git stash pop <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-pop-index">git stash pop --index <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+
+            <div class="sc-group">
+              <div class="sc-group-label" style="--grp-clr: var(--red);">🗑️ CLEAN</div>
+              <button class="sc-cmd-btn" data-scene="stash-drop">git stash drop stash@{1} <span class="sc-play-ind">▶ playing</span></button>
+              <button class="sc-cmd-btn" data-scene="stash-clear">git stash clear <span class="sc-play-ind">▶ playing</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIFECYCLE SCREEN (Right) -->
+        <div class="sc-screen">
+          <div class="sc-screen-titlebar">
+            <div class="sc-dots">
+              <span class="sc-dot" style="background:#ff5f56;"></span>
+              <span class="sc-dot" style="background:#ffbd2e;"></span>
+              <span class="sc-dot" style="background:#27c93f;"></span>
+            </div>
+            <div class="sc-screen-title">git-visualizer — scene: idle</div>
+            <button class="sc-reset-btn">[RESET]</button>
+          </div>
+
+          <div class="sc-screen-body" id="sc-screen-body">
+            <div class="sc-zones-grid">
+              <!-- Zone 1: Working Dir -->
+              <div class="sc-zone sc-zone-wd" id="sc-zone-wd">
+                <div class="sc-zone-title">📁 Working Dir</div>
+                <div class="sc-file-container" id="sc-files-wd">
+                  <span class="sc-file" id="sc-file-app">app.js ✏️</span>
+                  <span class="sc-file" id="sc-file-style">style.css ✏️</span>
+                  <span class="sc-file sc-hidden" id="sc-file-new">new-file.js 🆕</span>
+                </div>
+                <div class="sc-zone-label sc-hidden" id="sc-label-wd"></div>
+              </div>
+
+              <!-- Zone 2: Staging Area -->
+              <div class="sc-zone sc-zone-stage" id="sc-zone-stage">
+                <div class="sc-zone-title">📋 Staging Area</div>
+                <div class="sc-file-container" id="sc-files-stage">
+                  <span class="sc-file" id="sc-file-utils">utils.js ✅</span>
+                </div>
+                <div class="sc-zone-label sc-hidden" id="sc-label-stage"></div>
+              </div>
+
+              <!-- Zone 3: Local Repo -->
+              <div class="sc-zone sc-zone-repo">
+                <div class="sc-zone-title">💾 Local Repo</div>
+                <div class="sc-file-container"></div>
+              </div>
+
+              <!-- Zone 4: Remote -->
+              <div class="sc-zone sc-zone-remote">
+                <div class="sc-zone-title">☁️ Remote</div>
+                <div class="sc-file-container"></div>
+              </div>
+
+              <!-- Zone 5: Stash Stack -->
+              <div class="sc-zone sc-zone-stash" id="sc-zone-stash">
+                <div class="sc-zone-title">📦 STASH STACK</div>
+                <div class="sc-stash-container" id="sc-stash-stack">
+                  <span class="sc-stash-pill" id="sc-pill-1">stash@{0}</span>
+                  <span class="sc-stash-pill" id="sc-pill-2">stash@{1}</span>
+                </div>
+                <!-- Dynamic overlays inside stash -->
+                <div class="sc-overlay sc-hidden" id="sc-list-overlay">
+                  <div>stash@{0}  WIP on main: abc1234 — working on feature</div>
+                  <div>stash@{1}  WIP on main: def5678 — hotfix prep</div>
+                </div>
+                <div class="sc-overlay sc-hidden" id="sc-show-overlay">
+                  <div>📄 app.js     | 3 changes</div>
+                  <div>📄 style.css  | 1 change</div>
+                  <div>2 files changed, 4 lines</div>
+                  <div class="sc-diff-block sc-hidden" id="sc-diff-block">
+                    <div class="diff-minus">- const old = 'value';</div>
+                    <div class="diff-plus">+ const new = 'updated';</div>
+                  </div>
+                </div>
+                <div class="sc-zone-label sc-hidden" id="sc-label-stash"></div>
+              </div>
+            </div>
+
+            <div class="sc-desc-bar">
+              <div class="sc-desc-cmd"><span id="sc-cmd-text"></span><span class="sc-cursor">_</span></div>
+              <div class="sc-desc-text" id="sc-desc-text"></div>
+            </div>
+            
+            <div id="sc-particles-container"></div>
+            <div id="sc-flash" class="sc-hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMANDS SECTION ===== -->
+  <section id="commands" class="section section-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Reference</span>
+        <h2 class="section-title">Commands <span class="gradient-text">Reference</span></h2>
+        <p class="section-desc">Every essential Git command explained with examples.</p>
+      </div>
+
+      <!-- Search + Filter -->
+      <div class="cmd-toolbar reveal">
+        <div class="cmd-search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="cmd-search" placeholder="Search commands..." autocomplete="off" aria-label="Search commands" />
+        </div>
+        <div class="cmd-filters" role="group" aria-label="Filter commands by category">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Setup">Setup</button>
+          <button class="filter-btn" data-filter="Basic">Basic</button>
+          <button class="filter-btn" data-filter="Branching">Branching</button>
+          <button class="filter-btn" data-filter="Remote">Remote</button>
+          <button class="filter-btn" data-filter="History">History</button>
+        </div>
+      </div>
+
+      <!-- Command Cards Grid -->
+      <div class="commands-grid" id="commands-grid">
+
+        <!-- SETUP -->
+        <div class="cmd-card reveal" data-category="Setup" data-cmd="git init">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+            <button class="copy-btn" aria-label="Copy git init command" data-copy="git init&#10;# Creates a .git folder in your project">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🚀</span>
+            <h3 class="cmd-name">git init</h3>
+          </div>
+          <p class="cmd-desc">Initialize a new local repository in the current directory.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git init</span>
+<span class="c-cmt"># Creates a .git folder in your project</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Setup" data-cmd="git config">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+            <button class="copy-btn" aria-label="Copy git config command" data-copy='git config --global user.name "Your Name"&#10;git config --global user.email "you@email.com"'>⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">⚙️</span>
+            <h3 class="cmd-name">git config</h3>
+          </div>
+          <p class="cmd-desc">Set user identity and global preferences for Git. Additionally, edit the global config with <code>git config --global --edit</code> – سوف يدخل ال vim. اضغط i لتجربة إدخال البيانات، أدخل البيانات التي تريدها، ثم اضغط :wq! للخروج من هذا الوضع.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git config</span> --global user.name <span class="c-str">"Your Name"</span>
+<span class="c-cmd">git config</span> --global user.email <span class="c-str">"you@email.com"</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Setup" data-cmd="git config --global --edit">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+            <button class="copy-btn" aria-label="Copy git config --global --edit command" data-copy="git config --global --edit">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">⚙️</span>
+            <h3 class="cmd-name">git config --global --edit</h3>
+          </div>
+          <p class="cmd-desc">سوف يدخل ال vim. اضغط i لتجربة إدخال البيانات، أدخل البيانات التي تريدها، ثم اضغط :wq! للخروج من هذا الوضع.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git config --global --edit</span></code></pre>
+        </div>
+        
+        <div class="cmd-card reveal" data-category="Setup" data-cmd="git clone">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#10b981">Setup</span>
+            <button class="copy-btn" aria-label="Copy git clone command" data-copy="git clone https://github.com/user/repo.git">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">📥</span>
+            <h3 class="cmd-name">git clone</h3>
+          </div>
+          <p class="cmd-desc">Clone a remote repository to your local machine.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git clone</span> https://github.com/user/repo.git
+<span class="c-cmd">git clone</span> git@github.com:user/repo.git</code></pre>
+        </div>
+
+        <!-- BASIC -->
+        <div class="cmd-card reveal" data-category="Basic" data-cmd="git status">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+            <button class="copy-btn" aria-label="Copy git status command" data-copy="git status">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">📊</span>
+            <h3 class="cmd-name">git status</h3>
+          </div>
+          <p class="cmd-desc">Show the status of your working directory and staging area.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git status</span>
+<span class="c-cmd">git status</span> -s  <span class="c-cmt"># Short format</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Basic" data-cmd="git add">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+            <button class="copy-btn" aria-label="Copy git add command" data-copy="git add .">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">➕</span>
+            <h3 class="cmd-name">git add</h3>
+          </div>
+          <p class="cmd-desc">Add file changes to the staging area for the next commit.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git add</span> file.txt      <span class="c-cmt"># Single file</span>
+<span class="c-cmd">git add</span> .             <span class="c-cmt"># All changes</span>
+<span class="c-cmd">git add</span> -p            <span class="c-cmt"># Interactive</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Basic" data-cmd="git commit">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+            <button class="copy-btn" aria-label="Copy git commit command" data-copy='git commit -m "your message"'>⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">💾</span>
+            <h3 class="cmd-name">git commit</h3>
+          </div>
+          <p class="cmd-desc">Save staged changes as a permanent snapshot in history.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git commit</span> -m <span class="c-str">"message"</span>
+<span class="c-cmd">git commit</span> -am <span class="c-str">"msg"</span>  <span class="c-cmt"># Add + commit</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Basic" data-cmd="git restore">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#3b82f6">Basic</span>
+            <button class="copy-btn" aria-label="Copy git restore command" data-copy="git restore file.txt">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">↩️</span>
+            <h3 class="cmd-name">git restore</h3>
+          </div>
+          <p class="cmd-desc">Discard changes in the working directory or unstage files.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git restore</span> file.txt      <span class="c-cmt"># Discard changes</span>
+<span class="c-cmd">git restore</span> --staged file  <span class="c-cmt"># Unstage file</span></code></pre>
+        </div>
+
+        <!-- BRANCHING -->
+        <div class="cmd-card reveal" data-category="Branching" data-cmd="git branch">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+            <button class="copy-btn" aria-label="Copy git branch command" data-copy="git branch">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🌿</span>
+            <h3 class="cmd-name">git branch</h3>
+          </div>
+          <p class="cmd-desc">List, create, or delete branches in your repository.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git branch</span>            <span class="c-cmt"># List branches</span>
+<span class="c-cmd">git branch</span> new-feat   <span class="c-cmt"># Create branch</span>
+<span class="c-cmd">git branch</span> -d old     <span class="c-cmt"># Delete branch</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Branching" data-cmd="git checkout">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+            <button class="copy-btn" aria-label="Copy git checkout command" data-copy="git checkout -b new-feature">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🔀</span>
+            <h3 class="cmd-name">git checkout</h3>
+          </div>
+          <p class="cmd-desc">Switch branches or restore working tree files.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git checkout</span> main
+<span class="c-cmd">git checkout</span> -b new-feature  <span class="c-cmt"># Create & switch</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Branching" data-cmd="git merge">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+            <button class="copy-btn" aria-label="Copy git merge command" data-copy="git merge feature-branch">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🔗</span>
+            <h3 class="cmd-name">git merge</h3>
+          </div>
+          <p class="cmd-desc">Integrate changes from one branch into the current branch.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git checkout</span> main
+<span class="c-cmd">git merge</span> feature-branch</code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Branching" data-cmd="git stash">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+            <button class="copy-btn" aria-label="Copy git stash command" data-copy="git stash">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">📦</span>
+            <h3 class="cmd-name">git stash</h3>
+          </div>
+          <p class="cmd-desc">Temporarily shelve changes to switch context quickly.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git stash</span>             <span class="c-cmt"># Save changes</span>
+<span class="c-cmd">git stash</span> pop         <span class="c-cmt"># Restore changes</span>
+<span class="c-cmd">git stash</span> list        <span class="c-cmt"># View stashes</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Branching" data-cmd="git rebase">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#8b5cf6">Branching</span>
+            <button class="copy-btn" aria-label="Copy git rebase command" data-copy="git rebase main">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🔄</span>
+            <h3 class="cmd-name">git rebase</h3>
+          </div>
+          <p class="cmd-desc">Reapply commits on top of another base branch.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git rebase</span> main
+<span class="c-cmd">git rebase</span> -i HEAD~3   <span class="c-cmt"># Interactive</span></code></pre>
+        </div>
+
+        <!-- REMOTE -->
+        <div class="cmd-card reveal" data-category="Remote" data-cmd="git remote">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+            <button class="copy-btn" aria-label="Copy git remote command" data-copy="git remote -v">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🌐</span>
+            <h3 class="cmd-name">git remote</h3>
+          </div>
+          <p class="cmd-desc">Manage connections to remote repositories.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git remote</span> -v                  <span class="c-cmt"># List remotes</span>
+<span class="c-cmd">git remote add</span> origin &lt;url&gt;   <span class="c-cmt"># Add remote</span>
+<span class="c-cmd">git remote remove</span> origin       <span class="c-cmt"># Remove</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Remote" data-cmd="git push">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+            <button class="copy-btn" aria-label="Copy git push command" data-copy="git push origin main">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">⬆️</span>
+            <h3 class="cmd-name">git push</h3>
+          </div>
+          <p class="cmd-desc">Upload local commits to the remote repository on GitHub.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git push</span> origin main
+<span class="c-cmd">git push</span> -u origin main    <span class="c-cmt"># Set upstream</span>
+<span class="c-cmd">git push</span> --force           <span class="c-cmt"># Force push</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Remote" data-cmd="git pull">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+            <button class="copy-btn" aria-label="Copy git pull command" data-copy="git pull origin main">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">⬇️</span>
+            <h3 class="cmd-name">git pull</h3>
+          </div>
+          <p class="cmd-desc">Fetch and integrate changes from a remote repository.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git pull</span> origin main
+<span class="c-cmd">git pull</span> --rebase origin main</code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="Remote" data-cmd="git fetch">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#00f5ff">Remote</span>
+            <button class="copy-btn" aria-label="Copy git fetch command" data-copy="git fetch origin">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">📡</span>
+            <h3 class="cmd-name">git fetch</h3>
+          </div>
+          <p class="cmd-desc">Download objects from remote without merging them.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git fetch</span> origin
+<span class="c-cmd">git fetch</span> --all</code></pre>
+        </div>
+
+        <!-- HISTORY -->
+        <div class="cmd-card reveal" data-category="History" data-cmd="git log">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+            <button class="copy-btn" aria-label="Copy git log command" data-copy="git log --oneline --graph">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">📜</span>
+            <h3 class="cmd-name">git log</h3>
+          </div>
+          <p class="cmd-desc">View the full commit history of the repository.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git log</span>
+<span class="c-cmd">git log</span> --oneline --graph
+<span class="c-cmd">git log</span> -n 5</code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="History" data-cmd="git diff">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+            <button class="copy-btn" aria-label="Copy git diff command" data-copy="git diff --staged">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🔍</span>
+            <h3 class="cmd-name">git diff</h3>
+          </div>
+          <p class="cmd-desc">Show differences between commits, branches, or working tree.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git diff</span>              <span class="c-cmt"># Unstaged changes</span>
+<span class="c-cmd">git diff</span> --staged     <span class="c-cmt"># Staged changes</span>
+<span class="c-cmd">git diff</span> HEAD~1 HEAD  <span class="c-cmt"># Between commits</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="History" data-cmd="git reset">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+            <button class="copy-btn" aria-label="Copy git reset command" data-copy="git reset --soft HEAD~1">⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">⏪</span>
+            <h3 class="cmd-name">git reset</h3>
+          </div>
+          <p class="cmd-desc">Move HEAD to a previous commit, optionally modifying index.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git reset</span> --soft HEAD~1  <span class="c-cmt"># Keep staged</span>
+<span class="c-cmd">git reset</span> --hard HEAD~1  <span class="c-cmt"># Discard all</span></code></pre>
+        </div>
+
+        <div class="cmd-card reveal" data-category="History" data-cmd="git tag">
+          <div class="cmd-card-header">
+            <span class="cmd-cat-badge" style="--cat-clr:#ec4899">History</span>
+            <button class="copy-btn" aria-label="Copy git tag command" data-copy='git tag -a v1.0.0 -m "Release"'>⧉ Copy</button>
+          </div>
+          <div class="cmd-title-row">
+            <span class="cmd-icon">🏷️</span>
+            <h3 class="cmd-name">git tag</h3>
+          </div>
+          <p class="cmd-desc">Create, list, or delete tags to mark release points.</p>
+          <pre class="cmd-code"><code><span class="c-cmd">git tag</span> v1.0.0
+<span class="c-cmd">git tag</span> -a v1.0.0 -m <span class="c-str">"Release"</span>
+<span class="c-cmd">git push</span> origin --tags</code></pre>
+        </div>
+
+      </div><!-- /commands-grid -->
+      <p class="no-results" id="no-results" style="display:none;">No commands found. Try a different search.</p>
+    </div>
+  </section>
+
+  <!-- ===== WORKFLOW TIMELINE SECTION ===== -->
+  <section id="workflow" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Step by Step</span>
+        <h2 class="section-title">Git <span class="gradient-text">Workflow</span></h2>
+        <p class="section-desc">The standard flow from editing to publishing on GitHub.</p>
+      </div>
+      <div class="timeline-wrap">
+        <div class="timeline-line" aria-hidden="true"></div>
+        <div class="timeline-steps">
+          <div class="timeline-step reveal">
+            <div class="step-marker"><span>1</span></div>
+            <div class="step-card">
+              <div class="step-icon">✏️</div>
+              <h3>Edit</h3>
+              <p>Modify files in your working directory with your code editor.</p>
+              <div class="step-tag">Working Directory</div>
+            </div>
+          </div>
+          <div class="timeline-step reveal">
+            <div class="step-marker"><span>2</span></div>
+            <div class="step-card">
+              <div class="step-icon">➕</div>
+              <h3>Stage</h3>
+              <p>Select which changes to include in the next commit.</p>
+              <div class="step-tag code-tag">git add .</div>
+            </div>
+          </div>
+          <div class="timeline-step reveal">
+            <div class="step-marker"><span>3</span></div>
+            <div class="step-card">
+              <div class="step-icon">💾</div>
+              <h3>Commit</h3>
+              <p>Save a permanent snapshot of staged changes with a message.</p>
+              <div class="step-tag code-tag">git commit -m "msg"</div>
+            </div>
+          </div>
+          <div class="timeline-step reveal">
+            <div class="step-marker"><span>4</span></div>
+            <div class="step-card">
+              <div class="step-icon">⬆️</div>
+              <h3>Push</h3>
+              <p>Upload your commits to the remote repository on GitHub.</p>
+              <div class="step-tag code-tag">git push origin main</div>
+            </div>
+          </div>
+          <div class="timeline-step reveal">
+            <div class="step-marker"><span>5</span></div>
+            <div class="step-card">
+              <div class="step-icon">🐙</div>
+              <h3>GitHub</h3>
+              <p>Your changes are now live, visible, and ready for collaboration!</p>
+              <div class="step-tag">Remote Repository</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONCEPTS SECTION ===== -->
+  <section id="concepts" class="section section-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Fundamentals</span>
+        <h2 class="section-title">Core <span class="gradient-text">Concepts</span></h2>
+        <p class="section-desc">The essential vocabulary every developer needs to master Git.</p>
+      </div>
+      <div class="concepts-grid">
+        <div class="concept-card reveal" style="--acc:#10b981">
+          <div class="concept-icon-wrap"><span>📁</span></div>
+          <h3>Working Directory</h3>
+          <p>The folder on your computer where you write and edit code. Files here are either <em>untracked</em> or <em>modified</em>.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#3b82f6">
+          <div class="concept-icon-wrap"><span>📋</span></div>
+          <h3>Staging Area</h3>
+          <p>Also called the "index". A preparation zone — files you've <code>git add</code>ed live here, waiting for the next commit.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#8b5cf6">
+          <div class="concept-icon-wrap"><span>💾</span></div>
+          <h3>Local Repository</h3>
+          <p>The <code>.git</code> hidden folder inside your project. It holds the complete history of every commit ever made.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#00f5ff">
+          <div class="concept-icon-wrap"><span>☁️</span></div>
+          <h3>Remote Repository</h3>
+          <p>A hosted version of your project (GitHub, GitLab, Bitbucket). Shared with collaborators worldwide.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#10b981">
+          <div class="concept-icon-wrap"><span>🌿</span></div>
+          <h3>Branch</h3>
+          <p>A parallel version of your codebase. <code>main</code> is the default. Create branches to work on features safely.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#ec4899">
+          <div class="concept-icon-wrap"><span>📸</span></div>
+          <h3>Commit</h3>
+          <p>A timestamped snapshot of staged changes. Commits form a permanent, immutable chain — the project timeline.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#f59e0b">
+          <div class="concept-icon-wrap"><span>🔗</span></div>
+          <h3>Merge</h3>
+          <p>Combine changes from one branch into another. Git auto-merges when possible; conflicts require manual resolution.</p>
+        </div>
+        <div class="concept-card reveal" style="--acc:#8b5cf6">
+          <div class="concept-icon-wrap"><span>🔄</span></div>
+          <h3>Pull Request</h3>
+          <p>A GitHub feature to propose merging your branch into the main codebase. Enables team code review and discussion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COLLABORATION SECTION ===== -->
+  <section id="collaboration" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Team Workflow</span>
+        <h2 class="section-title">GitHub <span class="gradient-text">Collaboration</span></h2>
+        <p class="section-desc">How real teams work together using Git and GitHub.</p>
+      </div>
+      <div class="collab-grid">
+        <div class="collab-flow reveal">
+          <h3 class="flow-title">🧑‍💻 Solo Workflow</h3>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="fs-icon">🚀</span>
+              <span class="fs-label">git init / clone</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">✏️</span>
+              <span class="fs-label">Edit code</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">➕</span>
+              <span class="fs-label">git add .</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">💾</span>
+              <span class="fs-label">git commit -m</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">⬆️</span>
+              <span class="fs-label">git push</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="collab-tips reveal">
+          <h3 class="flow-title">💡 Best Practices</h3>
+          <div class="tip-list">
+            <div class="tip-item">
+              <span class="tip-icon">✅</span>
+              <p>Write clear, descriptive commit messages</p>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">✅</span>
+              <p>Commit small, focused changes frequently</p>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">✅</span>
+              <p>Always pull before you push to avoid conflicts</p>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">✅</span>
+              <p>Use branches for every new feature or bug fix</p>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">✅</span>
+              <p>Never commit sensitive data or secrets</p>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">✅</span>
+              <p>Use <code>.gitignore</code> to exclude unnecessary files</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="collab-flow reveal">
+          <h3 class="flow-title">👥 Team Workflow</h3>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="fs-icon">🍴</span>
+              <span class="fs-label">Fork / Clone repo</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">🌿</span>
+              <span class="fs-label">git checkout -b feature</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">💾</span>
+              <span class="fs-label">Commit changes</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">⬆️</span>
+              <span class="fs-label">Push branch</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <span class="fs-icon">🔄</span>
+              <span class="fs-label">Open Pull Request</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step highlight-step">
+              <span class="fs-icon">✅</span>
+              <span class="fs-label">Review &amp; Merge</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRACTICE TERMINAL SECTION ===== -->
+  <section id="practice" class="section section-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Hands On</span>
+        <h2 class="section-title">Interactive <span class="gradient-text">Practice</span></h2>
+        <p class="section-desc">Click the buttons to simulate real Git commands in action.</p>
+      </div>
+      <div class="terminal-wrapper reveal">
+        <!-- Terminal Window -->
+        <div class="terminal-window">
+          <div class="terminal-titlebar">
+            <div class="term-dots">
+              <span class="td td-red"></span>
+              <span class="td td-yellow"></span>
+              <span class="td td-green"></span>
+            </div>
+            <span class="term-title">bash — git-practice</span>
+            <button class="term-clear" id="term-clear" title="Clear terminal">⌫ Clear</button>
+          </div>
+          <div class="terminal-body" id="terminal-output" aria-live="polite" aria-label="Terminal output">
+            <div class="term-line">
+              <span class="term-green">git-practice</span>
+              <span class="term-white"> on </span>
+              <span class="term-cyan">🌿 main</span>
+              <span class="term-white"> ready</span>
+            </div>
+            <div class="term-line term-muted">Click a button below to simulate a Git command...</div>
+            <div class="term-line">&nbsp;</div>
+          </div>
+          <div class="terminal-prompt-line" aria-hidden="true">
+            <span class="prompt-symbol">$</span>
+            <span class="prompt-cursor" id="prompt-cursor">_</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="terminal-actions">
+          <button class="term-btn" data-cmd="git init" style="--btn-clr:#10b981">
+            <span class="tb-icon">🚀</span> git init
+          </button>
+          <button class="term-btn" data-cmd="git status" style="--btn-clr:#f59e0b">
+            <span class="tb-icon">📊</span> git status
+          </button>
+          <button class="term-btn" data-cmd="git add" style="--btn-clr:#00f5ff">
+            <span class="tb-icon">➕</span> git add .
+          </button>
+          <button class="term-btn" data-cmd="git commit" style="--btn-clr:#8b5cf6">
+            <span class="tb-icon">💾</span> git commit
+          </button>
+          <button class="term-btn" data-cmd="git push" style="--btn-clr:#3b82f6">
+            <span class="tb-icon">⬆️</span> git push
+          </button>
+          <button class="term-btn" data-cmd="git log" style="--btn-clr:#ec4899">
+            <span class="tb-icon">📜</span> git log
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GENERATE & TEST SSH KEYS SECTION ===== -->
+  <section id="ssh-keys" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Security & Authentication</span>
+        <h2 class="section-title">Generate & Test <span class="gradient-text">GitHub SSH Keys</span></h2>
+        <p class="section-desc">Securely connect your local machine to GitHub without typing your password every time.</p>
+      </div>
+      
+      <div class="ssh-grid">
+        <!-- 1. Why SSH Keys are Used -->
+        <div class="ssh-card reveal" data-category="Security">
+          <div class="card-header">
+            <span class="card-badge" style="--cat-clr:#10b981">Why SSH?</span>
+          </div>
+          <h3 class="card-title">Why SSH Keys are Used</h3>
+          <ul class="card-list">
+            <li><strong>Problem with HTTPS:</strong> Requires a personal access token (or password) every time you push or pull.</li>
+            <li><strong>Benefits of SSH:</strong> Uses cryptographic keys for secure, passwordless authentication.</li>
+          </ul>
+        </div>
+
+        <!-- 2. SSH Key Pair -->
+        <div class="ssh-card reveal" data-category="Security">
+          <div class="card-header">
+            <span class="card-badge" style="--cat-clr:#3b82f6">Key Pair</span>
+          </div>
+          <h3 class="card-title">SSH Key Pair</h3>
+          <p>SSH uses two linked keys:</p>
+          <ul class="card-list mt-2">
+            <li><strong>Private Key <code>(id_rsa)</code>:</strong> Stays on your machine. <span class="text-danger font-semibold">NEVER share this.</span></li>
+            <li><strong>Public Key <code>(id_rsa.pub)</code>:</strong> Uploaded safely to GitHub.</li>
+          </ul>
+        </div>
+
+        <!-- 3. Generate SSH Key -->
+        <div class="ssh-card reveal" style="grid-column: 1 / -1;" data-category="Security">
+          <div class="card-header">
+            <span class="card-badge" style="--cat-clr:#8b5cf6">Generate Key</span>
+          </div>
+          <h3 class="card-title">Generate SSH Key</h3>
+          <p class="mb-4">Run the following command in your terminal, replacing the email with your GitHub email:</p>
+          
+          <div class="ssh-code-wrapper">
+            <pre class="cmd-code"><code><span class="c-cmd">ssh-keygen</span> -t rsa -b 4096 -C <span class="c-str">"your_email@example.com"</span></code></pre>
+            <button class="copy-btn ssh-copy" aria-label="Copy ssh-keygen command" data-copy='ssh-keygen -t rsa -b 4096 -C "your_email@example.com"'>⧉ Copy</button>
+          </div>
+          
+          <div class="ssh-explanation mt-4">
+            <p><strong>Explanation:</strong></p>
+            <ul class="card-list">
+              <li><code>ssh-keygen</code>: The key-generation program.</li>
+              <li><code>-t rsa</code>: Specifies the RSA algorithm.</li>
+              <li><code>-b 4096</code>: Specifies a strong 4096-bit key size.</li>
+              <li><code>-C "email"</code>: Adds a label (comment) to identify the key.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Passphrase -->
+        <div class="ssh-card reveal" data-category="Security">
+          <div class="card-header">
+            <span class="card-badge" style="--cat-clr:#f59e0b">Passphrase</span>
+          </div>
+          <h3 class="card-title">Optional Passphrase</h3>
+          <p>When prompted, you can enter an optional passphrase for extra security. If someone steals your laptop, they still need the passphrase to use the key.</p>
+        </div>
+
+        <!-- 5. Add Public Key to GitHub -->
+        <div class="ssh-card reveal" data-category="Security">
+          <div class="card-header">
+            <span class="card-badge" style="--cat-clr:#ec4899">Add to GitHub</span>
+          </div>
+          <h3 class="card-title">Add Public Key to GitHub</h3>
+          <ol class="card-list">
+            <li>Copy the contents of <code>~/.ssh/id_rsa.pub</code></li>
+            <li>Go to GitHub ➔ <strong>Settings</strong></li>
+            <li>Click <strong>SSH and GPG keys</strong></li>
+            <li>Click <strong>New SSH key</strong> and paste the contents.</li>
+          </ol>
+        </div>
+
+        <!-- 6. Test Authentication -->
+        <div class="ssh-card reveal" style="grid-column: 1 / -1;" data-category="Security">
+          <div class="card-header">
+            <span class="card-badge" style="--cat-clr:#00f5ff">Test Connection</span>
+          </div>
+          <h3 class="card-title">Test Authentication</h3>
+          <p class="mb-4">Verify that your key is correctly set up and recognized by GitHub.</p>
+          
+          <div class="ssh-code-wrapper mb-4">
+            <pre class="cmd-code"><code><span class="c-cmd">ssh</span> -T git@github.com</code></pre>
+            <button class="copy-btn ssh-copy" aria-label="Copy ssh test command" data-copy="ssh -T git@github.com">⧉ Copy</button>
+          </div>
+
+          <p><strong>Expected Output:</strong></p>
+          <div class="terminal-window ssh-term mt-2">
+            <div class="terminal-titlebar">
+              <div class="term-dots">
+                <span class="td td-red"></span><span class="td td-yellow"></span><span class="td td-green"></span>
+              </div>
+              <span class="term-title">bash — ssh-test</span>
+            </div>
+            <div class="terminal-body" style="height: auto; padding: 16px;">
+              <div class="term-line"><span class="term-cyan">$ ssh -T git@github.com</span></div>
+              <div class="term-line term-white mt-2">Hi username! You've successfully authenticated, but GitHub does not provide shell access.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PULL REQUEST DEEP DIVE SECTION ===== -->
+  <section id="pull-requests" class="section section-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Advanced Collaboration</span>
+        <h2 class="section-title">Pull Request <span class="gradient-text">Deep Dive</span></h2>
+        <p class="section-desc">Master the core mechanism of GitHub collaboration, from your first PR to advanced code review workflows.</p>
+      </div>
+
+      <!-- 1. What is a Pull Request -->
+      <div class="pr-intro-grid">
+        <div class="pr-intro-card reveal">
+          <div class="card-icon" style="--icon-clr:#3b82f6">🤔</div>
+          <h3>What is a Pull Request?</h3>
+          <p>A Pull Request (PR) is a dedicated forum for discussing proposed changes to a repository before they are integrated into the main codebase.</p>
+          <ul class="card-list">
+            <li><strong>Purpose:</strong> To notify team members that you have completed a feature or fixed a bug.</li>
+            <li><strong>Why they exist:</strong> They provide a safety net for code review, automated testing, and discussion.</li>
+            <li><strong>Real-world workflow:</strong> No one pushes directly to <code>main</code>. Developers branch off, do work, and open a PR to merge back safely.</li>
+          </ul>
+        </div>
+
+        <!-- 2. Why is it called Pull Request -->
+        <div class="pr-intro-card reveal highlight-card" style="--highlight-clr:#8b5cf6">
+          <div class="card-icon" style="--icon-clr:#8b5cf6">💡</div>
+          <h3>Why is it called a "Pull Request"?</h3>
+          <p>Many beginners wonder why it's not called a <em>Push Request</em> since you are pushing code to GitHub.</p>
+          <div class="pr-name-logic mt-4">
+            <div class="logic-step"><strong>1.</strong> You create code and push it to your <em>own</em> branch.</div>
+            <div class="logic-arrow">↓</div>
+            <div class="logic-step logic-focus"><strong>2.</strong> You <em>request</em> the project maintainer to <strong>PULL</strong> your changes into the main branch.</div>
+          </div>
+          <p class="mt-4 logic-summary">"Hey maintainer, I've pushed my code. Here is a <strong>request</strong> for you to <strong>pull</strong> it into the official project."</p>
+        </div>
+      </div>
+
+      <!-- 3. Pull Request Workflow Timeline -->
+      <div class="pr-section mt-12 reveal">
+        <h3 class="pr-section-title">The Pull Request Workflow</h3>
+        <div class="pr-workflow-timeline">
+          <div class="pr-wt-step">
+            <div class="wt-icon">🌿</div>
+            <div class="wt-text">Create Branch</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step">
+            <div class="wt-icon">💻</div>
+            <div class="wt-text">Write Code</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step">
+            <div class="wt-icon">💾</div>
+            <div class="wt-text">Commit</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step">
+            <div class="wt-icon">⬆️</div>
+            <div class="wt-text">Push</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step pulse-step">
+            <div class="wt-icon">🔄</div>
+            <div class="wt-text">Open PR</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step">
+            <div class="wt-icon">👀</div>
+            <div class="wt-text">Code Review</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step">
+            <div class="wt-icon">✅</div>
+            <div class="wt-text">Approve</div>
+          </div>
+          <div class="wt-connector"></div>
+          <div class="pr-wt-step finish-step">
+            <div class="wt-icon">🔀</div>
+            <div class="wt-text">Merge to Main</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Push vs Pull Request -->
+      <div class="pr-section mt-12 reveal">
+        <h3 class="pr-section-title">Git Push vs Pull Request</h3>
+        <div class="pr-table-wrapper">
+          <table class="pr-comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th><span class="table-icon">⬆️</span> Git Push</th>
+                <th><span class="table-icon">🔄</span> Pull Request</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Purpose</strong></td>
+                <td>Uploads commits to remote server</td>
+                <td>Proposes merging a branch into another</td>
+              </tr>
+              <tr>
+                <td><strong>Who performs it?</strong></td>
+                <td>The developer writing the code</td>
+                <td>Developer (opens), Maintainer (merges)</td>
+              </tr>
+              <tr>
+                <td><strong>Code Review?</strong></td>
+                <td>❌ No, it's instant</td>
+                <td>✅ Yes, team can comment line-by-line</td>
+              </tr>
+              <tr>
+                <td><strong>Approval Required?</strong></td>
+                <td>❌ No</td>
+                <td>✅ Yes (usually configured)</td>
+              </tr>
+              <tr>
+                <td><strong>Affects Main Branch?</strong></td>
+                <td>✅ Yes (if pushing to main)</td>
+                <td>✅ Yes (but safely, after review)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 5. Real Example & 6. Commands -->
+      <div class="pr-scenario-grid mt-12">
+        <div class="pr-scenario-content reveal">
+          <h3 class="pr-section-title">Real-World Scenario</h3>
+          <div class="scenario-steps">
+            <div class="s-step"><span class="s-avatar">👨‍💻</span> <strong>Ahmed</strong> creates a <code>feature-login</code> branch.</div>
+            <div class="s-step"><span class="s-avatar">👨‍💻</span> <strong>Ahmed</strong> writes the login code and commits changes.</div>
+            <div class="s-step"><span class="s-avatar">👨‍💻</span> <strong>Ahmed</strong> pushes the branch to GitHub.</div>
+            <div class="s-step"><span class="s-avatar">👨‍💻</span> <strong>Ahmed</strong> opens a Pull Request on GitHub UI.</div>
+            <div class="s-step s-review"><span class="s-avatar">👩‍🔧</span> <strong>Admin</strong> reviews the code, suggests a typo fix.</div>
+            <div class="s-step"><span class="s-avatar">👨‍💻</span> <strong>Ahmed</strong> fixes the typo and pushes again (PR updates automatically).</div>
+            <div class="s-step s-approve"><span class="s-avatar">👩‍🔧</span> <strong>Admin</strong> approves the PR.</div>
+            <div class="s-step s-merge"><span class="s-avatar">👩‍🔧</span> <strong>Admin</strong> clicks "Merge pull request".</div>
+          </div>
+        </div>
+        
+        <div class="pr-scenario-code reveal">
+          <h3 class="pr-section-title">Commands Used</h3>
+          <div class="ssh-code-wrapper mb-4">
+            <pre class="cmd-code"><code><span class="c-cmt"># 1. Create and switch to branch</span>
+<span class="c-cmd">git checkout</span> -b feature-login
+
+<span class="c-cmt"># 2. Stage changes</span>
+<span class="c-cmd">git add</span> .
+
+<span class="c-cmt"># 3. Commit changes</span>
+<span class="c-cmd">git commit</span> -m <span class="c-str">"Add login page"</span>
+
+<span class="c-cmt"># 4. Push branch to GitHub</span>
+<span class="c-cmd">git push</span> -u origin feature-login</code></pre>
+            <button class="copy-btn ssh-copy" aria-label="Copy scenario commands" data-copy='git checkout -b feature-login&#10;git add .&#10;git commit -m "Add login page"&#10;git push -u origin feature-login'>⧉ Copy</button>
+          </div>
+          <p class="text-muted text-sm">After the final push, GitHub will automatically show a "Compare & pull request" button on the repository page!</p>
+        </div>
+      </div>
+
+      <!-- 7. Pull Request Lifecycle -->
+      <div class="pr-section mt-12 reveal">
+        <h3 class="pr-section-title">Pull Request Lifecycle Flowchart</h3>
+        <div class="pr-flowchart">
+          <div class="fc-node fc-draft">Draft PR</div>
+          <div class="fc-arrow">➔</div>
+          <div class="fc-node fc-open">Open PR</div>
+          <div class="fc-arrow">➔</div>
+          <div class="fc-node fc-review">Review</div>
+          
+          <div class="fc-branch fc-changes">
+            <div class="fc-arrow fc-down">⬎</div>
+            <div class="fc-node fc-req">Changes Requested</div>
+            <div class="fc-arrow">➔</div>
+            <div class="fc-node fc-update">Update & Push</div>
+            <div class="fc-arrow fc-up">⬏</div>
+          </div>
+          
+          <div class="fc-arrow fc-main-path">➔</div>
+          <div class="fc-node fc-approve">Approved</div>
+          <div class="fc-arrow">➔</div>
+          <div class="fc-node fc-merge">Merged & Closed</div>
+        </div>
+      </div>
+
+      <!-- 8. Terminology -->
+      <div class="pr-section mt-12 reveal">
+        <h3 class="pr-section-title">Common Terminology</h3>
+        <div class="pr-term-grid">
+          <div class="term-card">
+            <h4>Repository</h4>
+            <p>The project folder containing all files and Git history.</p>
+          </div>
+          <div class="term-card">
+            <h4>Fork</h4>
+            <p>A personal copy of someone else's repository on your GitHub account.</p>
+          </div>
+          <div class="term-card">
+            <h4>Branch</h4>
+            <p>A parallel version of the codebase to isolate your work.</p>
+          </div>
+          <div class="term-card">
+            <h4>Merge</h4>
+            <p>Combining the changes from your PR branch into the main branch.</p>
+          </div>
+          <div class="term-card">
+            <h4>Reviewer</h4>
+            <p>A team member who inspects your code for bugs or style issues.</p>
+          </div>
+          <div class="term-card">
+            <h4>Maintainer</h4>
+            <p>The person with write access who can actually click the "Merge" button.</p>
+          </div>
+          <div class="term-card">
+            <h4>Merge Conflict</h4>
+            <p>When two branches changed the exact same line of code differently.</p>
+          </div>
+          <div class="term-card">
+            <h4>Code Review</h4>
+            <p>The process of examining proposed code before it gets merged.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 & 10. Best Practices & Mistakes -->
+      <div class="pr-dos-donts mt-12">
+        <div class="pr-practices reveal">
+          <h3 class="pr-section-title text-success">✅ Best Practices</h3>
+          <ul class="practice-list list-success">
+            <li>
+              <span class="p-icon">✅</span>
+              <div>
+                <strong>Keep PRs Small:</strong> Easier and faster to review.
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">✅</span>
+              <div>
+                <strong>Clear Titles:</strong> "Fix login bug" instead of "Update code".
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">✅</span>
+              <div>
+                <strong>Detailed Description:</strong> Explain *what* changed and *why*.
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">✅</span>
+              <div>
+                <strong>One Feature Per PR:</strong> Don't mix UI changes with database refactoring.
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">✅</span>
+              <div>
+                <strong>Test Before Opening:</strong> Ensure your code actually runs locally.
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="pr-practices reveal">
+          <h3 class="pr-section-title text-danger">❌ Common Mistakes</h3>
+          <ul class="practice-list list-danger">
+            <li>
+              <span class="p-icon">❌</span>
+              <div>
+                <strong>Huge PRs:</strong> 50+ changed files are a reviewer's nightmare.
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">❌</span>
+              <div>
+                <strong>Merging Without Review:</strong> Defeats the entire purpose of a PR.
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">❌</span>
+              <div>
+                <strong>Vague Titles:</strong> Avoid titles like "stuff", "updates", or "fixed it".
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">❌</span>
+              <div>
+                <strong>Ignoring Comments:</strong> Always address reviewer feedback.
+              </div>
+            </li>
+            <li>
+              <span class="p-icon">❌</span>
+              <div>
+                <strong>Out of Sync:</strong> Forgetting to pull latest `main` before opening PR.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GIT ALIASES SECTION ===== -->
+  <section id="git-aliases" class="section section-alt">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-tag">Productivity Hacks</span>
+        <h2 class="section-title">Git <span class="gradient-text">Aliases</span></h2>
+        <p class="section-desc">Speed up your workflow with short, memorable shortcuts for the commands you use most.</p>
+      </div>
+
+      <div class="ga-card reveal">
+        <h3 class="ga-card-title">What is a Git Alias?</h3>
+        <p class="ga-card-text">
+          An alias is a user-defined shortcut that expands to a longer Git command (or series of commands).  
+          It lives in your global <code>~/.gitconfig</code> and is invoked exactly like any native Git sub-command.
+        </p>
+      </div>
+
+      <div class="ga-card reveal">
+        <h3 class="ga-card-title">Why do they exist?</h3>
+        <p class="ga-card-text">
+          Because you spend a lot of time typing the same long commands. An alias removes friction, reduces
+          mental overhead and makes your workflow feel <em>instant</em>.
+        </p>
+      </div>
+
+      <div class="ga-card reveal">
+        <h3 class="ga-card-title">Benefits of using aliases</h3>
+        <ul class="ga-benefits">
+          <li>🚀 Faster command entry</li>
+          <li>🔁 Consistency across machines (when shared via dotfiles)</li>
+          <li>📚 Self-documenting shortcuts (e.g. <code>git cm</code> = “commit-message”)</li>
+          <li>⚡️ Less typing → fewer typos</li>
+        </ul>
+      </div>
+
+      <div class="ga-card reveal">
+        <h3 class="ga-card-title">Alias syntax</h3>
+        <p class="ga-card-text">
+          <code>git config --global alias.&lt;newAlias&gt; "&lt;command&gt;"</code>
+        </p>
+        <div class="ga-syntax-breakdown">
+          <div class="syntax-part"><strong>git config</strong> – Git's configuration tool</div>
+          <div class="syntax-part"><strong>--global</strong> – store it for the whole user</div>
+          <div class="syntax-part"><strong>alias.&lt;newAlias&gt;</strong> – the shortcut name</div>
+          <div class="syntax-part"><strong>"&lt;command&gt;"</strong> – the full command to run</div>
+        </div>
+      </div>
+
+      <div class="ga-timeline reveal">
+        <div class="ga-tl-step">
+          <div class="ga-tl-icon">⚙️</div>
+          <div class="ga-tl-label">Run <code>git config</code></div>
+        </div>
+        <div class="ga-tl-connector"></div>
+        <div class="ga-tl-step">
+          <div class="ga-tl-icon">🌍</div>
+          <div class="ga-tl-label">Add <code>--global</code></div>
+        </div>
+        <div class="ga-tl-connector"></div>
+        <div class="ga-tl-step">
+          <div class="ga-tl-icon">🔤</div>
+          <div class="ga-tl-label">Define <code>alias.cm</code></div>
+        </div>
+        <div class="ga-tl-connector"></div>
+        <div class="ga-tl-step">
+          <div class="ga-tl-icon">🖊️</div>
+          <div class="ga-tl-label">Command <code>"commit -m"</code></div>
+        </div>
+      </div>
+
+      <div class="ga-examples-grid reveal">
+        <div class="ga-example">
+          <h4>Define a few common aliases</h4>
+          <pre class="cmd-code"><code><span class="c-cmt"># commit with a message</span>
+<span class="c-cmd">git config --global alias.cm "commit -m"</span>
+
+<span class="c-cmt"># short status</span>
+<span class="c-cmd">git config --global alias.st status</span>
+
+<span class="c-cmt"># branch overview</span>
+<span class="c-cmd">git config --global alias.br branch</span>
+
+<span class="c-cmt"># checkout a branch (exchange)</span>
+<span class="c-cmd">git config --global alias.exchange checkout</span></code></pre>
+          <button class="copy-btn ga-copy" aria-label="Copy alias definitions"
+            data-copy='git config --global alias.cm "commit -m"
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.exchange checkout'>⧉ Copy</button>
+        </div>
+
+        <div class="ga-example">
+          <h4>Using them</h4>
+          <pre class="cmd-code"><code><span class="c-cmt"># Commit</span>
+<span class="c-cmd">git cm "Initial commit"</span>
+
+<span class="c-cmt"># Status</span>
+<span class="c-cmd">git st</span>
+
+<span class="c-cmt"># List branches</span>
+<span class="c-cmd">git br</span>
+
+<span class="c-cmt"># Checkout a feature branch</span>
+<span class="c-cmd">git exchange feature/login</span></code></pre>
+          <button class="copy-btn ga-copy" aria-label="Copy usage examples"
+            data-copy='git cm "Initial commit"
+git st
+git br
+git exchange feature/login'>⧉ Copy</button>
+        </div>
+      </div>
+
+      <div class="ga-demo reveal">
+        <h3 class="ga-section-title">Try it yourself</h3>
+        <form id="ga-demo-form" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+          <input type="text" name="alias" placeholder="alias (e.g. ci)" required
+                 style="padding:10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-main);color:var(--text-main);flex:1;min-width:150px;">
+          <input type="text" name="command" placeholder="full command (e.g. commit -m)" required
+                 style="padding:10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-main);color:var(--text-main);flex:2;min-width:200px;">
+          <button type="submit" class="theme-btn" style="padding:10px 20px;">Generate</button>
+        </form>
+        <div style="position:relative;">
+          <pre class="cmd-code" id="ga-demo-output" style="margin-top:0; min-height: 48px; display:flex; align-items:center; color:var(--text-muted);"><i>Your command will appear here...</i></pre>
+          <button class="copy-btn ga-copy" aria-label="Copy generated alias"
+                  data-copy="" style="display:none; top: 12px; right: 12px;">⧉ Copy</button>
+        </div>
+      </div>
+
+      <div class="ga-comparison reveal">
+        <h3 class="ga-section-title">Before ↔ After</h3>
+        <div class="pr-table-wrapper">
+          <table class="ga-comparison-table">
+            <thead>
+              <tr><th>Scenario</th><th>Without alias</th><th>With alias</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Commit with a message</td><td><code>git commit -m "…"</code></td><td><code>git cm "…"</code></td></tr>
+              <tr><td>Check status</td><td><code>git status</code></td><td><code>git st</code></td></tr>
+              <tr><td>List branches</td><td><code>git branch</code></td><td><code>git br</code></td></tr>
+              <tr><td>Switch branch</td><td><code>git checkout feature/login</code></td><td><code>git exchange feature/login</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ga-card-grid reveal">
+        <h3 class="ga-section-title" style="grid-column: 1 / -1;">Most useful Git aliases</h3>
+        <div class="ga-card-item"><strong>cm</strong> – <code>commit -m</code></div>
+        <div class="ga-card-item"><strong>st</strong> – <code>status</code></div>
+        <div class="ga-card-item"><strong>br</strong> – <code>branch</code></div>
+        <div class="ga-card-item"><strong>co</strong> – <code>checkout</code></div>
+        <div class="ga-card-item"><strong>lg</strong> – <code>log --oneline --graph</code></div>
+        <div class="ga-card-item"><strong>unstage</strong> – <code>reset HEAD --</code></div>
+      </div>
+
+      <div class="ga-progress reveal">
+        <h3 class="ga-section-title">Productivity impact</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 68%;"></div>
+        </div>
+        <p class="progress-note">≈ 68% of saved keystrokes when using the top 6 aliases daily.</p>
+      </div>
+
+      <div class="ga-warnings reveal">
+        <h3 class="ga-section-title text-danger">Common mistakes</h3>
+        <ul class="ga-warn-list">
+          <li>❌ Forgetting quotes around commands that contain spaces.</li>
+          <li>❌ Over-aliasing – turning every command into an alias makes the cheat-sheet unreadable.</li>
+          <li>❌ Using aliases that clash with existing Git sub-commands.</li>
+        </ul>
+      </div>
+
+      <div class="ga-best-practices reveal">
+        <h3 class="ga-section-title text-success">Best practices</h3>
+        <ul class="ga-best-list">
+          <li>✅ Keep aliases short (&lt; 3 characters) and memorable.</li>
+          <li>✅ Prefix with a unique character when in doubt (e.g. <code>gco</code> for checkout).</li>
+          <li>✅ Document them in your README or dotfiles.</li>
+          <li>✅ Group related aliases in a single `gitconfig` section.</li>
+          <li>✅ Test each alias after creation.</li>
+        </ul>
+      </div>
+
+      <div class="ga-workflow reveal">
+        <h3 class="ga-section-title">Professional workflow with aliases</h3>
+        <ol class="ga-wf-steps">
+          <li>🔧 <strong>Setup</strong> – run the "Define a few common aliases" block once per machine.</li>
+          <li>💡 <strong>Daily work</strong> – use <code>git cm</code>, <code>git st</code>, <code>git br</code> throughout the day.</li>
+          <li>🚦 <strong>Review</strong> – run <code>git lg</code> (log graph) before merging.</li>
+          <li>🧹 <strong>Cleanup</strong> – <code>git unstage</code> or <code>git reset</code> via alias.</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GIT STASH SECTION ===== -->
+  <section id="git-stash" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Temporary Storage</span>
+        <h2 class="section-title">Git <span class="gradient-text">Stash</span></h2>
+        <p class="section-desc">Save your unfinished work without committing. Switch context instantly.</p>
+      </div>
+
+      <!-- B. Concept Overview -->
+      <div class="stash-overview-grid">
+        <div class="stash-card reveal stash-zone-wrap">
+          <h3 class="stash-card-title">What is Git Stash?</h3>
+          <div class="stash-zones">
+            <div class="stash-zone" style="--zone-clr: var(--green)">
+              <div class="stash-zone-icon">📁</div>
+              <div class="stash-zone-text">
+                <h4>Working Directory</h4>
+                <p>Your active, unfinished code.</p>
+              </div>
+            </div>
+            <div class="stash-arrow">
+              <span class="stash-cmd">git stash</span>
+              <div class="stash-line">↓</div>
+            </div>
+            <div class="stash-zone" style="--zone-clr: var(--purple)">
+              <div class="stash-zone-icon">📦</div>
+              <div class="stash-zone-text">
+                <h4>Stash Stack</h4>
+                <p>Safe storage for later.</p>
+              </div>
+            </div>
+            <div class="stash-arrow">
+              <span class="stash-cmd">git stash pop</span>
+              <div class="stash-line">↑</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stash-card reveal">
+          <h3 class="stash-card-title">Real-World Scenario</h3>
+          <div class="stash-timeline">
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">👨‍💻</div>
+              <div class="stash-step-text">Working on Feature A</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--purple)">
+              <div class="stash-step-icon">🚨</div>
+              <div class="stash-step-text">Urgent bug reported!</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">📦</div>
+              <div class="stash-step-text">Run <code>git stash</code> — work is saved</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--purple)">
+              <div class="stash-step-icon">🌿</div>
+              <div class="stash-step-text">Switch to <code>hotfix</code> branch</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">🐛</div>
+              <div class="stash-step-text">Fix the bug &amp; commit</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--purple)">
+              <div class="stash-step-icon">🔙</div>
+              <div class="stash-step-text">Return to feature branch</div>
+            </div>
+            <div class="stash-step" style="--step-clr: var(--cyan)">
+              <div class="stash-step-icon">✅</div>
+              <div class="stash-step-text">Run <code>git stash pop</code> — continue Feature A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C. What Gets Saved? -->
+      <div class="stash-saves-wrap reveal mt-12">
+        <h3 class="stash-section-title">What Gets Saved?</h3>
+        <div class="stash-saves-grid">
+          <div class="stash-card stash-saves-col">
+            <h4 class="stash-saves-title">✅ Default `git stash` saves:</h4>
+            <ul class="stash-saves-list">
+              <li><span style="color: var(--green)">✓</span> Tracked modified files</li>
+              <li><span style="color: var(--green)">✓</span> Tracked staged files</li>
+            </ul>
+          </div>
+          <div class="stash-card stash-saves-col">
+            <h4 class="stash-saves-title">❌ Default does NOT save:</h4>
+            <ul class="stash-saves-list">
+              <li><span style="color: var(--red)">✗</span> Untracked new files</li>
+              <li><span style="color: var(--red)">✗</span> Ignored files</li>
+            </ul>
+          </div>
+          <div class="stash-card stash-saves-col">
+            <h4 class="stash-saves-title">✅ With `-u` also saves:</h4>
+            <ul class="stash-saves-list">
+              <li><span style="color: var(--green)">✓</span> Untracked new files</li>
+            </ul>
+          </div>
+        </div>
+        <div class="stash-warning-banner">
+          💡 Always use <code>git stash -u</code> when you have new files you haven't run <code>git add</code> on yet.
+        </div>
+      </div>
+
+      <!-- D. Commands Reference -->
+      <div class="stash-cmd-wrap mt-12">
+        <h3 class="stash-section-title reveal">Commands Reference</h3>
+        <div class="stash-filter-bar reveal">
+          <button class="stash-filter-btn active" data-filter="All">All</button>
+          <button class="stash-filter-btn" data-filter="Create">Create</button>
+          <button class="stash-filter-btn" data-filter="Inspect">Inspect</button>
+          <button class="stash-filter-btn" data-filter="Restore">Restore</button>
+          <button class="stash-filter-btn" data-filter="Clean">Clean</button>
+        </div>
+        <div class="stash-grid">
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash" data-copy="git stash">⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash</h4>
+            <p class="stash-cmd-desc">Save tracked changes and clean working directory</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span></code></pre>
+          </div>
+          
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash push" data-copy='git stash push -m "message"'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash push -m "msg"</h4>
+            <p class="stash-cmd-desc">Save with a descriptive name (<strong>recommended</strong>)</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> push -m <span style="color: var(--green)">"message"</span></code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash save" data-copy='git stash save "message"'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash save "msg"</h4>
+            <p class="stash-cmd-desc">⚠️ Deprecated syntax — prefer <code>push -m</code></p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> save <span style="color: var(--green)">"message"</span></code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Create">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--green)">Create</span>
+              <button class="copy-btn" aria-label="Copy git stash -u" data-copy='git stash -u'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash -u</h4>
+            <p class="stash-cmd-desc">Include untracked new files (or <code>--include-untracked</code>)</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> -u</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Inspect">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git stash list" data-copy='git stash list'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash list</h4>
+            <p class="stash-cmd-desc">Show all saved stashes</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> list</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Inspect">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git stash show" data-copy='git stash show'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash show</h4>
+            <p class="stash-cmd-desc">Show changed files in latest stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> show</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Inspect">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git stash show -p" data-copy='git stash show -p'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash show -p</h4>
+            <p class="stash-cmd-desc">Show full diff of latest stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> show -p</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash apply" data-copy='git stash apply'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash apply</h4>
+            <p class="stash-cmd-desc">Restore changes, keep stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> apply</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash apply stash@{2}" data-copy='git stash apply stash@{2}'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash apply stash@{2}</h4>
+            <p class="stash-cmd-desc">Restore a specific stash by index</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> apply stash@{2}</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash apply --index" data-copy='git stash apply --index'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash apply --index</h4>
+            <p class="stash-cmd-desc">Restore changes AND original staging state</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> apply --index</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash pop" data-copy='git stash pop'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash pop</h4>
+            <p class="stash-cmd-desc">Restore changes AND delete stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> pop</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Restore">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--purple)">Restore</span>
+              <button class="copy-btn" aria-label="Copy git stash pop --index" data-copy='git stash pop --index'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash pop --index</h4>
+            <p class="stash-cmd-desc">Restore changes &amp; staging, then delete stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> pop --index</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card reveal" data-category="Clean">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--red)">Clean</span>
+              <button class="copy-btn" aria-label="Copy git stash drop stash@{1}" data-copy='git stash drop stash@{1}'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash drop stash@{1}</h4>
+            <p class="stash-cmd-desc">Delete one specific stash</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> drop stash@{1}</code></pre>
+          </div>
+
+          <div class="stash-card stash-cmd-card stash-danger-card reveal" data-category="Clean">
+            <div class="stash-cmd-header">
+              <span class="stash-badge" style="--badge-clr: var(--red)">Clean</span>
+              <button class="copy-btn" aria-label="Copy git stash clear" data-copy='git stash clear'>⧉ Copy</button>
+            </div>
+            <h4 class="stash-cmd-title">git stash clear</h4>
+            <p class="stash-cmd-desc">Delete ALL stashes permanently (danger)</p>
+            <pre class="stash-code"><code><span style="color: var(--cyan)">git stash</span> clear</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- E. apply vs pop -->
+      <div class="stash-compare-wrap mt-12 reveal">
+        <h3 class="stash-section-title">`apply` vs `pop`</h3>
+        <div class="stash-compare-grid">
+          <div class="stash-card">
+            <h4 class="stash-compare-title">git stash apply</h4>
+            <ul class="stash-compare-list">
+              <li><span style="color: var(--green)">✅</span> Restores changes to Working Directory</li>
+              <li><span style="color: var(--green)">✅</span> Keeps stash in list</li>
+              <li><span style="color: var(--cyan)">🔁</span> Can be applied multiple times</li>
+              <li>💡 Use when: you might need the stash again</li>
+            </ul>
+          </div>
+          <div class="stash-vs">VS</div>
+          <div class="stash-card stash-glow-card" style="--glow-clr: var(--cyan)">
+            <h4 class="stash-compare-title">git stash pop</h4>
+            <ul class="stash-compare-list">
+              <li><span style="color: var(--green)">✅</span> Restores changes to Working Directory</li>
+              <li><span style="color: var(--red)">❌</span> Deletes stash after restore</li>
+              <li><span style="color: var(--yellow)">⚡</span> Most common workflow</li>
+              <li>💡 Use when: you're done with the stash</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. Stash Numbering -->
+      <div class="stash-demo-wrap mt-12 reveal">
+        <h3 class="stash-section-title">Stash Numbering</h3>
+        <div class="stash-demo-card">
+          <p class="stash-demo-text">Git automatically renumbers all stashes after a drop.</p>
+          <div class="stash-stack" id="stash-stack-demo">
+            <div class="stash-stack-item" id="stash-item-0">
+              <span class="stash-item-id">stash@{0}</span> — <span class="stash-item-msg">"feat: login UI"</span>
+            </div>
+            <div class="stash-stack-item" id="stash-item-1">
+              <span class="stash-item-id">stash@{1}</span> — <span class="stash-item-msg">"fix: navbar colors"</span>
+            </div>
+            <div class="stash-stack-item" id="stash-item-2">
+              <span class="stash-item-id">stash@{2}</span> — <span class="stash-item-msg">"wip: dashboard"</span>
+            </div>
+          </div>
+          <button class="btn btn-outline stash-demo-btn mt-4" id="stash-demo-drop-btn">Drop stash@{1}</button>
+        </div>
+      </div>
+
+      <!-- G. Common Mistakes -->
+      <div class="stash-mistakes-wrap mt-12 reveal">
+        <h3 class="stash-section-title">⚠️ Common Mistakes</h3>
+        <div class="stash-mistakes-grid">
+          <div class="stash-card stash-warning">
+            <h4>Thinking stash saves untracked files</h4>
+            <p>Use <code>-u</code> flag for new files</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Thinking `pop` never causes conflicts</h4>
+            <p>pop is a merge; conflicts can happen</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Thinking restored changes always go to staging</h4>
+            <p>They go to Working Directory by default; use <code>--index</code> to restore staging state</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Forgetting `pop` deletes the stash</h4>
+            <p>Use <code>apply</code> if you're unsure</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Using `clear` by accident</h4>
+            <p>Clears ALL stashes permanently, no undo</p>
+          </div>
+          <div class="stash-card stash-warning">
+            <h4>Using stash as long-term storage</h4>
+            <p>Create a branch instead</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- H. Stash vs Branch -->
+      <div class="stash-decision-wrap mt-12 reveal">
+        <div class="stash-decision-card">
+          <div class="stash-decision-col">
+            <div class="stash-decision-item">⏱️ Short interruption (minutes/hours)? <span class="stash-arrow-right">→</span> Use <strong>git stash</strong></div>
+            <div class="stash-decision-item">📅 Long interruption (days/weeks)? <span class="stash-arrow-right">→</span> Create a <strong>branch</strong></div>
+          </div>
+          <div class="stash-decision-divider"></div>
+          <div class="stash-decision-col">
+            <div class="stash-decision-item">🤝 Need to share work with teammates? <span class="stash-arrow-right">→</span> Create a <strong>branch</strong></div>
+            <div class="stash-decision-item">💾 Need a backup? <span class="stash-arrow-right">→</span> Create a <strong>branch</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GIT CLEAN & RESTORE SECTION ===== -->
+  <section id="git-clean-restore" class="section section-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Cleanup &amp; Undo</span>
+        <h2 class="section-title">Clean <span class="gradient-text">&amp; Restore</span></h2>
+        <p class="section-desc">Remove untracked clutter safely, and undo a mistaken git add without losing your work.</p>
+      </div>
+
+      <!-- A. Prerequisite Recap -->
+      <div class="gc-recap-wrap reveal mt-12">
+        <div class="gc-recap-strip">
+          <div class="gc-recap-zone">📁 Working Directory</div>
+          <div class="gc-recap-arrow">→</div>
+          <div class="gc-recap-zone">📋 Staging Area</div>
+          <div class="gc-recap-arrow">→</div>
+          <div class="gc-recap-zone">💾 Repository</div>
+        </div>
+        <p class="gc-caption">Git Clean acts on the Working Directory. Git Restore --staged acts on the Staging Area.</p>
+      </div>
+
+      <!-- B. Git Clean — Concept Block -->
+      <div class="gc-clean-concept-grid mt-12 reveal">
+        <div class="gc-card">
+          <h3 class="gc-card-title">What is an untracked file?</h3>
+          <div class="gc-file-tree">
+            <div class="gc-file-row gc-tracked">
+              <span class="gc-file-name">📄 app.js</span>
+              <span class="gc-file-status">✅ Tracked</span>
+            </div>
+            <div class="gc-file-row gc-tracked">
+              <span class="gc-file-name">📄 style.css</span>
+              <span class="gc-file-status">✅ Tracked</span>
+            </div>
+            <div class="gc-file-row gc-untracked">
+              <span class="gc-file-name">📄 notes.txt</span>
+              <span class="gc-file-status">⚪ Untracked</span>
+            </div>
+            <div class="gc-file-row gc-untracked">
+              <span class="gc-file-name">📄 temp.log</span>
+              <span class="gc-file-status">⚪ Untracked</span>
+            </div>
+          </div>
+        </div>
+        <div class="gc-card gc-alert-card">
+          <h3 class="gc-card-title">⚠️ Common Misconception</h3>
+          <ul class="gc-alert-list">
+            <li class="gc-wrong"><span class="gc-icon">❌</span> "git clean deletes everything in the Working Directory" — <strong>WRONG</strong></li>
+            <li class="gc-right"><span class="gc-icon">✅</span> "git clean only removes untracked files — tracked files and their edits are always safe"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- C. Git Clean — Preview vs Delete Demo -->
+      <div class="gc-demo-wrap mt-12 reveal">
+        <h3 class="gc-card-title">Preview vs Delete (Interactive)</h3>
+        <div class="gc-card gc-clean-demo-card">
+          <div class="gc-demo-controls">
+            <button class="gc-demo-btn btn-outline" id="gc-clean-preview-btn">Run git clean -n</button>
+            <button class="gc-demo-btn gc-btn-danger" id="gc-clean-force-btn">Run git clean -f</button>
+            <button class="gc-demo-reset-btn" id="gc-clean-reset-btn" aria-label="Reset Demo">↺ Reset Demo</button>
+          </div>
+          
+          <div class="gc-demo-files" id="gc-clean-files">
+            <div class="gc-demo-file-row gc-demo-tracked" id="gc-clean-app">
+              <span>app.js</span>
+              <span class="gc-demo-tag">Tracked, Modified (always safe)</span>
+            </div>
+            <div class="gc-demo-file-row gc-demo-untracked" id="gc-clean-notes">
+              <span>notes.txt</span>
+              <span class="gc-demo-tag">Untracked</span>
+            </div>
+            <div class="gc-demo-file-row gc-demo-untracked" id="gc-clean-temp">
+              <span>temp.log</span>
+              <span class="gc-demo-tag">Untracked</span>
+            </div>
+          </div>
+
+          <div class="gc-terminal-output gc-hidden" id="gc-clean-terminal"></div>
+          <div class="gc-demo-banner gc-hidden" id="gc-clean-banner"></div>
+        </div>
+      </div>
+
+      <!-- D. Git Clean — Commands Reference Cards -->
+      <div class="gc-cmds-grid mt-12 reveal">
+        <div class="gc-card gc-cmd-card">
+          <div class="gc-cmd-header">
+            <span class="gc-badge gc-badge-blue">Preview</span>
+            <button class="copy-btn" aria-label="Copy git clean -n" data-copy="git clean -n">⧉ Copy</button>
+          </div>
+          <h4 class="gc-cmd-title">git clean -n</h4>
+          <p class="gc-cmd-desc">Shows what would be deleted. Deletes nothing. Always run this first.</p>
+          <pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -n</code></pre>
+        </div>
+        <div class="gc-card gc-cmd-card">
+          <div class="gc-cmd-header">
+            <span class="gc-badge gc-badge-red">Delete</span>
+            <button class="copy-btn" aria-label="Copy git clean -f" data-copy="git clean -f">⧉ Copy</button>
+          </div>
+          <h4 class="gc-cmd-title">git clean -f</h4>
+          <p class="gc-cmd-desc">Deletes untracked files only. Tracked files are never affected.</p>
+          <pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -f</code></pre>
+        </div>
+        <div class="gc-card gc-cmd-card">
+          <div class="gc-cmd-header">
+            <span class="gc-badge gc-badge-red">Delete</span>
+            <button class="copy-btn" aria-label="Copy git clean -fd" data-copy="git clean -fd">⧉ Copy</button>
+          </div>
+          <h4 class="gc-cmd-title">git clean -fd</h4>
+          <p class="gc-cmd-desc">Also removes untracked <strong>directories</strong>, not just files.</p>
+          <pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -fd</code></pre>
+        </div>
+        <div class="gc-card gc-cmd-card">
+          <div class="gc-cmd-header">
+            <span class="gc-badge gc-badge-red">Delete</span>
+            <button class="copy-btn" aria-label="Copy git clean -fx" data-copy="git clean -fx">⧉ Copy</button>
+          </div>
+          <h4 class="gc-cmd-title">git clean -fx</h4>
+          <p class="gc-cmd-desc">Also removes files ignored by <code>.gitignore</code> — use with extra care.</p>
+          <pre class="gc-code"><code><span style="color: var(--cyan)">git clean</span> -fx</code></pre>
+        </div>
+      </div>
+
+      <!-- E. Git Restore --staged — Concept Block -->
+      <div class="gc-restore-concept-wrap mt-12 reveal">
+        <h3 class="gc-section-title">Git Restore --staged</h3>
+        <div class="gc-mental-model">
+          <div class="gc-model-row">
+            <span class="gc-model-cmd">git add</span>
+            <span class="gc-model-icon">⬆️</span>
+            <span class="gc-model-path">Working Directory → Staging Area</span>
+          </div>
+          <div class="gc-model-divider"></div>
+          <div class="gc-model-row">
+            <span class="gc-model-cmd">git restore --staged</span>
+            <span class="gc-model-icon">⬇️</span>
+            <span class="gc-model-path">Staging Area → Working Directory <span class="gc-model-note">(undo the add — work is NOT lost)</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. Git Restore --staged — Interactive Before/After Demo -->
+      <div class="gc-restore-demo-wrap mt-12 reveal">
+        <h3 class="gc-card-title">Restore --staged Demo</h3>
+        <div class="gc-card gc-restore-card">
+          <div class="gc-demo-controls">
+            <button class="gc-demo-btn btn-primary" id="gc-restore-btn">Run git restore --staged app.js</button>
+            <button class="gc-demo-reset-btn" id="gc-restore-reset-btn" aria-label="Reset Demo">↺ Reset Demo</button>
+          </div>
+          
+          <div class="gc-restore-panels">
+            <div class="gc-panel">
+              <h4 class="gc-panel-title">Working Directory</h4>
+              <div class="gc-panel-content" id="gc-restore-wd">
+                <span class="gc-empty-text" id="gc-wd-empty">(empty / clean)</span>
+              </div>
+            </div>
+            <div class="gc-panel">
+              <h4 class="gc-panel-title">Staging Area</h4>
+              <div class="gc-panel-content" id="gc-restore-stage">
+                <div class="gc-file-token" id="gc-restore-file">app.js</div>
+                <span class="gc-empty-text gc-hidden" id="gc-stage-empty">(empty)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gc-demo-banner gc-hidden" id="gc-restore-banner"></div>
+        </div>
+      </div>
+
+      <!-- G. Git Clean vs Git Restore --staged — Comparison Table -->
+      <div class="gc-compare-wrap mt-12 reveal">
+        <h3 class="gc-section-title">Comparison</h3>
+        <div class="gc-compare-grid">
+          <div class="gc-card">
+            <h4 class="gc-compare-title">git clean</h4>
+            <ul class="gc-compare-list">
+              <li><strong>Works on:</strong> Untracked files</li>
+              <li><strong>Action:</strong> Deletes files</li>
+              <li><strong>Recoverable:</strong> ⚠️ Not easily</li>
+              <li><strong>Flags:</strong> <code>-n</code> preview, <code>-f</code> force</li>
+            </ul>
+          </div>
+          <div class="gc-compare-vs">VS</div>
+          <div class="gc-card">
+            <h4 class="gc-compare-title">git restore --staged</h4>
+            <ul class="gc-compare-list">
+              <li><strong>Works on:</strong> Tracked, staged files</li>
+              <li><strong>Action:</strong> Removes from Staging Area only</li>
+              <li><strong>Recoverable:</strong> ✅ Always — no data lost</li>
+              <li><strong>Flags:</strong> none needed, just the filename</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- H. Common Mistakes — Warning Cards Grid -->
+      <div class="gc-mistakes-wrap mt-12 reveal">
+        <h3 class="gc-section-title">⚠️ Common Mistakes</h3>
+        <div class="gc-mistakes-grid">
+          <div class="gc-card gc-warning-card">
+            <h4>Thinking <code>git clean</code> deletes tracked files</h4>
+            <p>It never touches tracked files, only untracked ones.</p>
+          </div>
+          <div class="gc-card gc-warning-card">
+            <h4>Thinking <code>git clean</code> deletes modified tracked files</h4>
+            <p>Modified tracked files are always safe.</p>
+          </div>
+          <div class="gc-card gc-warning-card">
+            <h4>Thinking <code>git clean -n</code> deletes anything</h4>
+            <p><code>-n</code> is preview-only, zero files removed.</p>
+          </div>
+          <div class="gc-card gc-warning-card">
+            <h4>Thinking <code>git restore --staged</code> removes your changes</h4>
+            <p>It only unstages; your edits stay in the Working Directory.</p>
+          </div>
+          <div class="gc-card gc-warning-card gc-col-span-full">
+            <h4>Thinking <code>git restore --staged</code> restores the last commit</h4>
+            <p>It does not touch file content at all, only the staging state.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- I. Practical Exercises — Quiz Cards -->
+      <div class="gc-quiz-wrap mt-12 reveal">
+        <h3 class="gc-section-title">Test Your Knowledge</h3>
+        <div class="gc-quiz-grid">
+          <!-- Ex 1 -->
+          <div class="gc-card gc-quiz-card" data-answer="preview">
+            <h4 class="gc-quiz-title">Scenario 1</h4>
+            <p class="gc-quiz-setup">Given: <code>app.js (Modified)</code>, <code>notes.txt (Untracked)</code></p>
+            <p class="gc-quiz-q">Predict the output of <code>git clean -n</code>:</p>
+            <div class="gc-quiz-options">
+              <button class="gc-quiz-option" data-val="delete-both">Deletes both files</button>
+              <button class="gc-quiz-option" data-val="delete-notes">Deletes notes.txt</button>
+              <button class="gc-quiz-option" data-val="preview">Would remove notes.txt (Preview only)</button>
+            </div>
+            <div class="gc-quiz-explanation">
+              <strong>Correct!</strong> <code>-n</code> is preview only. Nothing is deleted, and <code>app.js</code> is tracked so it wouldn't be affected anyway.
+            </div>
+          </div>
+          
+          <!-- Ex 2 -->
+          <div class="gc-card gc-quiz-card" data-answer="delete-notes">
+            <h4 class="gc-quiz-title">Scenario 2</h4>
+            <p class="gc-quiz-setup">Given: <code>app.js (Modified)</code>, <code>notes.txt (Untracked)</code></p>
+            <p class="gc-quiz-q">Predict the result after <code>git clean -f</code>:</p>
+            <div class="gc-quiz-options">
+              <button class="gc-quiz-option" data-val="delete-both">Deletes both files</button>
+              <button class="gc-quiz-option" data-val="delete-notes">notes.txt deleted, app.js safe</button>
+              <button class="gc-quiz-option" data-val="nothing">Nothing happens</button>
+            </div>
+            <div class="gc-quiz-explanation">
+              <strong>Correct!</strong> <code>notes.txt</code> is untracked and deleted. <code>app.js</code> still exists with its modifications because it's tracked.
+            </div>
+          </div>
+
+          <!-- Ex 3 -->
+          <div class="gc-card gc-quiz-card" data-answer="unstaged">
+            <h4 class="gc-quiz-title">Scenario 3</h4>
+            <p class="gc-quiz-setup">Given: <code>app.js (Staged)</code></p>
+            <p class="gc-quiz-q">Predict the result after <code>git restore --staged app.js</code>:</p>
+            <div class="gc-quiz-options">
+              <button class="gc-quiz-option" data-val="deleted">Edits in app.js are lost</button>
+              <button class="gc-quiz-option" data-val="unstaged">app.js moves back to Working Directory as Modified</button>
+              <button class="gc-quiz-option" data-val="commit">app.js is committed</button>
+            </div>
+            <div class="gc-quiz-explanation">
+              <strong>Correct!</strong> Nothing is lost. It simply leaves the Staging Area and goes back to being modified in the Working Directory.
+            </div>
+          </div>
+
+          <!-- Ex 4 -->
+          <div class="gc-card gc-quiz-card" data-answer="combo">
+            <h4 class="gc-quiz-title">Scenario 4</h4>
+            <p class="gc-quiz-setup">Given: <code>app.js (Modified)</code>, <code>style.css (Staged)</code>, <code>notes.txt (Untracked)</code></p>
+            <p class="gc-quiz-q">Predict the final state after running <code>git clean -f</code> then <code>git restore --staged style.css</code>:</p>
+            <div class="gc-quiz-options">
+              <button class="gc-quiz-option" data-val="combo">notes.txt deleted → style.css unstaged → app.js unchanged</button>
+              <button class="gc-quiz-option" data-val="wrong1">All files deleted</button>
+              <button class="gc-quiz-option" data-val="wrong2">notes.txt and app.js deleted → style.css unstaged</button>
+            </div>
+            <div class="gc-quiz-explanation">
+              <strong>Correct!</strong> <code>notes.txt</code> deleted (untracked). <code>style.css</code> unstaged to Working Directory as Modified. <code>app.js</code> unchanged throughout.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GIT RESET SECTION ===== -->
+  <section id="git-reset" class="section">
+    <div class="container">
+
+      <!-- A. Section Header -->
+      <div class="section-header reveal">
+        <span class="section-tag">Rewriting History</span>
+        <h2 class="section-title">Resetting <span class="gradient-text">The HEAD</span></h2>
+        <p class="section-desc">Move HEAD backwards in time. Understand exactly which layers Git touches — and when that becomes dangerous.</p>
+      </div>
+
+      <!-- B. Why Reset Exists -->
+      <div class="gr-motivation-card reveal">
+        <h3 class="gr-card-heading">Why Would You Ever Want to Move Backwards?</h3>
+        <div class="gr-scenarios-grid">
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">✍️</span>
+            <strong class="gr-scenario-title">Wrong commit message</strong>
+            <p>You committed with a typo or unclear message and want to redo it.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🧩</span>
+            <strong class="gr-scenario-title">Too many small commits</strong>
+            <p>You made 5 tiny commits and want to squash them into one clean commit before pushing.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🔬</span>
+            <strong class="gr-scenario-title">Experimental work</strong>
+            <p>You tried something locally and want to cleanly undo all of it.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">📦</span>
+            <strong class="gr-scenario-title">Wrong files staged</strong>
+            <p>You committed files that shouldn't be there and need to restart.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🔁</span>
+            <strong class="gr-scenario-title">Prepare for rebase</strong>
+            <p>You need to clean up local history before merging into main.</p>
+          </div>
+          <div class="gr-scenario-card">
+            <span class="gr-scenario-icon" aria-hidden="true">🧹</span>
+            <strong class="gr-scenario-title">Start a feature over</strong>
+            <p>You've realized the approach is wrong and want a clean slate from a known good commit.</p>
+          </div>
+        </div>
+        <blockquote class="gr-motivation-quote">
+          &ldquo;In all of these cases, the solution is the same: move HEAD to a previous commit. What changes is <strong>how much Git resets alongside HEAD</strong>.&rdquo;
+        </blockquote>
+      </div>
+
+      <!-- C. HEAD Explained -->
+      <div class="gr-card reveal">
+        <h3 class="gr-card-heading">HEAD Is Not a Commit — It&rsquo;s a Pointer</h3>
+        <p class="gr-card-sub">HEAD is simply a label that tracks <em>which commit you are currently at</em>. When you reset, you move this label.</p>
+        <div class="gr-head-diagram" id="gr-head-diagram" aria-label="Commit timeline animation showing HEAD pointer">
+          <div class="gr-commit-track">
+            <div class="gr-commit-node" data-label="A" data-sha="a1b2c3"></div>
+            <div class="gr-commit-line" aria-hidden="true"></div>
+            <div class="gr-commit-node" data-label="B" data-sha="b4d5e6"></div>
+            <div class="gr-commit-line" aria-hidden="true"></div>
+            <div class="gr-commit-node gr-commit-dim" id="gr-node-c" data-label="C" data-sha="c7f8a9"></div>
+            <div class="gr-commit-line gr-commit-line-dim" id="gr-line-cd" aria-hidden="true"></div>
+            <div class="gr-commit-node gr-commit-dim" id="gr-node-d" data-label="D" data-sha="d0b1c2"></div>
+          </div>
+          <div class="gr-head-pointer" id="gr-head-pointer" aria-label="HEAD pointer">
+            <div class="gr-head-arrow">&#8593;</div>
+            <div class="gr-head-label">HEAD</div>
+          </div>
+          <div class="gr-head-desc gr-hidden" id="gr-head-desc">
+            After <code>git reset &lt;commit-B&gt;</code>, HEAD now points to B. Commits C and D are no longer in your active history — but <strong>what happens to their changes</strong> depends on the reset mode.
+          </div>
+        </div>
+        <div class="gr-diagram-controls">
+          <button class="gr-anim-btn" id="gr-head-move-btn" aria-label="Move HEAD to commit B">&larr; Move HEAD to B</button>
+          <button class="gr-anim-btn gr-anim-btn-outline" id="gr-head-reset-btn" aria-label="Reset HEAD animation">&#8635; Reset</button>
+        </div>
+      </div>
+
+      <!-- D. Three-Area Strip -->
+      <div class="gr-area-strip reveal">
+        <div class="gr-area-col">
+          <span class="gr-area-icon" aria-hidden="true">💾</span>
+          <strong>Repository</strong>
+          <p>The .git folder. Stores every commit and the full history.</p>
+        </div>
+        <div class="gr-area-arrow" aria-hidden="true">&rarr;</div>
+        <div class="gr-area-col">
+          <span class="gr-area-icon" aria-hidden="true">📋</span>
+          <strong>Staging Area</strong>
+          <p>Files you have <code>git add</code>ed, ready for the next commit.</p>
+        </div>
+        <div class="gr-area-arrow" aria-hidden="true">&rarr;</div>
+        <div class="gr-area-col">
+          <span class="gr-area-icon" aria-hidden="true">📁</span>
+          <strong>Working Directory</strong>
+          <p>Your actual files on disk. Where you write and edit code.</p>
+        </div>
+      </div>
+      <p class="gr-area-caption"><code>git reset</code> always moves HEAD in the Repository. The reset <strong>mode</strong> decides what happens to Staging and Working Directory.</p>
+
+      <!-- E. git log Explainer -->
+      <div class="gr-card gr-log-card reveal">
+        <h3 class="gr-card-heading">Reading History Before You Reset</h3>
+        <div class="gr-log-layout">
+          <div class="gr-log-left">
+            <div class="gr-code-block">
+              <div class="gr-code-header">
+                <span>git log output</span>
+                <button class="copy-btn" aria-label="Copy git log command" data-copy="git log">&#10697; Copy</button>
+              </div>
+              <pre><code><span class="gr-sha">commit f7a3d91</span>
+Author: Alex Dev &lt;alex@example.com&gt;
+Date:   Mon Jul 7 10:22:00 2026
+
+    Add login page UI
+
+<span class="gr-sha">commit b2c8e14</span>
+Author: Alex Dev &lt;alex@example.com&gt;
+Date:   Sun Jul 6 18:45:00 2026
+
+    Fix navbar overflow bug</code></pre>
+            </div>
+          </div>
+          <div class="gr-log-right">
+            <ul class="gr-log-explain">
+              <li><span class="gr-log-icon">🔑</span><span><strong>SHA</strong> — The unique ID of every commit. You need this for <code>git reset &lt;commit&gt;</code>.</span></li>
+              <li><span class="gr-log-icon">✍️</span><span><strong>Message</strong> — What was changed. Helps you identify the target commit.</span></li>
+              <li><span class="gr-log-icon">👤</span><span><strong>Author</strong> — Who made the commit.</span></li>
+              <li><span class="gr-log-icon">📅</span><span><strong>Date</strong> — When it was committed. Useful for time-based orientation.</span></li>
+            </ul>
+            <div class="gr-tip-banner">
+              💡 Copy the first 7 characters of the SHA — that&rsquo;s all Git needs for reset.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. Mode Concept Intro Banner -->
+      <div class="gr-card gr-mode-intro-card reveal">
+        <h3 class="gr-card-heading">Reset Always Moves HEAD — The Mode Controls Everything Else</h3>
+        <div class="gr-mode-rows">
+          <div class="gr-mode-row gr-mode-soft">
+            <span class="gr-mode-pill gr-pill-soft">--soft</span>
+            <span class="gr-mode-arrow">&#8594;</span>
+            <span>Moves HEAD only</span>
+          </div>
+          <div class="gr-mode-row gr-mode-mixed">
+            <span class="gr-mode-pill gr-pill-mixed">--mixed</span>
+            <span class="gr-mode-arrow">&#8594;</span>
+            <span>Moves HEAD + clears Staging Area</span>
+          </div>
+          <div class="gr-mode-row gr-mode-hard">
+            <span class="gr-mode-pill gr-pill-hard">--hard</span>
+            <span class="gr-mode-arrow">&#8594;</span>
+            <span>Moves HEAD + clears Staging Area + clears Working Directory</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- G. Soft Reset -->
+      <div class="gr-card gr-reset-mode-card gr-soft-card reveal">
+        <div class="gr-mode-card-header">
+          <span class="gr-mode-badge gr-badge-soft">--soft</span>
+          <h3 class="gr-mode-card-title">Soft Reset</h3>
+        </div>
+        <div class="gr-mode-body">
+          <div class="gr-checklist">
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Repository</strong> — HEAD moves to target commit</span></div>
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Staging Area</strong> — Previous commit&rsquo;s changes appear here (staged, ready to commit again)</span></div>
+            <div class="gr-check-row gr-check-no"><span class="gr-check-icon">&#10005;</span><span><strong>Working Directory</strong> — Completely untouched</span></div>
+          </div>
+          <div class="gr-before-after" id="gr-soft-ba">
+            <div class="gr-ba-panel">
+              <div class="gr-ba-label">Before</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B &rarr; <span class="gr-sha-inline">C</span> &rarr; <span class="gr-sha-inline">D</span> <span class="gr-head-tag">(HEAD&rarr;D)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content gr-muted">(empty)</span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-muted">(clean)</span>
+              </div>
+            </div>
+            <div class="gr-ba-sep" aria-hidden="true">&rarr;</div>
+            <div class="gr-ba-panel" id="gr-soft-after">
+              <div class="gr-ba-label">After</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B <span class="gr-head-tag">(HEAD&rarr;B)</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-soft" id="gr-soft-stage-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content" id="gr-soft-stage-content"><span class="gr-muted">(empty)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-muted">(unchanged)</span>
+              </div>
+            </div>
+          </div>
+          <button class="gr-run-btn gr-run-soft" id="gr-soft-run-btn" aria-label="Simulate git reset --soft B">&#9654; Run git reset --soft B</button>
+          <blockquote class="gr-use-case">
+            &ldquo;You made 3 small commits but want to combine them into one. Soft reset to the commit before your first small commit. All changes land in Staging — commit once with a single clean message.&rdquo;
+          </blockquote>
+          <button class="copy-btn" aria-label="Copy git reset --soft command" data-copy="git reset --soft &lt;commit&gt;">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- H. Mixed Reset -->
+      <div class="gr-card gr-reset-mode-card gr-mixed-card reveal">
+        <div class="gr-mode-card-header">
+          <span class="gr-mode-badge gr-badge-mixed">--mixed</span>
+          <h3 class="gr-mode-card-title">Mixed Reset <span class="gr-default-label">(Git&rsquo;s Default)</span></h3>
+        </div>
+        <div class="gr-mode-body">
+          <div class="gr-checklist">
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Repository</strong> — HEAD moves to target commit</span></div>
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Staging Area</strong> — Cleared. Changes become <em>unstaged modified</em> files.</span></div>
+            <div class="gr-check-row gr-check-no"><span class="gr-check-icon">&#10005;</span><span><strong>Working Directory</strong> — Untouched. Your edits still exist.</span></div>
+          </div>
+          <div class="gr-insight-banner">
+            Mixed reset is <code>git reset</code> with no flag. It clears the staging area but keeps your work in the Working Directory — you decide what to re-stage.
+          </div>
+          <div class="gr-before-after" id="gr-mixed-ba">
+            <div class="gr-ba-panel">
+              <div class="gr-ba-label">Before</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B &rarr; <span class="gr-sha-inline">C</span> &rarr; <span class="gr-sha-inline">D</span> <span class="gr-head-tag">(HEAD&rarr;D)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content gr-file-pill">app.js &#9989;</span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-muted">(modified files)</span>
+              </div>
+            </div>
+            <div class="gr-ba-sep" aria-hidden="true">&rarr;</div>
+            <div class="gr-ba-panel" id="gr-mixed-after">
+              <div class="gr-ba-label">After</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B <span class="gr-head-tag">(HEAD&rarr;B)</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-mixed" id="gr-mixed-stage-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content" id="gr-mixed-stage-content"><span class="gr-file-pill">app.js &#9989;</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-mixed" id="gr-mixed-wd-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content" id="gr-mixed-wd-content"><span class="gr-muted">(modified files)</span></span>
+              </div>
+            </div>
+          </div>
+          <button class="gr-run-btn gr-run-mixed" id="gr-mixed-run-btn" aria-label="Simulate git reset --mixed B">&#9654; Run git reset --mixed B</button>
+          <blockquote class="gr-use-case">
+            &ldquo;You staged the wrong file or staged too much. Mixed reset clears the staging area but leaves your actual code changes safe in the Working Directory.&rdquo;
+          </blockquote>
+          <button class="copy-btn" aria-label="Copy git reset --mixed command" data-copy="git reset --mixed &lt;commit&gt;">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- I. Hard Reset -->
+      <div class="gr-card gr-reset-mode-card gr-hard-card reveal">
+        <div class="gr-mode-card-header">
+          <span class="gr-mode-badge gr-badge-hard">--hard</span>
+          <h3 class="gr-mode-card-title">Hard Reset</h3>
+        </div>
+        <div class="gr-mode-body">
+          <div class="gr-checklist">
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Repository</strong> — HEAD moves to target commit</span></div>
+            <div class="gr-check-row gr-check-yes"><span class="gr-check-icon">&#10003;</span><span><strong>Staging Area</strong> — Completely wiped</span></div>
+            <div class="gr-check-row gr-check-yes gr-check-danger"><span class="gr-check-icon">&#10003;</span><span><strong>Working Directory</strong> — Completely wiped. <strong>Your code changes are gone.</strong></span></div>
+          </div>
+          <div class="gr-danger-banner">
+            &#9888;&#65039; Hard reset is the only reset mode that can delete unrecoverable work. If you have uncommitted changes in your Working Directory, they will be gone permanently.
+          </div>
+          <div class="gr-before-after" id="gr-hard-ba">
+            <div class="gr-ba-panel">
+              <div class="gr-ba-label">Before</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B &rarr; <span class="gr-sha-inline">C</span> &rarr; <span class="gr-sha-inline">D</span> <span class="gr-head-tag">(HEAD&rarr;D)</span></span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content gr-file-pill">auth.js &#9989;</span>
+              </div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content gr-file-pill-warn">login.js &#9998;&#65039;</span>
+              </div>
+            </div>
+            <div class="gr-ba-sep" aria-hidden="true">&rarr;</div>
+            <div class="gr-ba-panel" id="gr-hard-after">
+              <div class="gr-ba-label">After</div>
+              <div class="gr-ba-layer">
+                <span class="gr-ba-layer-name">💾 Repository</span>
+                <span class="gr-ba-content">A &rarr; B <span class="gr-head-tag">(HEAD&rarr;B)</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-hard" id="gr-hard-stage-layer">
+                <span class="gr-ba-layer-name">📋 Staging Area</span>
+                <span class="gr-ba-content" id="gr-hard-stage-content"><span class="gr-file-pill">auth.js &#9989;</span></span>
+              </div>
+              <div class="gr-ba-layer gr-layer-hard" id="gr-hard-wd-layer">
+                <span class="gr-ba-layer-name">📁 Working Directory</span>
+                <span class="gr-ba-content" id="gr-hard-wd-content"><span class="gr-file-pill-warn">login.js &#9998;&#65039;</span></span>
+              </div>
+            </div>
+          </div>
+          <button class="gr-run-btn gr-run-hard" id="gr-hard-run-btn" aria-label="Simulate git reset --hard B">&#9654; Run git reset --hard B</button>
+          <blockquote class="gr-use-case">
+            &ldquo;You experimented locally and want to completely discard everything. The project should be identical to commit B — no traces of your experiment.&rdquo;
+          </blockquote>
+          <button class="copy-btn" aria-label="Copy git reset --hard command" data-copy="git reset --hard &lt;commit&gt;">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- J. Interactive Reset Simulator -->
+      <div class="gr-card gr-simulator-card reveal">
+        <h3 class="gr-card-heading">Reset Mode Simulator — See Every Layer Change</h3>
+        <p class="gr-card-sub">Select a mode, then click &ldquo;Apply Reset&rdquo; to see all three Git layers respond in real time.</p>
+        <div class="gr-sim-controls">
+          <button class="gr-simulator-btn gr-sim-soft active" id="gr-sim-soft-btn" aria-pressed="true" aria-label="Select soft reset mode">Soft</button>
+          <button class="gr-simulator-btn gr-sim-mixed" id="gr-sim-mixed-btn" aria-pressed="false" aria-label="Select mixed reset mode">Mixed</button>
+          <button class="gr-simulator-btn gr-sim-hard" id="gr-sim-hard-btn" aria-pressed="false" aria-label="Select hard reset mode">Hard</button>
+        </div>
+        <div class="gr-sim-diagram">
+          <div class="gr-sim-panel" id="gr-sim-repo">
+            <div class="gr-sim-panel-title">💾 Repository</div>
+            <div class="gr-sim-panel-content" id="gr-sim-repo-content">A &rarr; B &rarr; <span class="gr-sha-sim" id="gr-sim-c">C</span> &rarr; <span class="gr-sha-sim" id="gr-sim-d">D</span> <span class="gr-sim-head">(HEAD &rarr; D)</span></div>
+          </div>
+          <div class="gr-sim-arrow" aria-hidden="true">&#8595;</div>
+          <div class="gr-sim-panel" id="gr-sim-stage">
+            <div class="gr-sim-panel-title">📋 Staging Area</div>
+            <div class="gr-sim-panel-content" id="gr-sim-stage-content"><span class="gr-sim-file">app.js</span>, <span class="gr-sim-file">auth.js</span> <span class="gr-sim-staged">(staged)</span></div>
+          </div>
+          <div class="gr-sim-arrow" aria-hidden="true">&#8595;</div>
+          <div class="gr-sim-panel" id="gr-sim-wd">
+            <div class="gr-sim-panel-title">📁 Working Directory</div>
+            <div class="gr-sim-panel-content" id="gr-sim-wd-content"><span class="gr-sim-file">login.js</span> <span class="gr-sim-modified">(modified)</span></div>
+          </div>
+        </div>
+        <div class="gr-sim-actions">
+          <button class="gr-run-btn" id="gr-sim-apply-btn" aria-label="Apply selected reset mode">Apply Reset</button>
+          <button class="gr-anim-btn gr-anim-btn-outline" id="gr-sim-reset-btn" aria-label="Reset simulator to initial state">&#8635; Reset All</button>
+        </div>
+        <div class="gr-sim-desc" id="gr-sim-desc" aria-live="polite">Select a mode above and click &ldquo;Apply Reset&rdquo; to see what happens.</div>
+      </div>
+
+      <!-- K. Force Push Explainer -->
+      <div class="gr-card reveal">
+        <h3 class="gr-card-heading">Why Normal Push Fails After Reset — and What Force Push Does</h3>
+        <div class="gr-force-layout">
+          <div class="gr-force-timelines">
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Local:</span>
+              <div class="gr-timeline-track">
+                <span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span>
+                <span class="gr-head-badge">(HEAD)</span>
+              </div>
+            </div>
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Remote:</span>
+              <div class="gr-timeline-track">
+                <span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill gr-pill-dim">C</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill gr-pill-dim">D</span>
+                <span class="gr-head-badge">(origin/main)</span>
+              </div>
+            </div>
+          </div>
+          <p class="gr-force-caption">After a reset, your local history is <em>behind</em> the remote. Git refuses to push because it would delete remote commits — it protects you.</p>
+          <div class="gr-terminal-block">
+            <pre><code><span class="gr-cmd-color">$ git push origin main</span>
+<span class="gr-error-color">! [rejected]        main -&gt; main (non-fast-forward)</span>
+error: failed to push some refs to 'origin'
+hint: Updates were rejected because the tip of your current branch is behind</code></pre>
+          </div>
+          <h4 class="gr-force-sub">Force Push — Overriding the Protection</h4>
+          <div class="gr-terminal-block">
+            <pre><code><span class="gr-cmd-color">$ git push origin main --force</span></code></pre>
+          </div>
+          <p class="gr-force-caption">Force push tells Git: &lsquo;I know what I&rsquo;m doing — overwrite remote history with my local history.&rsquo;</p>
+          <div class="gr-force-timelines">
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Local:</span>
+              <div class="gr-timeline-track"><span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span> <span class="gr-head-badge">(HEAD)</span></div>
+            </div>
+            <div class="gr-timeline-row">
+              <span class="gr-timeline-label">Remote:</span>
+              <div class="gr-timeline-track"><span class="gr-commit-pill">A</span><span class="gr-tl-arrow">&rarr;</span><span class="gr-commit-pill">B</span> <span class="gr-deleted-label">(overwritten — C and D gone from GitHub)</span></div>
+            </div>
+          </div>
+          <button class="copy-btn" aria-label="Copy git push force command" data-copy="git push origin main --force">&#10697; Copy</button>
+        </div>
+      </div>
+
+      <!-- L. Force Push Team Warning -->
+      <div class="gr-card gr-danger-card reveal">
+        <h3 class="gr-card-heading">&#9888;&#65039; Force Push is Dangerous on Shared Branches</h3>
+        <div class="gr-collab-timeline">
+          <div class="gr-collab-step">
+            <span class="gr-collab-num">1</span>
+            <span>&#129489;&#8205;&#128187; Developer A and Developer B both pull from <code>main</code>. Timeline: <code>A &rarr; B &rarr; C &rarr; D</code></span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step">
+            <span class="gr-collab-num">2</span>
+            <span>&#128260; Developer B makes a new commit E. Timeline: <code>A &rarr; B &rarr; C &rarr; D &rarr; E</code></span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step gr-collab-danger">
+            <span class="gr-collab-num">3</span>
+            <span>&#9889; Developer A does <code>git reset --hard B</code> then <code>git push --force</code>. GitHub now shows: <code>A &rarr; B</code></span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step gr-collab-danger">
+            <span class="gr-collab-num">4</span>
+            <span>&#128561; Developer B tries to push commit E. Git rejects — their history no longer matches remote.</span>
+          </div>
+          <div class="gr-collab-connector" aria-hidden="true"></div>
+          <div class="gr-collab-step gr-collab-danger">
+            <span class="gr-collab-num">5</span>
+            <span>&#128165; Developer B&rsquo;s entire history is now &ldquo;orphaned&rdquo; — they must manually resolve the conflict or lose their work.</span>
+          </div>
+        </div>
+        <div class="gr-safe-alt-card">
+          <h4 class="gr-safe-alt-title">&#10003; Safe Alternatives</h4>
+          <div class="gr-safe-row"><span class="gr-safe-icon">&#10003;</span><span><code>git revert &lt;commit&gt;</code> — Safely undoes a commit by creating a <strong>new</strong> commit. History is never rewritten. Safe for shared branches.</span></div>
+          <div class="gr-safe-row"><span class="gr-safe-icon">&#10003;</span><span>Only use <code>--force</code> on <strong>personal feature branches</strong> that no one else has pulled.</span></div>
+        </div>
+      </div>
+
+      <!-- M. Comparison Table -->
+      <div class="gr-card reveal">
+        <h3 class="gr-card-heading">Soft vs Mixed vs Hard — At a Glance</h3>
+        <div class="gr-table-wrap">
+          <table class="gr-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Mode</th>
+                <th scope="col">Moves HEAD</th>
+                <th scope="col">Clears Staging</th>
+                <th scope="col">Clears Working Dir</th>
+                <th scope="col">Work Lost?</th>
+                <th scope="col">Common Use Case</th>
+                <th scope="col">Danger Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>--soft</code></td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-no">&#10005;</td>
+                <td class="gr-td-no">&#10005;</td>
+                <td>Never</td>
+                <td>Squash commits, rewrite last commit message</td>
+                <td><span class="gr-danger-badge gr-danger-safe">&#129001; Safe</span></td>
+              </tr>
+              <tr>
+                <td><code>--mixed</code></td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-no">&#10005;</td>
+                <td>Never</td>
+                <td>Unstage wrong files, reorganize staged changes</td>
+                <td><span class="gr-danger-badge gr-danger-low">&#128993; Low Risk</span></td>
+              </tr>
+              <tr>
+                <td><code>--hard</code></td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td class="gr-td-yes">&#10003;</td>
+                <td>Yes (uncommitted)</td>
+                <td>Discard all local experimentation</td>
+                <td><span class="gr-danger-badge gr-danger-high">&#128308; Dangerous</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- N. Real-World Scenario Cards -->
+      <div class="gr-scenarios-section reveal">
+        <h3 class="gr-section-heading">Real-World Scenarios — When to Use Each Mode</h3>
+        <div class="gr-scenario-cards-grid">
+          <div class="gr-scenario-rw-card gr-rw-soft">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-soft">--soft</span>
+              <h4>Wrong commit message</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Committed with message &lsquo;asdf&rsquo;. Embarrassing.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --soft HEAD~1</code> &rarr; edit message &rarr; commit again</div>
+            <div class="gr-rw-risk gr-risk-zero">&#129001; Risk: Zero — nothing is lost</div>
+          </div>
+          <div class="gr-scenario-rw-card gr-rw-mixed">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-mixed">--mixed</span>
+              <h4>Undo a mistaken git add</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Staged the wrong files before committing.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --mixed HEAD</code> clears staging; files remain modified</div>
+            <div class="gr-rw-risk gr-risk-low">&#128993; Risk: Low — all code stays in Working Directory</div>
+          </div>
+          <div class="gr-scenario-rw-card gr-rw-hard">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-hard">--hard</span>
+              <h4>Discard a failed experiment</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Spent 2 hours on an approach. It&rsquo;s wrong. Start over.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --hard &lt;last-good-commit&gt;</code> — project reverts completely</div>
+            <div class="gr-rw-risk gr-risk-high">&#128308; Risk: Irreversible if you had uncommitted work</div>
+          </div>
+          <div class="gr-scenario-rw-card gr-rw-mixed">
+            <div class="gr-rw-header">
+              <span class="gr-rw-mode-badge gr-badge-soft">--soft + --force</span>
+              <h4>Squash before merging</h4>
+            </div>
+            <div class="gr-rw-problem">🔴 <strong>Problem:</strong> &ldquo;Made 6 small commits on a feature branch. Want 1 clean commit for the PR.&rdquo;</div>
+            <div class="gr-rw-solution">💡 <strong>Solution:</strong> <code>git reset --soft &lt;commit-before-feature&gt;</code> &rarr; single commit &rarr; <code>git push --force</code> (safe on personal branch)</div>
+            <div class="gr-rw-risk gr-risk-low">&#128993; Risk: Low — only on personal feature branch</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- O. Common Mistakes -->
+      <div class="gr-mistakes-section reveal">
+        <h3 class="gr-section-heading">&#9888;&#65039; Common Misconceptions</h3>
+        <div class="gr-mistakes-grid">
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;HEAD is a commit&rdquo;</h4>
+            <p>HEAD is a pointer that points to a commit. They are not the same thing.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Hard reset deletes Git history forever&rdquo;</h4>
+            <p>Hard reset moves HEAD. Commits still exist via <code>git reflog</code> for ~90 days. What&rsquo;s lost is uncommitted work.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Reset automatically updates GitHub&rdquo;</h4>
+            <p>Reset only changes your local repository. GitHub is unaffected until you push (with <code>--force</code>).</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Force push is always dangerous&rdquo;</h4>
+            <p>Force push is safe on private feature branches no one else has pulled. It is dangerous on shared branches like <code>main</code>.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;Mixed reset = losing my code&rdquo;</h4>
+            <p>Mixed reset never touches the Working Directory. All your code is safe — it just moves out of staging.</p>
+          </div>
+          <div class="gr-mistake-card">
+            <span class="gr-mistake-icon" aria-hidden="true">&#9888;</span>
+            <h4>&ldquo;<code>git restore</code> and <code>git reset</code> do the same thing&rdquo;</h4>
+            <p><code>git restore --staged</code> unstages a file. <code>git reset</code> moves HEAD. Completely different operations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- P. Prediction Exercises -->
+      <div class="gr-exercises-section reveal">
+        <h3 class="gr-section-heading">Prediction Exercises — What Will Happen?</h3>
+        <div class="gr-exercises-grid">
+
+          <div class="gr-exercise-card" id="gr-ex-1">
+            <h4 class="gr-ex-title">Exercise 1</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Repository:</strong> A &rarr; B &rarr; C &rarr; D <span class="gr-head-tag">(HEAD&rarr;D)</span></div>
+              <div class="gr-ex-layer"><strong>Staging Area:</strong> (empty)</div>
+              <div class="gr-ex-layer"><strong>Working Dir:</strong> (clean)</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git reset --soft B</code></div>
+            <p class="gr-ex-question">Where do the changes from C and D end up?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 1 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="wrong">Deleted permanently</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="correct">Staging Area</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="wrong">Working Directory</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-1" data-val="wrong">Still in Repository as commits</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-1-exp">
+              <strong>Correct!</strong> <code>--soft</code> moves HEAD to B, leaving changes from C and D staged — ready to be committed again as one clean commit.
+            </div>
+          </div>
+
+          <div class="gr-exercise-card" id="gr-ex-2">
+            <h4 class="gr-ex-title">Exercise 2</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Repository:</strong> A &rarr; B &rarr; C <span class="gr-head-tag">(HEAD&rarr;C)</span></div>
+              <div class="gr-ex-layer"><strong>Staging Area:</strong> style.css (staged)</div>
+              <div class="gr-ex-layer"><strong>Working Dir:</strong> style.css, app.js (modified)</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git reset --mixed A</code></div>
+            <p class="gr-ex-question">What is in the Staging Area after the reset?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 2 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="wrong">style.css</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="wrong">app.js</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="correct">Nothing</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-2" data-val="wrong">All files</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-2-exp">
+              <strong>Correct!</strong> <code>--mixed</code> clears the Staging Area entirely. style.css moves to the Working Directory as &ldquo;modified&rdquo;.
+            </div>
+          </div>
+
+          <div class="gr-exercise-card" id="gr-ex-3">
+            <h4 class="gr-ex-title">Exercise 3</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Repository:</strong> A &rarr; B &rarr; C <span class="gr-head-tag">(HEAD&rarr;C)</span></div>
+              <div class="gr-ex-layer"><strong>Staging Area:</strong> login.js (staged)</div>
+              <div class="gr-ex-layer"><strong>Working Dir:</strong> login.js, README.md (modified)</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git reset --hard A</code></div>
+            <p class="gr-ex-question">What happens to login.js and README.md?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 3 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="wrong">Both move to Staging</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="wrong">Both stay in Working Directory</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="correct">Both are permanently deleted</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-3" data-val="wrong">They are committed to A</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-3-exp">
+              <strong>Correct — and be careful!</strong> <code>--hard</code> wipes both Staging and Working Directory. All uncommitted changes are gone.
+            </div>
+          </div>
+
+          <div class="gr-exercise-card" id="gr-ex-4">
+            <h4 class="gr-ex-title">Exercise 4 — Force Push</h4>
+            <div class="gr-ex-state">
+              <div class="gr-ex-layer"><strong>Local:</strong> A &rarr; B <span class="gr-head-tag">(HEAD, after hard reset)</span></div>
+              <div class="gr-ex-layer"><strong>Remote:</strong> A &rarr; B &rarr; C &rarr; D</div>
+            </div>
+            <div class="gr-ex-cmd"><code>git push origin main</code></div>
+            <p class="gr-ex-question">What happens?</p>
+            <div class="gr-ex-options" role="group" aria-label="Exercise 4 options">
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="wrong">Push succeeds normally</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="correct">Git rejects the push</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="wrong">C and D deleted automatically</button>
+              <button class="gr-quiz-option" data-ex="gr-ex-4" data-val="wrong">Local pulls C and D automatically</button>
+            </div>
+            <div class="gr-ex-explanation gr-hidden" id="gr-ex-4-exp">
+              <strong>Correct!</strong> Git rejects the push because local history is behind remote. You must use <code>git push --force</code> — with great caution.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Q. Mini Quiz -->
+      <div class="gr-quiz-card reveal">
+        <h3 class="gr-card-heading">Test Your Understanding</h3>
+        <div class="gr-mini-quiz" id="gr-mini-quiz">
+          <div class="gr-quiz-progress">
+            <span id="gr-quiz-num">Question 1 of 5</span>
+            <div class="gr-quiz-bar"><div class="gr-quiz-bar-fill" id="gr-quiz-bar" style="width: 0%"></div></div>
+          </div>
+          <div class="gr-quiz-question" id="gr-quiz-question" aria-live="polite">What is HEAD?</div>
+          <div class="gr-quiz-options-wrap" id="gr-quiz-options" role="group" aria-label="Quiz answer options">
+            <button class="gr-mini-opt" data-val="A">A fixed snapshot of your code</button>
+            <button class="gr-mini-opt" data-val="B">A pointer to the current commit</button>
+            <button class="gr-mini-opt" data-val="C">The latest commit on GitHub</button>
+            <button class="gr-mini-opt" data-val="D">The first commit in the project</button>
+          </div>
+          <button class="gr-anim-btn" id="gr-quiz-next" style="display:none" aria-label="Next quiz question">Next &rarr;</button>
+          <div class="gr-quiz-result gr-hidden" id="gr-quiz-result" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- R. Commands Reference Grid -->
+      <div class="gr-cmds-section reveal">
+        <h3 class="gr-section-heading">Commands Reference</h3>
+        <div class="gr-cmds-grid">
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git log" data-copy="git log">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git log</code></h4>
+            <p class="gr-cmd-desc">View commit history, SHAs, authors, and messages.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git log</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--blue)">Inspect</span>
+              <button class="copy-btn" aria-label="Copy git log --oneline" data-copy="git log --oneline">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git log --oneline</code></h4>
+            <p class="gr-cmd-desc">Compact one-line-per-commit view — great for reset targeting.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git log</span> --oneline</code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--green)">Safe Reset</span>
+              <button class="copy-btn" aria-label="Copy git reset --soft" data-copy="git reset --soft &lt;commit&gt;">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset --soft</code></h4>
+            <p class="gr-cmd-desc">Move HEAD only. Changes appear in Staging Area.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> --soft <span class="gr-c-str">&lt;commit&gt;</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--green)">Safe Reset</span>
+              <button class="copy-btn" aria-label="Copy git reset --mixed" data-copy="git reset --mixed &lt;commit&gt;">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset --mixed</code></h4>
+            <p class="gr-cmd-desc">Move HEAD and clear Staging. Changes stay in Working Directory. (Default)</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> --mixed <span class="gr-c-str">&lt;commit&gt;</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--red)">Destructive</span>
+              <button class="copy-btn" aria-label="Copy git reset --hard" data-copy="git reset --hard &lt;commit&gt;">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset --hard</code></h4>
+            <p class="gr-cmd-desc">Move HEAD and wipe Staging + Working Directory. Uncommitted work is lost.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> --hard <span class="gr-c-str">&lt;commit&gt;</span></code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--green)">Safe Reset</span>
+              <button class="copy-btn" aria-label="Copy git reset HEAD~1" data-copy="git reset HEAD~1">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reset HEAD~1</code></h4>
+            <p class="gr-cmd-desc">Shorthand to undo exactly one commit back (mixed by default).</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reset</span> HEAD~1</code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--purple)">Remote</span>
+              <button class="copy-btn" aria-label="Copy git push force" data-copy="git push origin main --force">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git push --force</code></h4>
+            <p class="gr-cmd-desc">Overwrite remote history with local history. Use with caution.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git push</span> origin main --force</code></pre>
+          </div>
+
+          <div class="gr-cmd-card">
+            <div class="gr-cmd-top">
+              <span class="gr-cmd-badge" style="--cmd-clr: var(--cyan)">Recovery</span>
+              <button class="copy-btn" aria-label="Copy git reflog" data-copy="git reflog">&#10697; Copy</button>
+            </div>
+            <h4 class="gr-cmd-name"><code>git reflog</code></h4>
+            <p class="gr-cmd-desc">View all HEAD movements. Recover commits after a hard reset for ~90 days.</p>
+            <pre class="gr-cmd-code"><code><span class="gr-c-cmd">git reflog</span></code></pre>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GIT IGNORE SECTION ===== -->
+  <section id="git-ignore" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">File Tracking Control</span>
+        <h2 class="section-title">Git <span class="gradient-text">Ignore</span></h2>
+        <p class="section-desc">Tell Git which files should never become part of your history — and understand exactly why that matters.</p>
+      </div>
+
+      <!-- A. Prerequisite Recap Strip -->
+      <div class="gc-recap-strip reveal gi-recap-strip">
+        <div class="gc-recap-flow">
+          📁 Working Directory  →  Untracked File  →  <span style="color:var(--cyan)">git add</span>  →  Tracked File  →  <span style="color:var(--purple)">git commit</span>  →  Repository
+        </div>
+        <p class="gc-recap-caption">Git Ignore only influences files that have <strong>never been tracked</strong>. Once tracked, <code>.gitignore</code> has no effect.</p>
+      </div>
+
+      <!-- B. Why Git Ignore Exists — Real-World Motivation Cards -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Why Does .gitignore Exist?</h3>
+        <div class="gi-motivation-grid">
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🔐</div>
+            <h4 class="gi-mot-title">Secret Files (.env)</h4>
+            <p class="gi-mot-desc">API keys, database passwords, and tokens should never be committed to Git history.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">📦</div>
+            <h4 class="gi-mot-title">Downloaded Dependencies (node_modules/)</h4>
+            <p class="gi-mot-desc">Hundreds of megabytes of packages that can be reinstalled with <code>npm install</code>.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🏗️</div>
+            <h4 class="gi-mot-title">Build Artifacts (dist/, build/)</h4>
+            <p class="gi-mot-desc">Generated output files — they change every build and bloat your history.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">📋</div>
+            <h4 class="gi-mot-title">Log Files (*.log)</h4>
+            <p class="gi-mot-desc">Runtime logs are machine-generated noise that adds nothing to your project history.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">💻</div>
+            <h4 class="gi-mot-title">IDE Config (.vscode/, .idea/)</h4>
+            <p class="gi-mot-desc">Personal editor preferences that vary per developer and should not be shared.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🗂️</div>
+            <h4 class="gi-mot-title">OS Files (.DS_Store, Thumbs.db)</h4>
+            <p class="gi-mot-desc">Invisible files created by macOS and Windows that have nothing to do with your code.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">🧪</div>
+            <h4 class="gi-mot-title">Test Coverage Reports</h4>
+            <p class="gi-mot-desc">Generated test output — reproducible on any machine, no need to track it.</p>
+          </div>
+          <div class="gi-motivation-card reveal">
+            <div class="gi-mot-icon">⚡</div>
+            <h4 class="gi-mot-title">Cache Folders (.cache/, .next/)</h4>
+            <p class="gi-mot-desc">Temporary performance artifacts that are rebuilt automatically.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- C. Tracked vs Untracked Visual Explorer -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Tracked vs Untracked — The Foundation</h3>
+        <p class="gi-text">Git only knows about files you have explicitly introduced via <code>git add</code>. A file in your folder that has never been <code>git add</code>ed is <strong>Untracked</strong> — invisible to Git's tracking system.</p>
+        <div class="gi-explorer reveal">
+          <div class="gi-exp-header">📁 my-project/</div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 app.js</span><span class="gi-exp-spacer"></span><span class="gi-badge-tracked">✅ Tracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 style.css</span><span class="gi-exp-spacer"></span><span class="gi-badge-tracked">✅ Tracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 README.md</span><span class="gi-exp-spacer"></span><span class="gi-badge-tracked">✅ Tracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 notes.txt</span><span class="gi-exp-spacer"></span><span class="gi-badge-untracked">⚪ Untracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">├── 📄 .env</span><span class="gi-exp-spacer"></span><span class="gi-badge-untracked">⚪ Untracked</span></div>
+          <div class="gi-exp-row"><span class="gi-exp-file">└── 📁 node_modules/</span><span class="gi-exp-spacer"></span><span class="gi-badge-untracked">⚪ Untracked</span></div>
+        </div>
+        <div class="gi-info-box reveal">
+          <strong>Key insight</strong>: <code>.gitignore</code> rules only prevent Git from tracking <strong>Untracked</strong> files. If a file is already Tracked, adding it to <code>.gitignore</code> does nothing.
+        </div>
+      </div>
+
+      <!-- D. .gitignore File — Introduction Card -->
+      <div class="gi-intro-card reveal">
+        <div class="gi-intro-left">
+          <ul class="gi-intro-list">
+            <li>📄 It is a plain text file named <code>.gitignore</code></li>
+            <li>📍 Placed in the root of your repository</li>
+            <li>📝 Each line is a pattern telling Git what to ignore</li>
+            <li>🚫 It does NOT delete files</li>
+            <li>🙈 It does NOT hide files from your OS</li>
+            <li>⚙️ It ONLY affects Git's file tracking decisions</li>
+          </ul>
+        </div>
+        <div class="gi-intro-right">
+          <div class="gi-code-header">
+            <span>.gitignore</span>
+            <button class="copy-btn" aria-label="Copy gitignore" data-copy="# Dependencies&#10;node_modules/&#10;&#10;# Environment secrets&#10;.env&#10;.env.local&#10;&#10;# Build output&#10;dist/&#10;build/&#10;&#10;# Logs&#10;*.log&#10;&#10;# OS files&#10;.DS_Store&#10;Thumbs.db&#10;&#10;# Editor config&#10;.vscode/&#10;.idea/">⧉ Copy</button>
+          </div>
+          <pre class="gi-code-block"><code><span class="c-cmt"># Dependencies</span>
+node_modules/
+
+<span class="c-cmt"># Environment secrets</span>
+.env
+.env.local
+
+<span class="c-cmt"># Build output</span>
+dist/
+build/
+
+<span class="c-cmt"># Logs</span>
+*.log
+
+<span class="c-cmt"># OS files</span>
+.DS_Store
+Thumbs.db
+
+<span class="c-cmt"># Editor config</span>
+.vscode/
+.idea/</code></pre>
+        </div>
+      </div>
+
+      <!-- E. Pattern Rules — Tabbed Visualizer -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Pattern Syntax — How Rules Work</h3>
+        <div class="gi-tabs reveal">
+          <div class="gi-tab-nav" role="tablist">
+            <button class="gi-tab-btn gi-tab-active" data-tab="gi-tab-1" role="tab" aria-selected="true">Specific File</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-2" role="tab" aria-selected="false">Wildcard (*.ext)</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-3" role="tab" aria-selected="false">Entire Folder</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-4" role="tab" aria-selected="false">Characters (*, ?, [])</button>
+            <button class="gi-tab-btn" data-tab="gi-tab-5" role="tab" aria-selected="false">Negation (!)</button>
+          </div>
+          <div class="gi-tab-content">
+            <!-- Tab 1 -->
+            <div class="gi-tab-panel gi-tab-active" data-panel="gi-tab-1" role="tabpanel">
+              <div class="gi-tab-split">
+                <div class="gi-tab-desc">
+                  <h4>Rule: <code>password.txt</code></h4>
+                  <p>Ignores exactly one file with that exact name.</p>
+                  <button class="copy-btn" aria-label="Copy password.txt" data-copy="password.txt">⧉ Copy password.txt</button>
+                </div>
+                <div class="gi-tab-vis">
+                  <div class="gi-file-tree">
+                    <div class="gi-file-row">app.js</div>
+                    <div class="gi-file-row gi-ignored-row">password.txt <span class="gi-ignored-tag">Ignored</span></div>
+                    <div class="gi-file-row">style.css</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 2 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-2" role="tabpanel">
+              <div class="gi-tab-split">
+                <div class="gi-tab-desc">
+                  <h4>Rule: <code>*.log</code></h4>
+                  <p><code>*</code> means "any filename". This ignores every file ending in <code>.log</code> regardless of name.</p>
+                  <div class="gi-tab-copies">
+                    <button class="copy-btn" aria-label="Copy *.log" data-copy="*.log">⧉ *.log</button>
+                    <button class="copy-btn" aria-label="Copy *.xlsx" data-copy="*.xlsx">⧉ *.xlsx</button>
+                    <button class="copy-btn" aria-label="Copy *.pdf" data-copy="*.pdf">⧉ *.pdf</button>
+                    <button class="copy-btn" aria-label="Copy *.tmp" data-copy="*.tmp">⧉ *.tmp</button>
+                    <button class="copy-btn" aria-label="Copy *.docx" data-copy="*.docx">⧉ *.docx</button>
+                  </div>
+                </div>
+                <div class="gi-tab-vis">
+                  <div class="gi-file-tree">
+                    <div class="gi-file-row">app.js</div>
+                    <div class="gi-file-row gi-ignored-row" style="animation-delay: 0.1s">error.log <span class="gi-ignored-tag">Ignored</span></div>
+                    <div class="gi-file-row gi-ignored-row" style="animation-delay: 0.3s">access.log <span class="gi-ignored-tag">Ignored</span></div>
+                    <div class="gi-file-row gi-ignored-row" style="animation-delay: 0.5s">debug.log <span class="gi-ignored-tag">Ignored</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 3 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-3" role="tabpanel">
+              <div class="gi-tab-split">
+                <div class="gi-tab-desc">
+                  <h4>Rule: <code>node_modules/</code></h4>
+                  <p>The trailing <code>/</code> means "this is a folder". Every file inside it — no matter how deeply nested — is ignored.</p>
+                  <div class="gi-tab-copies">
+                    <button class="copy-btn" aria-label="Copy node_modules/" data-copy="node_modules/">⧉ node_modules/</button>
+                    <button class="copy-btn" aria-label="Copy dist/" data-copy="dist/">⧉ dist/</button>
+                    <button class="copy-btn" aria-label="Copy build/" data-copy="build/">⧉ build/</button>
+                    <button class="copy-btn" aria-label="Copy temp/" data-copy="temp/">⧉ temp/</button>
+                  </div>
+                </div>
+                <div class="gi-tab-vis">
+                  <div class="gi-file-tree">
+                    <div class="gi-file-row">src/</div>
+                    <div class="gi-folder-wrap">
+                      <div class="gi-file-row gi-ignored-row">📁 node_modules/ <span class="gi-ignored-tag">Ignored Folder</span></div>
+                      <div class="gi-folder-contents">
+                        <div class="gi-file-row gi-ignored-row dim">react/</div>
+                        <div class="gi-file-row gi-ignored-row dim">lodash/</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 4 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-4" role="tabpanel">
+              <div class="gi-char-grid">
+                <div class="gi-char-row">
+                  <div class="gi-char-def">
+                    <strong><code>*</code></strong> → matches any sequence of characters<br>
+                    <small>example: <code>*.log</code></small>
+                  </div>
+                  <div class="gi-char-ex">
+                    <span class="gi-match-yes">✓ error.log</span>
+                    <span class="gi-match-yes">✓ app.log</span>
+                    <span class="gi-match-yes">✓ x.log</span>
+                    <span class="gi-match-no">✗ app.js</span>
+                  </div>
+                </div>
+                <div class="gi-char-row">
+                  <div class="gi-char-def">
+                    <strong><code>?</code></strong> → matches exactly one character<br>
+                    <small>example: <code>file?.txt</code></small>
+                  </div>
+                  <div class="gi-char-ex">
+                    <span class="gi-match-yes">✓ file1.txt</span>
+                    <span class="gi-match-yes">✓ fileA.txt</span>
+                    <span class="gi-match-no">✗ file10.txt</span>
+                  </div>
+                </div>
+                <div class="gi-char-row">
+                  <div class="gi-char-def">
+                    <strong><code>[abc]</code></strong> → matches one character from the set<br>
+                    <small>example: <code>file[123].txt</code></small>
+                  </div>
+                  <div class="gi-char-ex">
+                    <span class="gi-match-yes">✓ file1.txt</span>
+                    <span class="gi-match-yes">✓ file2.txt</span>
+                    <span class="gi-match-yes">✓ file3.txt</span>
+                    <span class="gi-match-no">✗ file4.txt</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab 5 -->
+            <div class="gi-tab-panel" data-panel="gi-tab-5" role="tabpanel">
+              <div class="gi-negation-wrap">
+                <div class="gi-neg-header">
+                  <h4>Rules: <code>*.md</code> then <code>!README.md</code></h4>
+                  <p>The <code>!</code> prefix <strong>un-ignores</strong> a previously ignored file. Rules are processed top-to-bottom. The last matching rule wins.</p>
+                  <button class="copy-btn" aria-label="Copy negation rule" data-copy="*.md&#10;!README.md">⧉ Copy</button>
+                </div>
+                <div class="gi-neg-cols">
+                  <div class="gi-neg-col">
+                    <div class="gi-neg-file">README.md</div>
+                    <div class="gi-neg-flow">
+                      <span>matched *.md &rarr; ignored</span>
+                      <span>matched !README.md &rarr; un-ignored</span>
+                    </div>
+                    <div class="gi-badge-tracked">✅ Tracked</div>
+                  </div>
+                  <div class="gi-neg-col">
+                    <div class="gi-neg-file">Notes.md</div>
+                    <div class="gi-neg-flow">
+                      <span>matched *.md &rarr; ignored</span>
+                      <span class="dim">no exception</span>
+                    </div>
+                    <div class="gi-badge-ignored">🚫 Ignored</div>
+                  </div>
+                  <div class="gi-neg-col">
+                    <div class="gi-neg-file">Guide.md</div>
+                    <div class="gi-neg-flow">
+                      <span>matched *.md &rarr; ignored</span>
+                      <span class="dim">no exception</span>
+                    </div>
+                    <div class="gi-badge-ignored">🚫 Ignored</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F. The Critical Concept -->
+      <div class="gi-sub-section">
+        <div class="gi-critical-card reveal">
+          <h3 class="gi-crit-title">⚠️ .gitignore Only Works For Untracked Files</h3>
+          <div class="gi-crit-steps">
+            <div class="gi-crit-step" id="gi-step-1">
+              <h4>Step 1 — Setup</h4>
+              <pre class="gi-code-block"><code><span class="c-cmt"># config.json gets committed</span>
+<span class="c-cmd">git add</span> config.json
+<span class="c-cmd">git commit</span> -m <span class="c-str">"add config"</span></code></pre>
+              <div class="gi-crit-file">config.json <span class="gi-badge-tracked">✅ Tracked</span></div>
+              <button class="gi-crit-btn" id="gi-btn-step2">Now add to .gitignore &rarr;</button>
+            </div>
+            
+            <div class="gi-crit-step gi-step-hidden" id="gi-step-2">
+              <h4>Step 2 — Added to .gitignore</h4>
+              <pre class="gi-code-block"><code><span class="c-cmt"># .gitignore</span>
+config.json</code></pre>
+              <div class="gi-crit-file">config.json <span class="gi-badge-tracked">✅ Tracked</span> <span class="gi-q-mark">Ignored?</span></div>
+              <button class="gi-crit-btn" id="gi-btn-step3">Check Git's response &rarr;</button>
+            </div>
+            
+            <div class="gi-crit-step gi-step-hidden" id="gi-step-3">
+              <h4>Step 3 — The Answer</h4>
+              <div class="gi-crit-file">config.json <span class="gi-badge-tracked">✅ Still Tracked</span></div>
+              <div class="gi-info-banner">
+                <strong>Git says:</strong> "I already know about <code>config.json</code>. It's in my tracking system. <code>.gitignore</code> cannot reach files I'm already tracking."<br><br>
+                <strong>Why:</strong> Git's tracking state is stored in the index. Once a file is indexed, <code>.gitignore</code> patterns are never evaluated for it.
+              </div>
+              <div class="gi-rm-cached">
+                <h4>How to fix it:</h4>
+                <pre class="gi-code-block"><code><span class="c-cmd">git rm --cached</span> config.json
+<span class="c-cmt"># Now Git forgets it ever tracked this file</span>
+<span class="c-cmt"># .gitignore can now apply</span>
+<span class="c-cmd">git commit</span> -m <span class="c-str">"stop tracking config.json"</span></code></pre>
+                <div class="gi-rm-actions">
+                  <button class="gi-crit-btn" id="gi-btn-sim">▶ Simulate git rm --cached</button>
+                  <button class="copy-btn" aria-label="Copy git rm" data-copy="git rm --cached config.json">⧉ Copy</button>
+                </div>
+                <div class="gi-sim-result gi-step-hidden" id="gi-sim-result">
+                  <div class="gi-crit-file" id="gi-sim-file">config.json <span class="gi-badge-ignored">✅ Ignored</span></div>
+                  <div class="gi-info-banner">The local file still exists on your disk — <code>git rm --cached</code> only removes it from Git's index, not from your file system.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G. Security Warning -->
+      <div class="gi-sub-section">
+        <div class="gi-danger-card reveal">
+          <h3 class="gi-danger-title">🔴 Security Warning: The .env Trap</h3>
+          <div class="gi-danger-timeline">
+            <div class="gi-dt-step">👨‍💻 1. Developer creates project — writes API keys and DB password into <code>.env</code></div>
+            <div class="gi-dt-step">😰 2. Accidentally runs <code>git add .env</code> then <code>git commit</code></div>
+            <div class="gi-dt-step">🌐 3. Pushes to GitHub — <code>.env</code> is now <strong>public in Git history</strong></div>
+            <div class="gi-dt-step">💡 4. Realizes the mistake — adds <code>.env</code> to <code>.gitignore</code></div>
+            <div class="gi-dt-step">❓ 5. "Is the secret safe now?"</div>
+          </div>
+          <div class="gi-danger-terminal">
+            ❌ NO. The secret is NOT safe.
+
+Git history is permanent. Every previous commit still contains .env.
+Anyone with access to the repository can run:
+
+  git log --all -- .env
+  git show &lt;commit-hash&gt;:.env
+
+...and retrieve the original secrets.
+          </div>
+          <h4 class="gi-danger-action-title">What you must do:</h4>
+          <div class="gi-danger-grid">
+            <div class="gi-d-card">
+              <div class="gi-d-icon">🔄</div>
+              <h5>Rotate Immediately</h5>
+              <p>Revoke and regenerate ALL exposed credentials right now</p>
+            </div>
+            <div class="gi-d-card">
+              <div class="gi-d-icon">🗑️</div>
+              <h5>Remove from index</h5>
+              <p><code>git rm --cached .env</code> + commit</p>
+            </div>
+            <div class="gi-d-card">
+              <div class="gi-d-icon">📝</div>
+              <h5>Add to .gitignore</h5>
+              <p>Prevent future accidents</p>
+            </div>
+            <div class="gi-d-card">
+              <div class="gi-d-icon">📚</div>
+              <h5>Rewrite History (Adv)</h5>
+              <p><code>git filter-branch</code> or BFG Repo Cleaner</p>
+            </div>
+          </div>
+          <div class="gi-danger-banner">
+            <strong>Key insight:</strong> <code>git rm --cached</code> removes the file from future commits — but it cannot erase it from past commits. The secret already exists in your commit history. Treat exposed credentials as permanently compromised.
+          </div>
+          <div class="gi-danger-actions">
+             <button class="copy-btn" aria-label="Copy .env" data-copy=".env">⧉ Copy .env</button>
+             <button class="copy-btn" aria-label="Copy git rm cached" data-copy="git rm --cached .env">⧉ Copy git rm --cached .env</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- H. Common Mistakes -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Common Mistakes</h3>
+        <div class="gi-myth-grid">
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "I added .env to .gitignore — it's safe"</div>
+            <div class="gi-myth-y">✅ Reality: Only safe if <code>.env</code> was never committed. Check your history.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: ".gitignore deletes the file"</div>
+            <div class="gi-myth-y">✅ Reality: It only affects tracking. Your local file is untouched.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "Adding a tracked file to .gitignore ignores it"</div>
+            <div class="gi-myth-y">✅ Reality: No. Use <code>git rm --cached</code> first.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "I can use .gitignore to hide files from collaborators"</div>
+            <div class="gi-myth-y">✅ Reality: It only affects untracked files. Already-tracked files are still visible to everyone.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "node_modules/ and dist/ don't need ignoring"</div>
+            <div class="gi-myth-y">✅ Reality: Always ignore them — they create enormous repositories and break <code>git clone</code>.</div>
+          </div>
+          <div class="gi-myth-card reveal">
+            <div class="gi-myth-x">❌ Myth: "I need to add .gitignore after finishing the project"</div>
+            <div class="gi-myth-y">✅ Reality: Add it before your first commit. Retrofitting is much harder.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- I. Best Practices -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Standard .gitignore Template</h3>
+        <div class="gi-template-card reveal">
+          <div class="gi-code-header">
+            <span>Standard Template</span>
+            <button class="copy-btn" aria-label="Copy template" data-copy="# ─── Secrets ───────────────────────────────────&#10;.env&#10;.env.local&#10;.env.production&#10;*.pem&#10;*.key&#10;&#10;# ─── Dependencies ───────────────────────────────&#10;node_modules/&#10;vendor/&#10;&#10;# ─── Build Output ───────────────────────────────&#10;dist/&#10;build/&#10;out/&#10;.next/&#10;.nuxt/&#10;&#10;# ─── Logs ───────────────────────────────────────&#10;*.log&#10;npm-debug.log*&#10;yarn-debug.log*&#10;&#10;# ─── OS Files ───────────────────────────────────&#10;.DS_Store&#10;Thumbs.db&#10;desktop.ini&#10;&#10;# ─── Editor / IDE ───────────────────────────────&#10;.vscode/&#10;.idea/&#10;*.swp&#10;*.swo&#10;&#10;# ─── Testing & Coverage ─────────────────────────&#10;coverage/&#10;.nyc_output/">⧉ Copy Template</button>
+          </div>
+          <pre class="gi-code-block"><code><span class="c-cmt"># ─── Secrets ───────────────────────────────────</span>
+.env
+.env.local
+.env.production
+*.pem
+*.key
+
+<span class="c-cmt"># ─── Dependencies ───────────────────────────────</span>
+node_modules/
+vendor/
+
+<span class="c-cmt"># ─── Build Output ───────────────────────────────</span>
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+<span class="c-cmt"># ─── Logs ───────────────────────────────────────</span>
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+<span class="c-cmt"># ─── OS Files ───────────────────────────────────</span>
+.DS_Store
+Thumbs.db
+desktop.ini
+
+<span class="c-cmt"># ─── Editor / IDE ───────────────────────────────</span>
+.vscode/
+.idea/
+*.swp
+*.swo
+
+<span class="c-cmt"># ─── Testing & Coverage ─────────────────────────</span>
+coverage/
+.nyc_output/</code></pre>
+          <div class="gi-tip-card">
+            Visit <a href="https://gitignore.io" target="_blank" rel="noopener">gitignore.io</a> to generate language/framework-specific templates.
+          </div>
+        </div>
+      </div>
+
+      <!-- J. Prediction Exercises -->
+      <div class="gi-sub-section">
+        <h3 class="gr-section-heading">Test Your Understanding</h3>
+        <div class="gi-quiz-grid">
+          
+          <div class="gi-quiz-card reveal" data-answer="readme-tracked">
+            <h4 class="gi-quiz-title">Exercise 1</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>.gitignore:
+  *.md
+  !README.md
+
+Files in project:
+  README.md
+  Notes.md
+  Guide.md</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: Which files does Git track?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="all-tracked">All three are tracked</button>
+              <button class="gi-quiz-option" data-val="readme-tracked">Only README.md is tracked</button>
+              <button class="gi-quiz-option" data-val="none-tracked">None are tracked</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> <code>*.md</code> ignores all markdown files. <code>!README.md</code> creates an exception — only README.md survives as tracked.
+            </div>
+          </div>
+          
+          <div class="gi-quiz-card reveal" data-answer="still-tracked">
+            <h4 class="gi-quiz-title">Exercise 2</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>Steps:
+  1. git add config.json
+  2. git commit -m "add config"
+  3. Add "config.json" to .gitignore</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: Will Git ignore config.json after step 3?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="still-tracked">No — it's already tracked, .gitignore has no effect</button>
+              <button class="gi-quiz-option" data-val="now-ignored">Yes — .gitignore overrides the tracking</button>
+              <button class="gi-quiz-option" data-val="deleted">The file gets deleted from the project</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> <code>.gitignore</code> only affects untracked files. <code>config.json</code> was committed — it's in Git's index. Use <code>git rm --cached config.json</code> to stop tracking it.
+            </div>
+          </div>
+          
+          <div class="gi-quiz-card reveal" data-answer="folder-ignored">
+            <h4 class="gi-quiz-title">Exercise 3</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>.gitignore:
+  node_modules/</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: What does Git ignore?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="folder-ignored">The entire node_modules/ folder and everything inside it</button>
+              <button class="gi-quiz-option" data-val="one-file">Only a file named node_modules</button>
+              <button class="gi-quiz-option" data-val="nothing">Nothing — you need to list every file inside</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> A trailing <code>/</code> in <code>.gitignore</code> means "this is a directory". Everything inside, at any depth of nesting, is ignored.
+            </div>
+          </div>
+          
+          <div class="gi-quiz-card reveal" data-answer="env-not-safe">
+            <h4 class="gi-quiz-title">Exercise 4</h4>
+            <div class="gi-quiz-setup">
+              <pre><code>Scenario:
+  - Developer committed .env 3 months ago
+  - Yesterday added .env to .gitignore
+  - Ran git rm --cached .env + committed</code></pre>
+            </div>
+            <p class="gi-quiz-q">Predict: Are the API keys safe from exposure?</p>
+            <div class="gi-quiz-options">
+              <button class="gi-quiz-option" data-val="env-not-safe">No — they still exist in the 3-month-old commit in Git history</button>
+              <button class="gi-quiz-option" data-val="env-safe">Yes — git rm --cached removed them completely</button>
+              <button class="gi-quiz-option" data-val="env-maybe">Only if nobody has cloned the repository yet</button>
+            </div>
+            <div class="gi-quiz-explanation" style="display:none">
+              <strong>Correct!</strong> <code>git rm --cached</code> removes the file from future commits only. The 3-month-old commit still contains the original <code>.env</code>. The keys must be rotated immediately.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- K. Summary -->
+      <div class="gi-sub-section">
+        <div class="gi-summary-card reveal">
+          <h3 class="gi-summary-title">Key Takeaways</h3>
+          <div class="gi-summary-grid">
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--cyan)">🎯</span>
+              <span><code>.gitignore</code> exists to keep repositories clean from noise, secrets, and generated files</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--red)">🔒</span>
+              <span>Never commit <code>.env</code> — add it to <code>.gitignore</code> before your first <code>git add</code></span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--yellow)">⚠️</span>
+              <span><code>.gitignore</code> only works on <strong>untracked</strong> files — it cannot un-track already-committed files</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--purple)">🗂️</span>
+              <span>To stop tracking a committed file: <code>git rm --cached &lt;file&gt;</code> + commit</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--blue)">📜</span>
+              <span>Git history is permanent — <code>git rm --cached</code> does NOT erase past commits</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--green)">✨</span>
+              <span>The <code>!</code> prefix creates exceptions — <code>!README.md</code> overrides a <code>*.md</code> ignore rule</span>
+            </div>
+            <div class="gi-sum-item">
+              <span class="gi-sum-icon" style="color: var(--pink)">🔄</span>
+              <span>When in doubt, use <a href="https://gitignore.io" target="_blank" rel="noopener">gitignore.io</a> to generate battle-tested templates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">🌿 Git Reference</div>
+          <p>A premium interactive learning resource for mastering Git &amp; GitHub — part of the LocalSchool offline learning platform.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Twitter" title="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="#lifecycle">Git Lifecycle</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#concepts">Core Concepts</a></li>
+            <li><a href="#collaboration">Collaboration</a></li>
+            <li><a href="#git-stash">Git Stash</a></li>
+            <li><a href="#git-clean-restore">Clean &amp; Restore</a></li>
+            <li><a href="#git-reset">Git Reset</a></li>
+            <li><a href="#git-ignore">Git Ignore</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Commands</h4>
+          <ul>
+            <li><a href="#commands">git init</a></li>
+            <li><a href="#commands">git commit</a></li>
+            <li><a href="#commands">git branch</a></li>
+            <li><a href="#commands">git push</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#practice">Practice Terminal</a></li>
+            <li><a href="https://git-scm.com/doc" target="_blank" rel="noopener">Official Docs ↗</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a></li>
+            <li><a href="https://learngitbranching.js.org" target="_blank" rel="noopener">Learn Branching ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 LocalSchool — Git &amp; GitHub Reference. Built for offline learning.</p>
+        <p class="footer-made">Made with 💙 for developers</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+  <!-- ===== COPY TOAST ===== -->
+  <div id="copy-toast" role="status" aria-live="polite">✓ Copied!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
